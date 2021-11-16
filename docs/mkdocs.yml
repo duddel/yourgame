@@ -1,0 +1,42 @@
+site_name: yourgame
+docs_dir: md_sites
+theme:
+  name: material
+  logo: yg_logo.png
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - scheme: default
+      primary: white
+      accent: pink
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to dark mode
+    - scheme: slate
+      primary: white
+      accent: pink
+      toggle:
+        icon: material/lightbulb
+        name: Switch to light mode
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences
+repo_url: https://github.com/duddel/yourgame
+repo_name: duddel/yourgame
+edit_uri: ""
+nav:
+  - Getting Started: index.md
+  - "API":
+    - yg.asset: yg_asset.md
+    - yg.audio: yg_audio.md
+    - yg.control: yg_control.md
+    - yg.gl: yg_gl.md
+    - yg.input: yg_input.md
+    - yg.interact: yg_interact.md
+    - yg.log: yg_log.md
+    - yg.math: yg_math.md
+    - yg.phys: yg_phys.md
+    - yg.time: yg_time.md
+    - yg.util: yg_util.md

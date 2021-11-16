@@ -1,0 +1,111 @@
+# deploy builds are done for all commits on all branches.
+# deploy demo to gh-pages is done on branches main and
+# develop (see job deploy_examples_gh_pages).
+name: deploy
+on: push
+
+jobs:
+  deploy_desktop:
+    name: desktop
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - uses: actions/checkout@v3
+      # ubuntu: install deps, configure/build
+      - name: install deps
+        run: |
+          sudo apt update
+          sudo apt install libgl1-mesa-dev xorg-dev
+        if: startsWith(matrix.os, 'ubuntu')
+      - name: configure/build (ubuntu)
+        run: |
+          cd build
+          ./build_desktop_release.bash
+        if: startsWith(matrix.os, 'ubuntu')
+      # windows: configure/build
+      - name: configure/build (win32)
+        run: |
+          cd build
+          build_desktop_release_win32.cmd
+        if: startsWith(matrix.os, 'windows')
+        shell: cmd
+      - name: configure/build (win64)
+        run: |
+          cd build
+          build_desktop_release_win64.cmd
+        if: startsWith(matrix.os, 'windows')
+        shell: cmd
+      - name: upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          path: build/_deploy/*
+
+  deploy_web:
+    name: web
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: install emsdk
+        run: |
+          git clone https://github.com/emscripten-core/emsdk.git
+          cd emsdk
+          ./emsdk install latest
+          ./emsdk activate latest
+      - name: configure/build
+        # build_web_release.bash needs to know the emsdk location
+        # in order to call: source $EMSDK/emsdk_env.sh:
+        env:
+          EMSDK: ${{ github.workspace }}/emsdk
+        run: |
+          cd build
+          ./build_web_release.bash
+      - name: upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          path: build/_deploy/*
+
+  deploy_android:
+    name: android
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: assemble
+        run: |
+          cd build
+          ./build_android_release.bash
+      - name: upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          path: build/_deploy/*
+
+  deploy_examples_gh_pages:
+    name: deploy examples to gh-pages
+    runs-on: ubuntu-22.04
+    needs: deploy_web
+    if: |
+      github.ref == 'refs/heads/main' ||
+      github.ref == 'refs/heads/develop'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v2
+        with:
+          name: artifact # default name (by not giving any name to actions/upload-artifact@v2)
+          path: _artifact
+      - name: unzip
+        # assuming there is only one *Emscripten.zip file
+        run: |
+          mkdir _deploy
+          unzip _artifact/*Emscripten.zip -d _deploy
+      - name: copy examples
+        run: cp examples/assets/* _deploy/assets
+      - name: deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.8
+        with:
+          branch: gh-pages
+          folder: _deploy
+          target-folder: demo

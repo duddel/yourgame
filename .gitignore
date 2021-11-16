@@ -1,0 +1,6 @@
+**/_build*
+**/_deploy*
+yourgamelib/
+*.log
+.vscode/*
+docs/site

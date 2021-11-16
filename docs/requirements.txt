@@ -1,0 +1,2 @@
+# Python requirements for building the docs
+mkdocs-material # depends on mkdocs
