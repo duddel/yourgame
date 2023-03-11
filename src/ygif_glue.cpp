@@ -20,6 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 #include <array>
+#include <cmath>
 #include "yourgame/yourgame.h"
 #include "ygif_trafo.h"
 #include "ygif_camera.h"
@@ -352,16 +353,16 @@ namespace mygame
 
     // gl ...
     const std::map<std::string, GLenum> str2texUnit = {
-        {"diffuse", yg::gl::textureUnitDiffuse}};
+        {"DIFFUSE", yg::gl::textureUnitDiffuse}};
 
     const std::map<std::string, GLint> str2texFilter = {
-        {"linear", GL_LINEAR},
-        {"nearest", GL_NEAREST}};
+        {"LINEAR", GL_LINEAR},
+        {"NEAREST", GL_NEAREST}};
 
     const std::map<std::string, GLint> str2texWrap = {
-        {"repeat", GL_REPEAT},
-        {"mirrored_repeat", GL_MIRRORED_REPEAT},
-        {"clamp_to_edge", GL_CLAMP_TO_EDGE}};
+        {"REPEAT", GL_REPEAT},
+        {"MIRRORED_REPEAT", GL_MIRRORED_REPEAT},
+        {"CLAMP_TO_EDGE", GL_CLAMP_TO_EDGE}};
     //{"clamp_to_border", GL_CLAMP_TO_BORDER}};
 
     void gl_draw(yg::gl::Geometry *geo,
@@ -371,6 +372,11 @@ namespace mygame
                  yg::math::Camera *camera,
                  yg::math::Trafo *trafo)
     {
+        if (!geo || !shader)
+        {
+            return;
+        }
+
         shader->useProgram(light, camera);
         yg::gl::DrawConfig cfg;
         cfg.camera = camera;
@@ -387,13 +393,13 @@ namespace mygame
         yg::gl::drawGeo(geo, cfg);
     }
 
-    void gl_drawSprite(yg::gl::Texture *texture,
-                       const yg::gl::TextureCoords &coords,
-                       int x,
-                       int y,
-                       int width,
-                       int height,
-                       float angle)
+    std::array<float, 4> gl_drawSprite(yg::gl::Texture *texture,
+                                       const yg::gl::TextureCoords &coords,
+                                       float x,
+                                       float y,
+                                       float width,
+                                       float height,
+                                       float angle)
     {
         yg::gl::DrawConfig cfg;
 
@@ -405,41 +411,58 @@ namespace mygame
 
         cfg.textures.push_back(texture);
 
-        float width_f = static_cast<float>(width);
-        float height_f = static_cast<float>(height);
+        float width_f = width;
+        float height_f = height;
         if (texture)
         {
             cfg.subtex = {coords.uMin, coords.uMax, coords.vMin, coords.vMax};
 
-            if (width == 0 && height == 0)
+            if (std::fpclassify(width) == FP_ZERO && std::fpclassify(height) == FP_ZERO)
             {
                 width_f = static_cast<float>(coords.xMaxPixel - coords.xMinPixel);
                 height_f = static_cast<float>(coords.yMaxPixel - coords.yMinPixel);
             }
-            else if (width == 0)
+            else if (std::fpclassify(width) == FP_ZERO)
             {
                 width_f = height_f * coords.aspectRatioPixel;
             }
-            else if (height == 0)
+            else if (std::fpclassify(height) == FP_ZERO)
             {
                 height_f = width_f * coords.aspectRatioPixelInverse;
             }
         }
 
+        std::array<float, 4> screenPos;
         {
             float windowWidth = yg::input::get(yg::input::WINDOW_WIDTH);
             float windowHeight = yg::input::get(yg::input::WINDOW_HEIGHT);
 
+            // 1. make a transform to position the sprite quad in the "world", where the
+            //    length units match screen space pixels.
             yg::math::Trafo trafo;
-            trafo.translateGlobal({static_cast<float>(x), static_cast<float>(-y), 0.0f});
+            trafo.translateGlobal({x, -y, 0.0f});
             trafo.rotateGlobal(angle, yg::math::Axis::Z);
-            trafo.setScaleLocal({static_cast<float>(width_f) * 0.5f, static_cast<float>(height_f) * 0.5f, 1.0f});
+            trafo.setScaleLocal({width_f * 0.5f, height_f * 0.5f, 1.0f});
 
+            // 2. make an orthographic projection that projects the (x+,y-) "quadrant" from
+            //    world space (where the quad gets positioned by trafo) onto screen space.
+            // this is actually the MVP matrix (or P * V, as the view matrix is identity).
+            // because we do not pass a camera to the draw call, we apply the projection
+            // matrix to cfg.modelMat (P * M) directly
             cfg.modelMat = glm::ortho(0.0f, windowWidth, -windowHeight, 0.0f, -1.0f, 1.0f) *
                            trafo.mat();
+
+            // 3. calculate the screen position of the resulting srpite quad, as if it
+            //    was not rotated
+            auto quadUpLeftModel = trafo.mat() * glm::vec4(-1.0f, 1.0f, 0.0f, 1.0f);
+            auto quadLowRightModel = trafo.mat() * glm::vec4(1.0f, -1.0f, 0.0f, 1.0f);
+            // xmin, xmax, ymin, ymax
+            screenPos = {quadUpLeftModel[0], quadLowRightModel[0], -quadUpLeftModel[1], -quadLowRightModel[1]};
         }
 
         yg::gl::drawGeo(g_assets.get<yg::gl::Geometry>("quad"), cfg);
+
+        return screenPos;
     }
 
     void gl_depthTest(bool enable)
@@ -563,12 +586,16 @@ namespace mygame
 
     void interact_addSelect(const std::string &name, std::vector<std::string> items, int value)
     {
-        InteractItem flav;
-        flav.name = name;
-        flav.type = InteractItemType::SELECT;
-        flav.selectItems = items;
-        flav.data.integer = value % items.size();
-        interact_insert(flav);
+        // value is the index of the selected item in items, starting with 1 (Lua logic)
+        if (value >= 1 && value <= items.size())
+        {
+            InteractItem flav;
+            flav.name = name;
+            flav.type = InteractItemType::SELECT;
+            flav.selectItems = items;
+            flav.data.integer = value - 1; // internally, first index is 0 (used for imgui logic)
+            interact_insert(flav);
+        }
     }
 
     float interact_getNumber(const std::string &name)
@@ -668,7 +695,7 @@ namespace mygame
         auto it = g_interact.find(name);
         if (it != g_interact.end() && g_interactItems[it->second].type == InteractItemType::SELECT)
         {
-            return g_interactItems[it->second].data.integer;
+            return g_interactItems[it->second].data.integer + 1; // first index is 1 (Lua logic)
         }
         return 0;
     }
@@ -810,11 +837,6 @@ namespace mygame
         return g_assets.numOf<yg::gl::Geometry>();
     }
 
-    void enableAudio()
-    {
-        yg::audio::init(2, 44100, 5);
-    }
-
     void control_runScript(const std::string &filename)
     {
         g_luaScriptName = filename;
@@ -841,8 +863,8 @@ namespace mygame
 
     void loadBaseAssets()
     {
-        asset_loadVertFragShader("sprite", "a//sprite.vert", "a//sprite.frag");
-        asset_loadGeometry("quad", "a//quad.obj", "");
+        asset_loadVertFragShader("sprite", "a//yg_sprite.vert", "a//yg_sprite.frag");
+        asset_loadGeometry("quad", "a//yg_quad.obj", "");
     }
 
     void registerLua(lua_State *L)
@@ -852,6 +874,9 @@ namespace mygame
 
             // namespace audio ...
             .beginNamespace("audio")
+            .addFunction("init", yg::audio::init)
+            .addFunction("shutdown", yg::audio::shutdown)
+            .addFunction("isInitialized", yg::audio::isInitialized)
             .addFunction("storeFile", yg::audio::storeFile)
             .addFunction("play", yg::audio::play)
             .addFunction("stop", yg::audio::stop)
@@ -874,7 +899,6 @@ namespace mygame
             .addFunction("enableFullscreen", yg::control::enableFullscreen)
             .addFunction("enableVSync", yg::control::enableVSync)
             .addFunction("catchMouse", yg::control::catchMouse)
-            .addFunction("enableAudio", enableAudio)
             .addFunction("runScript", control_runScript)
             .addFunction("loadScript", control_loadScript)
             .endNamespace()
@@ -897,8 +921,6 @@ namespace mygame
             .addFunction("lookAt", &yg::math::Trafo::lookAt)
             .addFunction("lerp", &yg::math::Trafo::lerp)
             .addFunction("setIdentity", &yg::math::Trafo::setIdentity)
-            .addFunction("getAxisLocal", &yg::math::Trafo::getAxisLocal)
-            .addFunction("getAxisGlobal", &yg::math::Trafo::getAxisGlobal)
             .addFunction("getEye", &yg::math::Trafo::getEye)
             .addFunction("getRotation", &yg::math::Trafo::getRotation)
             .addFunction("getScale", &yg::math::Trafo::getScale)
@@ -910,6 +932,8 @@ namespace mygame
             .addFunction("translateLocal", &YgifTrafo::translateLocal)
             .addFunction("translateGlobal", &YgifTrafo::translateGlobal)
             .addFunction("setScaleLocal", &YgifTrafo::setScaleLocal)
+            .addFunction("getAxisLocal", &YgifTrafo::getAxisLocal)
+            .addFunction("getAxisGlobal", &YgifTrafo::getAxisGlobal)
             .endClass()
             // Lua class yg.math.Camera (C++ class YgifCamera) is derived from yg::math::Camera
             .beginClass<yg::math::Camera>("CameraBase")
@@ -952,6 +976,7 @@ namespace mygame
             .beginClass<yg::gl::Texture>("Texture")
             .addFunction("getCoords", &yg::gl::Texture::getCoords)
             .addFunction("getFrameCoords", &yg::gl::Texture::getFrameCoords)
+            .addFunction("getGridCoords", &yg::gl::Texture::getGridCoords)
             .endClass()
             .beginClass<yg::gl::TextureCoords>("TextureCoords")
             .endClass()

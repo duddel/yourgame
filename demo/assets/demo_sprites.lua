@@ -6,7 +6,7 @@ function init()
     yg.interact.addNumber("frame rate", "Hz", 10, 0, 60)
 
     -- load sprite sheet
-    yg.asset.loadTexture("sprites", "a//sprites.png", "a//sprites.json", "diffuse", "nearest", "repeat", true)
+    yg.asset.loadTexture("sprites", "a//sprites.png", "a//sprites.json", "DIFFUSE", "NEAREST", "REPEAT", true)
 
     timer = 0
 end

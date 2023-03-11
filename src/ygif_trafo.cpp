@@ -69,4 +69,36 @@ namespace mygame
     {
         yourgame::math::Trafo::setScaleLocal(scale);
     }
+
+    glm::vec3 YgifTrafo::getAxisLocal(std::string const &ax)
+    {
+        if (ax == "Y")
+        {
+            return yourgame::math::Trafo::getAxisLocal(yourgame::math::Axis::Y);
+        }
+        else if (ax == "Z")
+        {
+            return yourgame::math::Trafo::getAxisLocal(yourgame::math::Axis::Z);
+        }
+        else
+        {
+            return yourgame::math::Trafo::getAxisLocal(yourgame::math::Axis::X);
+        }
+    }
+
+    glm::vec3 YgifTrafo::getAxisGlobal(std::string const &ax)
+    {
+        if (ax == "Y")
+        {
+            return yourgame::math::Trafo::getAxisGlobal(yourgame::math::Axis::Y);
+        }
+        else if (ax == "Z")
+        {
+            return yourgame::math::Trafo::getAxisGlobal(yourgame::math::Axis::Z);
+        }
+        else
+        {
+            return yourgame::math::Trafo::getAxisGlobal(yourgame::math::Axis::X);
+        }
+    }
 }

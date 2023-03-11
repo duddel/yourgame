@@ -38,15 +38,9 @@ Enables/disables catched mouse.
 | -------- | ------- | ---------------------------------------------- |
 | `enable` | boolean | Enable catched mouse. Options: `true`, `false` |
 
-## function yg.control.enableAudio()
-
-Enables audio module.
-
-> `yg.control.catchMouse()` -> `void`
-
 ## function yg.control.runScript()
 
-Starts execution of another Lua script after shutting down current script.
+Starts execution of another Lua script after shutting down current running script. The current cycle, this function is called in, will be normally executed and rendered.
 
 > `yg.control.runScript(filename)` -> `void`
 

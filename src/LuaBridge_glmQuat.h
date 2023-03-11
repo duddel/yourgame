@@ -24,7 +24,7 @@ namespace luabridge
             for (std::size_t i = 0; i < 4; ++i)
             {
                 lua_pushinteger(L, static_cast<lua_Integer>(i + 1));
-                Stack<float>::push(L, quat[i]);
+                Stack<float>::push(L, quat[static_cast<glm::length_t>(i)]);
                 lua_settable(L, -3);
             }
         }

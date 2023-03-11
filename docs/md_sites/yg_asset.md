@@ -19,9 +19,9 @@ Loads a texture or texture atlas (sprite sheet).
 | `name`          | string  | Name of the texture to register it in the asset manager                             |
 | `imgFilename`   | string  | Filename of the image to load                                                       |
 | `atlasFilename` | string  | Filename of the atlas file (.json) to load. May be `""`                             |
-| `unit`          | string  | GL texture unit. Options: `"diffuse"`                                               |
-| `filter`        | string  | Texture filter mode. Options: `"linear"`, `"nearest"`                               |
-| `wrapmode`      | string  | Texture wrap mode.<br />Options: `"repeat"`, `"mirrored_repeat"`, `"clamp_to_edge"` |
+| `unit`          | string  | GL texture unit. Options: `"DIFFUSE"`                                               |
+| `filter`        | string  | Texture filter mode. Options: `"LINEAR"`, `"NEAREST"`                               |
+| `wrapmode`      | string  | Texture wrap mode.<br />Options: `"REPEAT"`, `"MIRRORED_REPEAT"`, `"CLAMP_TO_EDGE"` |
 | `mipmap`        | boolean | Enable mipmapping. Options: `true`, `false`                                         |
 
 ## function yg.asset.loadVertFragShader()
@@ -52,7 +52,7 @@ Loads a geometry file (.obj) with optional material library (.mtl).
 
 Retrieves a previously loaded Texture from the asset manager.
 
-> `yg.asset.getTexture(name)` -> `Texture` (`nil` on error)
+> `yg.asset.getTexture(name)` -> [`yg.gl.Texture`](yg_gl.md#class-yggltexture) (`nil` on error)
 
 | Argument | Type   | Info                            |
 | -------- | ------ | ------------------------------- |
@@ -62,7 +62,7 @@ Retrieves a previously loaded Texture from the asset manager.
 
 Retrieves a previously loaded Shader program from the asset manager.
 
-> `yg.asset.getShader(name)` -> `Shader` (`nil` on error)
+> `yg.asset.getShader(name)` -> [`yg.gl.Shader`](yg_gl.md#class-ygglshader) (`nil` on error)
 
 | Argument | Type   | Info                                   |
 | -------- | ------ | -------------------------------------- |
@@ -72,7 +72,7 @@ Retrieves a previously loaded Shader program from the asset manager.
 
 Retrieves a previously loaded Geometry from the asset manager.
 
-> `yg.asset.getGeometry(name)` -> `Geometry` (`nil` on error)
+> `yg.asset.getGeometry(name)` -> [`yg.gl.Geometry`](yg_gl.md#class-ygglgeometry) (`nil` on error)
 
 | Argument | Type   | Info                             |
 | -------- | ------ | -------------------------------- |

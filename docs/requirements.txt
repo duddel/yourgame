@@ -1,2 +1,2 @@
 # Python requirements for building the docs
-mkdocs-material # depends on mkdocs
+mkdocs-material~=9.1.2

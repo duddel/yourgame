@@ -1,5 +1,14 @@
 ===========================================================
-License of yourgame
+License of Kenney Assets
+===========================================================
+Some assets used in this project are made by Kenney
+
+License (CC0)
+http://creativecommons.org/publicdomain/zero/1.0/
+
+
+===========================================================
+License of yourgame (this project)
 ===========================================================
 Copyright (c) 2019-2023 Alexander Scholz
 

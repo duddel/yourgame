@@ -8,7 +8,7 @@ Represents a physics environment. An instance of this class is mandatory to real
 
 ### constructor
 
-> `yg.phys.PhysEnv()` -> [`PhysEnv`](#class-ygphysphysenv)
+> `yg.phys.PhysEnv()` -> [`yg.phys.PhysEnv`](#class-ygphysphysenv)
 
 ### function yg.phys.PhysEnv.setGravity()
 
@@ -191,6 +191,10 @@ rbInfo.mass = 2.5
 rbInfo.friction = 0.5
 rbInfo.restitution = 0.5
 ```
+
+### constructor
+
+> `yg.phys.RigidBodyInfo()` -> [`yg.phys.RigidBodyInfo`](#class-ygphysrigidbodyinfo)
 
 ### Properties
 

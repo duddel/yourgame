@@ -6,6 +6,10 @@ Classes for math.
 
 Represents a 3-dimensional homogeneous transform.
 
+### constructor
+
+> `yg.math.Trafo()` -> [`yg.math.Trafo`](#class-ygmathtrafo)
+
 ### function yg.math.Trafo.rotateLocal()
 
 Rotates the transform around **local axis** `ax` by `angle` radians.
@@ -169,6 +173,10 @@ Returns the scale of the transform (array of 3 numbers).
 ## class yg.math.Camera
 
 Represents a camera with extrinsics (pose in world) and intrinsics (projection) in 3-dimensional space.
+
+### constructor
+
+> `yg.math.Camera()` -> [`yg.math.Camera`](#class-ygmathcamera)
 
 ### function yg.math.Camera.setPerspective()
 

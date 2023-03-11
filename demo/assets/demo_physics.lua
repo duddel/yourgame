@@ -6,10 +6,6 @@ function init()
     -- register interact values
     yg.interact.addNumber("gravity", "m/s^2", -9.81, -20, 20)
     yg.interact.addBinary("wiper", "move on/off", true)
-    yg.interact.addVector3("light_position", 20, 10, 0)
-    yg.interact.addRGB("light_diffuse", 1.0, 0.9, 0.7)
-    yg.interact.addRGB("light_ambient", 0.05, 0.05, 0.175)
-    yg.interact.addRGBA("clear color", 0.212, 0.235, 0.270, 1.000)
 
     -- make Motion
     motBounce = yg.util.Motion("REPEAT")
@@ -18,15 +14,21 @@ function init()
     motBounce:addRamp(1.5, 9, -9, "CUBEDOWN")
     motBounce:addIdle(0.2, -9)
 
+    -- light and color
+    yg.gl.clearColor(0.212, 0.235, 0.270, 1.000)
+    lightAmbient = {0.05, 0.05, 0.175}
+    lightDiffuse = {1.0, 0.9, 0.7}
+    lightPosition = {20, 10, 0}
+
     -- load assets
-    yg.asset.loadTexture("world", "a//ball.png", "", "diffuse", "nearest", "repeat", true)
-    yg.asset.loadTexture("cylinder", "a//cylinder.png", "", "diffuse", "nearest", "repeat", true)
-    yg.asset.loadVertFragShader("diff", "a//default.vert", "a//diffusecolor.frag")
-    yg.asset.loadVertFragShader("simple", "a//default.vert", "a//simplecolor.frag")
-    yg.asset.loadVertFragShader("tex", "a//default.vert", "a//diffusetex.frag")
+    yg.asset.loadTexture("world", "a//ball.png", "", "DIFFUSE", "NEAREST", "REPEAT", true)
+    yg.asset.loadTexture("cylinder", "a//cylinder.png", "", "DIFFUSE", "NEAREST", "REPEAT", true)
+    yg.asset.loadVertFragShader("diff", "a//yg_default.vert", "a//yg_diffusecolor.frag")
+    yg.asset.loadVertFragShader("simple", "a//yg_default.vert", "a//yg_simplecolor.frag")
+    yg.asset.loadVertFragShader("tex", "a//yg_default.vert", "a//yg_diffusetex.frag")
     yg.asset.loadGeometry("cube", "a//box.obj", "a//box.mtl")
-    yg.asset.loadGeometry("sphere_outside", "a//sphere_outside.obj")
-    yg.asset.loadGeometry("grid", "a//grid.obj")
+    yg.asset.loadGeometry("sphere_outside", "a//sphere.obj")
+    yg.asset.loadGeometry("grid", "a//yg_grid.obj")
     yg.asset.loadGeometry("cylinder", "a//cylinder.obj")
     yg.asset.loadGeometry("trafficcone", "a//trafficcone.obj", "a//trafficcone.mtl")
     yg.asset.loadGeometry("fence", "a//fence.obj", "a//fence.mtl")
@@ -41,7 +43,7 @@ function init()
     -- floor (matches grid geometry)
     physEnv:newBoxShape("floor", 10.0, 0.1, 10.0)
     rbInfo.mass = 0; rbInfo.restitution = 1
-    eye = {}; eye[1] = 0; eye[2] = -0.1; eye[3] = 0; trafo:setTranslation(eye)
+    eye = {0, -0.1, 0}; trafo:setTranslation(eye)
     physEnv:newRigidBody("floor", "floor", trafo, rbInfo)
 
     -- fence
@@ -85,19 +87,19 @@ function init()
             rbInfo.kinematic = false
             local eye = {}
 
-            eye[1] = math.random()*16-8; eye[2] = math.random()*5+6; eye[3] = math.random()*16-8
+            eye = {math.random()*16-8, math.random()*5+6, math.random()*16-8}
             trafo:setTranslation(eye)
             trafo:rotateLocal(math.random() * 3.14159265359, "Z")
             trafo:rotateGlobal(math.random() * 3.14159265359, "X")
             physEnv:newRigidBody("box_" .. i .. "_" .. j, "box", trafo, rbInfo)
 
-            eye[1] = math.random()*16-8; eye[2] = math.random()*5+6; eye[3] = math.random()*16-8
+            eye = {math.random()*16-8, math.random()*5+6, math.random()*16-8}
             trafo:setTranslation(eye)
             trafo:rotateLocal(math.random() * 3.14159265359, "Z")
             trafo:rotateGlobal(math.random() * 3.14159265359, "X")
             physEnv:newRigidBody("sphere_" .. i .. "_" .. j, "sphere", trafo, rbInfo)
 
-            eye[1] = math.random()*16-8; eye[2] = math.random()*5+6; eye[3] = math.random()*16-8
+            eye = {math.random()*16-8, math.random()*5+6, math.random()*16-8}
             trafo:setTranslation(eye)
             trafo:rotateLocal(math.random() * 3.14159265359, "Z")
             trafo:rotateGlobal(math.random() * 3.14159265359, "X")
@@ -110,8 +112,7 @@ function init()
     for i=1,5 do
         for j=1,5 do
             local trafo = yg.math.Trafo()
-            local eye = {}
-            eye[1] = math.random()*18-9; eye[2] = 0.75; eye[3] = math.random()*18-9
+            local eye = {math.random()*18-9, 0.75, math.random()*18-9}
             trafo:setTranslation(eye)
             physEnv:newRigidBody("cone_" .. i .. "_" .. j, "cone", trafo, rbInfo)
         end
@@ -119,27 +120,19 @@ function init()
 
     -- make camera
     c = yg.math.Camera()
-    eye = {}; eye[1] = 0; eye[2] = 10; eye[3] = 15
-    center = {}; center[1] = 0.0; center[2] = 2.5; center[3] = 0.0
-    up = {}; up[1] = 0.0; up[2] = 1.0; up[3] = 0.0
+    eye = {0, 10, 15}
+    center = {0, 2.5, 0}
+    up = {0, 1, 0}
     c:trafo():lookAt(eye, center, up)
 
     -- make lightsource
     light = yg.gl.Lightsource()
-end
-
-function tick()
-    -- update light 
-    lightAmbient = yg.interact.getRGB("light_ambient")
-    lightDiffuse = yg.interact.getRGB("light_diffuse")
-    lightPosition = yg.interact.getVector3("light_position")
     light:setAmbient(lightAmbient)
     light:setDiffuse(lightDiffuse)
     light:setPosition(lightPosition)
+end
 
-    cCol = yg.interact.getRGBA("clear color")
-    yg.gl.clearColor(cCol[1], cCol[2], cCol[3], cCol[4])
-
+function tick()
     -- update gravity
     physEnv:setGravity(0, yg.interact.getNumber("gravity"), 0)
 
@@ -159,10 +152,9 @@ function tick()
 
     -- move kinematic body
     do
-        local move = {}
         local trafo = yg.math.Trafo()
         local body = physEnv:getRigidBody("player")
-        move[1] = motBounce:val(); move[2] = 0; move[3] = 0
+        local move = {motBounce:val(), 0, 0}
         trafo:setTranslation(move)
         body:setTrafo(trafo)
     end

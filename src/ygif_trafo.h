@@ -35,6 +35,8 @@ namespace mygame
         void translateLocal(glm::vec3 const &trans);
         void translateGlobal(glm::vec3 const &trans);
         void setScaleLocal(glm::vec3 const &scale);
+        glm::vec3 getAxisLocal(std::string const &ax);
+        glm::vec3 getAxisGlobal(std::string const &ax);
     };
 }
 

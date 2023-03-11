@@ -75,9 +75,7 @@ namespace mygame
     const std::set<std::string> g_excludeFiles = {
         "./",
         "../",
-        "LICENSE_desktop.txt",
-        "LICENSE_android.txt",
-        "LICENSE_web.txt"};
+        "yg_LICENSES.txt"};
 
     // initial Lua script name to execute
     std::string g_luaScriptName = "a//main.lua";
@@ -105,6 +103,7 @@ namespace mygame
 
     void createEnvironment()
     {
+        yg::time::reset();
         loadBaseAssets();
         initLua();
     }
@@ -129,13 +128,7 @@ namespace mygame
         // load license info file
         {
             std::vector<uint8_t> data;
-#if defined(YOURGAME_PLATFORM_DESKTOP)
-            yg::file::readFile("a//LICENSE_desktop.txt", data);
-#elif defined(YOURGAME_PLATFORM_ANDROID)
-            yg::file::readFile("a//LICENSE_android.txt", data);
-#elif defined(YOURGAME_PLATFORM_WEB)
-            yg::file::readFile("a//LICENSE_web.txt", data);
-#endif
+            yg::file::readFile("a//yg_LICENSES.txt", data);
             g_licenseStr = new std::string(data.begin(), data.end());
         }
 
@@ -147,13 +140,16 @@ namespace mygame
             yg::file::setProjectPath(projFilePathFromArgv);
         }
 
+        // enable Vsync by default
+        yg::control::enableVSync(true);
+
         createEnvironment();
     }
 
     void tick()
     {
         // trigger reinit if F5 was hit
-        if (yg::input::getDelta(yg::input::KEY_F5) > 0.0f)
+        if (yg::input::getDelta(yg::input::KEY_P) > 0.0f)
         {
             g_reinitEnvironment = true;
         }
@@ -166,6 +162,12 @@ namespace mygame
             g_reinitEnvironment = false;
         }
 
+        // Exit
+        if (yg::input::getDelta(yg::input::KEY_ESCAPE) > 0.0f)
+        {
+            yg::control::exit();
+        }
+
         // toggle GUI
         if (yg::input::getDelta(yg::input::KEY_TAB) > 0.0f)
         {
@@ -173,9 +175,21 @@ namespace mygame
         }
 
         // fullscreen
-        if (yg::input::getDelta(yg::input::KEY_F11) > 0.0f)
+        if (yg::input::getDelta(yg::input::KEY_I) > 0.0f)
         {
             yg::control::enableFullscreen(!yg::input::geti(yg::input::WINDOW_FULLSCREEN));
+        }
+
+        // VSync
+        if (yg::input::getDelta(yg::input::KEY_O) > 0.0f)
+        {
+            yg::control::enableVSync(!yg::input::geti(yg::input::VSYNC_ON));
+        }
+
+        // Catch Mouse
+        if (yg::input::getDelta(yg::input::KEY_M) > 0.0f)
+        {
+            yg::control::catchMouse(!yg::input::geti(yg::input::MOUSE_CATCHED));
         }
 
         // set gl for this frame (viewport from window size, and clear gl buffers)
@@ -224,6 +238,7 @@ namespace mygame
         if (g_licenseStr != nullptr)
         {
             delete g_licenseStr;
+            g_licenseStr = nullptr;
         }
 
         destroyEnvironment();
@@ -242,24 +257,36 @@ namespace mygame
         {
             if (ImGui::BeginMenu("File"))
             {
-                if (ImGui::MenuItem("Exit"))
+                if (ImGui::MenuItem("Exit", "ESC"))
                 {
                     yg::control::exit();
                 }
                 ImGui::EndMenu();
             }
-            if (ImGui::BeginMenu("View"))
+            if (ImGui::BeginMenu("Control"))
             {
                 ImGui::MenuItem("Render GUI", "TAB", &g_renderImgui);
-                if (ImGui::MenuItem("Fullscreen", "F11", yg::input::geti(yg::input::WINDOW_FULLSCREEN)))
+
+                if (ImGui::MenuItem("Fullscreen", "I", yg::input::geti(yg::input::WINDOW_FULLSCREEN)))
                 {
                     yg::control::enableFullscreen(!yg::input::geti(yg::input::WINDOW_FULLSCREEN));
                 }
+
+                if (ImGui::MenuItem("Vertical Sync", "O", yg::input::geti(yg::input::VSYNC_ON)))
+                {
+                    yg::control::enableVSync(!yg::input::geti(yg::input::VSYNC_ON));
+                }
+
+                if (ImGui::MenuItem("Catch Mouse", "M", yg::input::geti(yg::input::MOUSE_CATCHED)))
+                {
+                    yg::control::catchMouse(!yg::input::geti(yg::input::MOUSE_CATCHED));
+                }
+
                 ImGui::EndMenu();
             }
             if (ImGui::BeginMenu("Run"))
             {
-                if (ImGui::MenuItem("Reload and Start", "F5"))
+                if (ImGui::MenuItem("Restart", "P"))
                 {
                     destroyEnvironment();
                     createEnvironment();
@@ -306,11 +333,10 @@ namespace mygame
             ImGui::SetWindowSize(ImVec2(yg::input::get(yg::input::WINDOW_WIDTH) * 0.5f,
                                         yg::input::get(yg::input::WINDOW_HEIGHT) * 0.5f),
                                  ImGuiCond_FirstUseEver);
-            /* The following procedure allows displaying long wrapped text,
-               whereas ImGui::TextWrapped() has a size limit and cuts the content. */
-            ImGui::PushTextWrapPos(0.0f);
+
+            // TextUnformatted() displays raw text without formatting. Relies
+            // on zero terminator if called like this, without 2nd argument:
             ImGui::TextUnformatted(g_licenseStr->c_str());
-            ImGui::PopTextWrapPos();
             ImGui::End();
         }
 
@@ -319,8 +345,8 @@ namespace mygame
             ImGui::Begin("About", &showAboutWindow, (ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_AlwaysAutoResize));
             ImGui::Text("%s", (version::PROJECT_NAME + "\n\n" +
                                "Version: " + version::verstr + "\n" +
-                               "Commit:" + version::git_commit + "\n" +
-                               "Commit Date:" + version::git_date + "\n")
+                               "Commit: " + version::git_commit + "\n" +
+                               "Commit Date: " + version::git_date + "\n")
                                   .c_str());
             ImGui::End();
         }
@@ -413,9 +439,16 @@ namespace mygame
         // Interact Editor
         if (g_interactItems.size() > 0)
         {
-            ImGui::SetNextWindowSizeConstraints({200.0f, sideBarHeight}, {500.0f, sideBarHeight});
-            ImGui::Begin("Interact", nullptr, (0));
-            ImGui::SetWindowPos({yg::input::get(yg::input::WINDOW_WIDTH) - ImGui::GetWindowSize().x, mainMenuBarHeight});
+            // use this to force the scale of the interact window as right panel
+            // ImGui::SetNextWindowSizeConstraints({200.0f, sideBarHeight}, {500.0f, sideBarHeight});
+
+            // make the interact window floating, collapsed and initializes at position 0,0
+            ImGui::SetNextWindowCollapsed(true, (ImGuiCond_Once));
+            ImGui::SetNextWindowPos({0.0f, 0.0f}, (ImGuiCond_Once));
+            ImGui::Begin("Interact", nullptr, (ImGuiWindowFlags_AlwaysAutoResize));
+
+            // use this to force interact window as right panel
+            // ImGui::SetWindowPos({yg::input::get(yg::input::WINDOW_WIDTH) - ImGui::GetWindowSize().x, mainMenuBarHeight});
 
             for (auto &f : g_interactItems)
             {

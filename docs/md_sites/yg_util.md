@@ -33,7 +33,7 @@ end
 
 ### constructor
 
-> `yg.util.Motion(flowType)` -> [`Motion`](#class-ygutilmotion)
+> `yg.util.Motion(flowType)` -> [`yg.util.Motion`](#class-ygutilmotion)
 
 | Argument   | Type   | Info                                                    |
 | ---------- | ------ | ------------------------------------------------------- |
