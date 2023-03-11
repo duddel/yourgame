@@ -1,0 +1,1829 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../yg_math/">
+      
+      
+        <link rel="next" href="../yg_time/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
+    
+    
+      
+        <title>yg.phys - yourgame</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7bf56d0a.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="pink">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ygphys" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="yourgame" class="md-header__button md-logo" aria-label="yourgame" data-md-component="logo">
+      
+  <img src="../yg_logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            yourgame
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              yg.phys
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
+            </label>
+          
+        
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="white" data-md-color-accent="pink"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/duddel/yourgame" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    duddel/yourgame
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="yourgame" class="md-nav__button md-logo" aria-label="yourgame" data-md-component="logo">
+      
+  <img src="../yg_logo.png" alt="logo">
+
+    </a>
+    yourgame
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/duddel/yourgame" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    duddel/yourgame
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Getting Started
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          API
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../yg_asset/" class="md-nav__link">
+        yg.asset
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../yg_audio/" class="md-nav__link">
+        yg.audio
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../yg_control/" class="md-nav__link">
+        yg.control
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../yg_gl/" class="md-nav__link">
+        yg.gl
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../yg_input/" class="md-nav__link">
+        yg.input
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../yg_interact/" class="md-nav__link">
+        yg.interact
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../yg_log/" class="md-nav__link">
+        yg.log
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../yg_math/" class="md-nav__link">
+        yg.math
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          yg.phys
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        yg.phys
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#class-ygphysphysenv" class="md-nav__link">
+    class yg.phys.PhysEnv
+  </a>
+  
+    <nav class="md-nav" aria-label="class yg.phys.PhysEnv">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    constructor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvsetgravity" class="md-nav__link">
+    function yg.phys.PhysEnv.setGravity()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvnewboxshape" class="md-nav__link">
+    function yg.phys.PhysEnv.newBoxShape()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvnewsphereshape" class="md-nav__link">
+    function yg.phys.PhysEnv.newSphereShape()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvnewcylindershape" class="md-nav__link">
+    function yg.phys.PhysEnv.newCylinderShape()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvnewconeshape" class="md-nav__link">
+    function yg.phys.PhysEnv.newConeShape()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvdeleteshape" class="md-nav__link">
+    function yg.phys.PhysEnv.deleteShape()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvclearshapes" class="md-nav__link">
+    function yg.phys.PhysEnv.clearShapes()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvnumshapes" class="md-nav__link">
+    function yg.phys.PhysEnv.numShapes()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvnewrigidbody" class="md-nav__link">
+    function yg.phys.PhysEnv.newRigidBody()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvdeleterigidbody" class="md-nav__link">
+    function yg.phys.PhysEnv.deleteRigidBody()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvclearrigidbodies" class="md-nav__link">
+    function yg.phys.PhysEnv.clearRigidBodies()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvnumrigidbodies" class="md-nav__link">
+    function yg.phys.PhysEnv.numRigidBodies()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvgetrigidbody" class="md-nav__link">
+    function yg.phys.PhysEnv.getRigidBody()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvgetrigidbodiesstartingwith" class="md-nav__link">
+    function yg.phys.PhysEnv.getRigidBodiesStartingWith()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvtick" class="md-nav__link">
+    function yg.phys.PhysEnv.tick()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvgetcollisions" class="md-nav__link">
+    function yg.phys.PhysEnv.getCollisions()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvraytest" class="md-nav__link">
+    function yg.phys.PhysEnv.rayTest()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-ygphysrigidbodyinfo" class="md-nav__link">
+    class yg.phys.RigidBodyInfo
+  </a>
+  
+    <nav class="md-nav" aria-label="class yg.phys.RigidBodyInfo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-ygphysrigidbody" class="md-nav__link">
+    class yg.phys.RigidBody
+  </a>
+  
+    <nav class="md-nav" aria-label="class yg.phys.RigidBody">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysrigidbodygettrafo" class="md-nav__link">
+    function yg.phys.RigidBody.getTrafo()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysrigidbodysettrafo" class="md-nav__link">
+    function yg.phys.RigidBody.setTrafo()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysrigidbodysetrestitution" class="md-nav__link">
+    function yg.phys.RigidBody.setRestitution()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysrigidbodysetfriction" class="md-nav__link">
+    function yg.phys.RigidBody.setFriction()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysrigidbodysetsleepingthresholds" class="md-nav__link">
+    function yg.phys.RigidBody.setSleepingThresholds()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysrigidbodysetlinearfactors" class="md-nav__link">
+    function yg.phys.RigidBody.setLinearFactors()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysrigidbodysetangularfactor" class="md-nav__link">
+    function yg.phys.RigidBody.setAngularFactor()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysrigidbodysetangularfactors" class="md-nav__link">
+    function yg.phys.RigidBody.setAngularFactors()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysrigidbodyapplycentralforce" class="md-nav__link">
+    function yg.phys.RigidBody.applyCentralForce()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysrigidbodyapplycentralimpulse" class="md-nav__link">
+    function yg.phys.RigidBody.applyCentralImpulse()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties_1" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-ygphyscollision" class="md-nav__link">
+    class yg.phys.Collision
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-ygphysraytestresult" class="md-nav__link">
+    class yg.phys.RayTestResult
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../yg_time/" class="md-nav__link">
+        yg.time
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../yg_util/" class="md-nav__link">
+        yg.util
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#class-ygphysphysenv" class="md-nav__link">
+    class yg.phys.PhysEnv
+  </a>
+  
+    <nav class="md-nav" aria-label="class yg.phys.PhysEnv">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    constructor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvsetgravity" class="md-nav__link">
+    function yg.phys.PhysEnv.setGravity()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvnewboxshape" class="md-nav__link">
+    function yg.phys.PhysEnv.newBoxShape()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvnewsphereshape" class="md-nav__link">
+    function yg.phys.PhysEnv.newSphereShape()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvnewcylindershape" class="md-nav__link">
+    function yg.phys.PhysEnv.newCylinderShape()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvnewconeshape" class="md-nav__link">
+    function yg.phys.PhysEnv.newConeShape()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvdeleteshape" class="md-nav__link">
+    function yg.phys.PhysEnv.deleteShape()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvclearshapes" class="md-nav__link">
+    function yg.phys.PhysEnv.clearShapes()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvnumshapes" class="md-nav__link">
+    function yg.phys.PhysEnv.numShapes()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvnewrigidbody" class="md-nav__link">
+    function yg.phys.PhysEnv.newRigidBody()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvdeleterigidbody" class="md-nav__link">
+    function yg.phys.PhysEnv.deleteRigidBody()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvclearrigidbodies" class="md-nav__link">
+    function yg.phys.PhysEnv.clearRigidBodies()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvnumrigidbodies" class="md-nav__link">
+    function yg.phys.PhysEnv.numRigidBodies()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvgetrigidbody" class="md-nav__link">
+    function yg.phys.PhysEnv.getRigidBody()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvgetrigidbodiesstartingwith" class="md-nav__link">
+    function yg.phys.PhysEnv.getRigidBodiesStartingWith()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvtick" class="md-nav__link">
+    function yg.phys.PhysEnv.tick()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvgetcollisions" class="md-nav__link">
+    function yg.phys.PhysEnv.getCollisions()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysphysenvraytest" class="md-nav__link">
+    function yg.phys.PhysEnv.rayTest()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-ygphysrigidbodyinfo" class="md-nav__link">
+    class yg.phys.RigidBodyInfo
+  </a>
+  
+    <nav class="md-nav" aria-label="class yg.phys.RigidBodyInfo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-ygphysrigidbody" class="md-nav__link">
+    class yg.phys.RigidBody
+  </a>
+  
+    <nav class="md-nav" aria-label="class yg.phys.RigidBody">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysrigidbodygettrafo" class="md-nav__link">
+    function yg.phys.RigidBody.getTrafo()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysrigidbodysettrafo" class="md-nav__link">
+    function yg.phys.RigidBody.setTrafo()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysrigidbodysetrestitution" class="md-nav__link">
+    function yg.phys.RigidBody.setRestitution()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysrigidbodysetfriction" class="md-nav__link">
+    function yg.phys.RigidBody.setFriction()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysrigidbodysetsleepingthresholds" class="md-nav__link">
+    function yg.phys.RigidBody.setSleepingThresholds()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysrigidbodysetlinearfactors" class="md-nav__link">
+    function yg.phys.RigidBody.setLinearFactors()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysrigidbodysetangularfactor" class="md-nav__link">
+    function yg.phys.RigidBody.setAngularFactor()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysrigidbodysetangularfactors" class="md-nav__link">
+    function yg.phys.RigidBody.setAngularFactors()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysrigidbodyapplycentralforce" class="md-nav__link">
+    function yg.phys.RigidBody.applyCentralForce()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-ygphysrigidbodyapplycentralimpulse" class="md-nav__link">
+    function yg.phys.RigidBody.applyCentralImpulse()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties_1" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-ygphyscollision" class="md-nav__link">
+    class yg.phys.Collision
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-ygphysraytestresult" class="md-nav__link">
+    class yg.phys.RayTestResult
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="ygphys">yg.phys</h1>
+<p>Classes for 3-dimensional physics. With Bullet physics library under the hood.</p>
+<h2 id="class-ygphysphysenv">class yg.phys.PhysEnv</h2>
+<p>Represents a physics environment. An instance of this class is mandatory to realize a physics simulation.</p>
+<h3 id="constructor">constructor</h3>
+<blockquote>
+<p><code>yg.phys.PhysEnv()</code> -&gt; <a href="#class-ygphysphysenv"><code>PhysEnv</code></a></p>
+</blockquote>
+<h3 id="function-ygphysphysenvsetgravity">function yg.phys.PhysEnv.setGravity()</h3>
+<p>Sets the gravity vector of the Physics Environment.</p>
+<blockquote>
+<p><code>yg.phys.PhysEnv.setGravity(x, y, z)</code> -&gt; <code>void</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>number</td>
+<td>X-component of the gravity vector [m/s^2]</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>number</td>
+<td>Y-component of the gravity vector [m/s^2]</td>
+</tr>
+<tr>
+<td><code>z</code></td>
+<td>number</td>
+<td>Z-component of the gravity vector [m/s^2]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-ygphysphysenvnewboxshape">function yg.phys.PhysEnv.newBoxShape()</h3>
+<p>Creates and stores a new Box Shape in the Physics Environment.</p>
+<blockquote>
+<p><code>yg.phys.PhysEnv.newBoxShape(name, halfX, halfY, halfZ)</code> -&gt; <code>boolean</code> (<code>true</code> on success, <code>false</code> otherwise)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Name of the new Shape</td>
+</tr>
+<tr>
+<td><code>halfX</code></td>
+<td>number</td>
+<td>Half extends in X-dimension [m]</td>
+</tr>
+<tr>
+<td><code>halfY</code></td>
+<td>number</td>
+<td>Half extends in Y-dimension [m]</td>
+</tr>
+<tr>
+<td><code>halfZ</code></td>
+<td>number</td>
+<td>Half extends in Z-dimension [m]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-ygphysphysenvnewsphereshape">function yg.phys.PhysEnv.newSphereShape()</h3>
+<p>Creates and stores a new Sphere Shape in the Physics Environment.</p>
+<blockquote>
+<p><code>yg.phys.PhysEnv.newSphereShape(name, radius)</code> -&gt; <code>boolean</code> (<code>true</code> on success, <code>false</code> otherwise)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Name of the new Shape</td>
+</tr>
+<tr>
+<td><code>radius</code></td>
+<td>number</td>
+<td>Radius [m]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-ygphysphysenvnewcylindershape">function yg.phys.PhysEnv.newCylinderShape()</h3>
+<p>Creates and stores a new Cylinder Shape in the Physics Environment.</p>
+<blockquote>
+<p><code>yg.phys.PhysEnv.newCylinderShape(name, radius, height)</code> -&gt; <code>boolean</code> (<code>true</code> on success, <code>false</code> otherwise)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Name of the new Shape</td>
+</tr>
+<tr>
+<td><code>radius</code></td>
+<td>number</td>
+<td>Radius [m]</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td>number</td>
+<td>Height [m]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-ygphysphysenvnewconeshape">function yg.phys.PhysEnv.newConeShape()</h3>
+<p>Creates and stores a new Cone Shape in the Physics Environment.</p>
+<blockquote>
+<p><code>yg.phys.PhysEnv.newConeShape(name, radius, height)</code> -&gt; <code>boolean</code> (<code>true</code> on success, <code>false</code> otherwise)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Name of the new Shape</td>
+</tr>
+<tr>
+<td><code>radius</code></td>
+<td>number</td>
+<td>Radius [m]</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td>number</td>
+<td>Height [m]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-ygphysphysenvdeleteshape">function yg.phys.PhysEnv.deleteShape()</h3>
+<p>Deletes the Shape with name <code>name</code> from the Physics Environment, if present.</p>
+<blockquote>
+<p><code>yg.phys.PhysEnv.deleteShape(name)</code> -&gt; <code>boolean</code> (<code>true</code> on success, <code>false</code> otherwise)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Name of the Shape to delete</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-ygphysphysenvclearshapes">function yg.phys.PhysEnv.clearShapes()</h3>
+<p>Deletes all Shapes from the Physics Environment.</p>
+<blockquote>
+<p><code>yg.phys.PhysEnv.clearShapes()</code> -&gt; <code>number</code> (Number of Shapes that have been deleted)</p>
+</blockquote>
+<h3 id="function-ygphysphysenvnumshapes">function yg.phys.PhysEnv.numShapes()</h3>
+<p>Returns the number of Shapes contained in the Physics Environment.</p>
+<blockquote>
+<p><code>yg.phys.PhysEnv.numShapes()</code> -&gt; <code>number</code></p>
+</blockquote>
+<h3 id="function-ygphysphysenvnewrigidbody">function yg.phys.PhysEnv.newRigidBody()</h3>
+<p>Creates and stores a new Rigid Body in the Physics Environment.</p>
+<blockquote>
+<p><code>yg.phys.PhysEnv.newRigidBody(name, shapeName, trafo, info)</code> -&gt; <code>boolean</code> (<code>true</code> on success, <code>false</code> otherwise)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Name of the new Rigid Body</td>
+</tr>
+<tr>
+<td><code>shapeName</code></td>
+<td>string</td>
+<td>Name of the Shape to apply</td>
+</tr>
+<tr>
+<td><code>trafo</code></td>
+<td><a href="../yg_math/#class-ygmathtrafo">yg.math.Trafo</a></td>
+<td>Initial pose</td>
+</tr>
+<tr>
+<td><code>info</code></td>
+<td><a href="#class-ygphysrigidbodyinfo">yg.phys.RigidBodyInfo</a></td>
+<td>Rigid Body Info</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-ygphysphysenvdeleterigidbody">function yg.phys.PhysEnv.deleteRigidBody()</h3>
+<p>Deletes the Rigid Body with name <code>name</code> from the Physics Environment, if present.</p>
+<blockquote>
+<p><code>yg.phys.PhysEnv.deleteRigidBody(name)</code> -&gt; <code>boolean</code> (<code>true</code> on success, <code>false</code> otherwise)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Name of the Rigid Body to delete</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-ygphysphysenvclearrigidbodies">function yg.phys.PhysEnv.clearRigidBodies()</h3>
+<p>Deletes all Rigid Bodies from the Physics Environment.</p>
+<blockquote>
+<p><code>yg.phys.PhysEnv.clearRigidBodies()</code> -&gt; <code>number</code> (Number of Rigid Bodies that have been deleted)</p>
+</blockquote>
+<h3 id="function-ygphysphysenvnumrigidbodies">function yg.phys.PhysEnv.numRigidBodies()</h3>
+<p>Returns the number of Rigid Bodies contained in the Physics Environment.</p>
+<blockquote>
+<p><code>yg.phys.PhysEnv.numRigidBodies()</code> -&gt; <code>number</code></p>
+</blockquote>
+<h3 id="function-ygphysphysenvgetrigidbody">function yg.phys.PhysEnv.getRigidBody()</h3>
+<p>Returns the Rigid Body with name <code>name</code>, if present. Returns <code>nil</code> otherwise.</p>
+<blockquote>
+<p><code>yg.phys.PhysEnv.getRigidBody(name)</code> -&gt; <a href="#class-ygphysrigidbody"><code>yg.phys.RigidBody</code></a> (may return nil)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Name of the Rigid Body to get</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-ygphysphysenvgetrigidbodiesstartingwith">function yg.phys.PhysEnv.getRigidBodiesStartingWith()</h3>
+<p>Returns an array of Rigid Bodies with names starting with <code>name</code>.</p>
+<blockquote>
+<p><code>yg.phys.PhysEnv.getRigidBodiesStartingWith(name)</code> -&gt; {<a href="#class-ygphysrigidbody"><code>yg.phys.RigidBody</code></a>} (may return empty array)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Name prefix of the Rigid Bodies to get</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-ygphysphysenvtick">function yg.phys.PhysEnv.tick()</h3>
+<p>Advances (ticks) the Physics Environment by a given time delta.</p>
+<blockquote>
+<p><code>yg.phys.PhysEnv.tick(dt)</code> -&gt; <code>void</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dt</code></td>
+<td>number</td>
+<td>Time delta [seconds]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-ygphysphysenvgetcollisions">function yg.phys.PhysEnv.getCollisions()</h3>
+<p>Returns an array of Collision information that happened since last frame.</p>
+<blockquote>
+<p><code>yg.phys.PhysEnv.getCollisions()</code> -&gt; {<a href="#class-ygphyscollision"><code>yg.phys.Collision</code></a>} (may return empty array)</p>
+</blockquote>
+<h3 id="function-ygphysphysenvraytest">function yg.phys.PhysEnv.rayTest()</h3>
+<p>Casts a ray and tests its collision in the scene.</p>
+<blockquote>
+<p><code>yg.phys.PhysEnv.rayTest(eyeX, eyeY, eyeZ, targetX, targetY, targetZ)</code> -&gt; <a href="#class-ygphysraytestresult"><code>yg.phys.RayTestResult</code></a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>eyeX</code></td>
+<td>number</td>
+<td>X-coordinate of ray origin</td>
+</tr>
+<tr>
+<td><code>eyeY</code></td>
+<td>number</td>
+<td>Y-coordinate of ray origin</td>
+</tr>
+<tr>
+<td><code>eyeZ</code></td>
+<td>number</td>
+<td>Z-coordinate of ray origin</td>
+</tr>
+<tr>
+<td><code>targetX</code></td>
+<td>number</td>
+<td>X-coordinate of target point</td>
+</tr>
+<tr>
+<td><code>targetY</code></td>
+<td>number</td>
+<td>Y-coordinate of target point</td>
+</tr>
+<tr>
+<td><code>targetZ</code></td>
+<td>number</td>
+<td>Z-coordinate of target point</td>
+</tr>
+</tbody>
+</table>
+<h2 id="class-ygphysrigidbodyinfo">class yg.phys.RigidBodyInfo</h2>
+<p>Represents a Rigid Body Info structure to be used for Rigid Body creation, via <a href="#function-ygphysphysenvnewrigidbody"><code>yg.phys.PhysEnv.newRigidBody()</code></a>.</p>
+<h3 id="example">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Create RigidBodyInfo instance and set some properties</span>
+<span class="n">rbInfo</span> <span class="o">=</span> <span class="n">yg</span><span class="p">.</span><span class="n">phys</span><span class="p">.</span><span class="n">RigidBodyInfo</span><span class="p">()</span>
+<span class="n">rbInfo</span><span class="p">.</span><span class="n">mass</span> <span class="o">=</span> <span class="mf">2.5</span>
+<span class="n">rbInfo</span><span class="p">.</span><span class="n">friction</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">rbInfo</span><span class="p">.</span><span class="n">restitution</span> <span class="o">=</span> <span class="mf">0.5</span>
+</code></pre></div>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mass</code></td>
+<td>number</td>
+<td>1.0</td>
+<td>Mass [kg]</td>
+</tr>
+<tr>
+<td><code>linearDamping</code></td>
+<td>number</td>
+<td>0.0</td>
+<td>Linear Damping factor in [0,1]</td>
+</tr>
+<tr>
+<td><code>angularDamping</code></td>
+<td>number</td>
+<td>0.0</td>
+<td>Angular Damping factor in [0,1]</td>
+</tr>
+<tr>
+<td><code>friction</code></td>
+<td>number</td>
+<td>0.5</td>
+<td>Friction in [0,1]</td>
+</tr>
+<tr>
+<td><code>rollingFriction</code></td>
+<td>number</td>
+<td>0.0</td>
+<td>Rolling Friction in [0,1]</td>
+</tr>
+<tr>
+<td><code>spinningFriction</code></td>
+<td>number</td>
+<td>0.0</td>
+<td>Spinning Friction in [0,1]</td>
+</tr>
+<tr>
+<td><code>restitution</code></td>
+<td>number</td>
+<td>0.0</td>
+<td>Restitution in [0,1]</td>
+</tr>
+<tr>
+<td><code>linearSleepingThreshold</code></td>
+<td>number</td>
+<td>0.8</td>
+<td>Linear Sleeping Threshold in [0,1]</td>
+</tr>
+<tr>
+<td><code>angularSleepingThreshold</code></td>
+<td>number</td>
+<td>1.0</td>
+<td>Angular Sleeping Threshold in [0,1]</td>
+</tr>
+<tr>
+<td><code>kinematic</code></td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>If <code>true</code>, the Rigid Body will be kinematic</td>
+</tr>
+<tr>
+<td><code>disableDeactivation</code></td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>if <code>true</code>, the Rigid Body will have disabled deactivation</td>
+</tr>
+</tbody>
+</table>
+<h2 id="class-ygphysrigidbody">class yg.phys.RigidBody</h2>
+<p>Represents a Rigid Body.</p>
+<h3 id="function-ygphysrigidbodygettrafo">function yg.phys.RigidBody.getTrafo()</h3>
+<p>Returns the current pose (Trafo) of the Rigid Body.</p>
+<blockquote>
+<p><code>yg.phys.RigidBody.getTrafo()</code> -&gt; <a href="../yg_math/#class-ygmathtrafo"><code>yg.math.Trafo</code></a></p>
+</blockquote>
+<h3 id="function-ygphysrigidbodysettrafo">function yg.phys.RigidBody.setTrafo()</h3>
+<p>Sets the Rigid Body to a new pose (Trafo).</p>
+<blockquote>
+<p><code>yg.phys.RigidBody.setTrafo(trafo)</code> -&gt; <code>void</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>trafo</code></td>
+<td><a href="../yg_math/#class-ygmathtrafo">yg.math.Trafo</a></td>
+<td>Trafo to set</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-ygphysrigidbodysetrestitution">function yg.phys.RigidBody.setRestitution()</h3>
+<p>Sets the Restitution of the Rigid Body.</p>
+<blockquote>
+<p><code>yg.phys.RigidBody.setRestitution(restitution)</code> -&gt; <code>void</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>restitution</code></td>
+<td>number</td>
+<td>Restitution to set in [0,1]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-ygphysrigidbodysetfriction">function yg.phys.RigidBody.setFriction()</h3>
+<p>Sets the Friction of the Rigid Body.</p>
+<blockquote>
+<p><code>yg.phys.RigidBody.setFriction(friction)</code> -&gt; <code>void</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>friction</code></td>
+<td>number</td>
+<td>Friction to set in [0,1]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-ygphysrigidbodysetsleepingthresholds">function yg.phys.RigidBody.setSleepingThresholds()</h3>
+<p>Sets the Sleeping Thresholds of the Rigid Body.</p>
+<blockquote>
+<p><code>yg.phys.RigidBody.setSleepingThresholds(linear, angular)</code> -&gt; <code>void</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>linear</code></td>
+<td>number</td>
+<td>Linear sleeping threshold to set in [0,1]</td>
+</tr>
+<tr>
+<td><code>angular</code></td>
+<td>number</td>
+<td>Angular sleeping threshold to set in [0,1]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-ygphysrigidbodysetlinearfactors">function yg.phys.RigidBody.setLinearFactors()</h3>
+<p>Sets the Linear Factors of the Rigid Body.</p>
+<blockquote>
+<p><code>yg.phys.RigidBody.setLinearFactors(x, y, z)</code> -&gt; <code>void</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>number</td>
+<td>X-component linear factor to set in [0,1]</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>number</td>
+<td>Y-component linear factor to set in [0,1]</td>
+</tr>
+<tr>
+<td><code>z</code></td>
+<td>number</td>
+<td>Z-component linear factor to set in [0,1]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-ygphysrigidbodysetangularfactor">function yg.phys.RigidBody.setAngularFactor()</h3>
+<p>Sets the Angular Factors of the Rigid Body from a single value which is applied to all axes.</p>
+<blockquote>
+<p><code>yg.phys.RigidBody.setAngularFactor(angFac)</code> -&gt; <code>void</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>angFac</code></td>
+<td>number</td>
+<td>Angular factor to set in [0,1]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-ygphysrigidbodysetangularfactors">function yg.phys.RigidBody.setAngularFactors()</h3>
+<p>Sets the Angular Factors of the Rigid Body from individual values for x-,y-,z-components.</p>
+<blockquote>
+<p><code>yg.phys.RigidBody.setAngularFactors(x, y, z)</code> -&gt; <code>void</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>number</td>
+<td>X-component angular factor to set in [0,1]</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>number</td>
+<td>Y-component angular factor to set in [0,1]</td>
+</tr>
+<tr>
+<td><code>z</code></td>
+<td>number</td>
+<td>Z-component angular factor to set in [0,1]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-ygphysrigidbodyapplycentralforce">function yg.phys.RigidBody.applyCentralForce()</h3>
+<p>Applies a central force to the Rigid Body. The force <code>F</code> is applied to the Rigid Body for the time delta <code>t</code> of the next simulation step only.</p>
+<p><strong>Example:</strong> Applying a force <code>F=5N</code> for <code>t=1s</code> changes the velocity of a Rigid Body with mass <code>m=1kg</code> like so (damping etc. ignored):</p>
+<div class="highlight"><pre><span></span><code>dV = F  * t  / m
+dV = 5N * 1s / 1kg
+dV = 5m/s
+</code></pre></div>
+<blockquote>
+<p><code>yg.phys.RigidBody.applyCentralForce(x, y, z)</code> -&gt; <code>void</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>number</td>
+<td>X-component central force to apply [N]</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>number</td>
+<td>Y-component central force to apply [N]</td>
+</tr>
+<tr>
+<td><code>z</code></td>
+<td>number</td>
+<td>Z-component central force to apply [N]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-ygphysrigidbodyapplycentralimpulse">function yg.phys.RigidBody.applyCentralImpulse()</h3>
+<p>Applies a central impulse to the Rigid Body. The impulse is immediately applied to the Rigid Body as if a force <code>F</code> was applied for a time <code>t</code>. Unit: [N*s] (newton-second).</p>
+<p><strong>Example:</strong> Applying an impulse <code>J=5Ns</code> changes the velocity of a Rigid Body with mass <code>m=1kg</code> like so (damping etc. ignored):</p>
+<div class="highlight"><pre><span></span><code>dV = J   / m
+dV = 5Ns / 1kg
+dV = 5m/s
+</code></pre></div>
+<blockquote>
+<p><code>yg.phys.RigidBody.applyCentralImpulse(x, y, z)</code> -&gt; <code>void</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>number</td>
+<td>X-component central impulse to apply [N*s]</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>number</td>
+<td>Y-component central impulse to apply [N*s]</td>
+</tr>
+<tr>
+<td><code>z</code></td>
+<td>number</td>
+<td>Z-component central impulse to apply [N*s]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="properties_1">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Name of the Rigid Body</td>
+</tr>
+</tbody>
+</table>
+<h2 id="class-ygphyscollision">class yg.phys.Collision</h2>
+<p>Represents a Collision between two Rigid Bodies.</p>
+<h2 id="class-ygphysraytestresult">class yg.phys.RayTestResult</h2>
+<p>Represents the result of a ray test.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.fc8c2696.min.js"></script>
+      
+    
+  </body>
+</html>
