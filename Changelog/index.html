@@ -9,17 +9,17 @@
       
       
       
-        <link rel="prev" href="../yg_phys/">
+        <link rel="prev" href="../Manual/">
       
       
-        <link rel="next" href="../yg_util/">
+        <link rel="next" href="../Api/">
       
       <link rel="icon" href="../yg_logo.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
     
     
       
-        <title>yg.time - yourgame</title>
+        <title>Changelog - yourgame</title>
       
     
     
@@ -71,7 +71,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ygtime" class="md-skip">
+        <a href="#yourgame-changelog" class="md-skip">
           Skip to content
         </a>
       
@@ -105,7 +105,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              yg.time
+              Changelog
             
           </span>
         </div>
@@ -262,11 +262,52 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../Changelog/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Changelog
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Changelog
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#v001" class="md-nav__link">
+    v0.0.1
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -277,16 +318,14 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
       
       
       
@@ -295,7 +334,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           API
@@ -446,66 +485,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          yg.time
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../yg_time/" class="md-nav__link">
         yg.time
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#function-ygtimegetdelta" class="md-nav__link">
-    function yg.time.getDelta()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-ygtimegettime" class="md-nav__link">
-    function yg.time.getTime()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-ygtimegetclockperiod" class="md-nav__link">
-    function yg.time.getClockPeriod()
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -558,22 +542,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#function-ygtimegetdelta" class="md-nav__link">
-    function yg.time.getDelta()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-ygtimegettime" class="md-nav__link">
-    function yg.time.getTime()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-ygtimegetclockperiod" class="md-nav__link">
-    function yg.time.getClockPeriod()
+  <a href="#v001" class="md-nav__link">
+    v0.0.1
   </a>
   
 </li>
@@ -593,23 +563,12 @@
                   
 
 
-<h1 id="ygtime">yg.time</h1>
-<p>Functions for timing.</p>
-<h2 id="function-ygtimegetdelta">function yg.time.getDelta()</h2>
-<p>Returns the time delta since last frame in [seconds].</p>
-<blockquote>
-<p><code>yg.time.getDelta()</code> -&gt; <code>number</code></p>
-</blockquote>
-<h2 id="function-ygtimegettime">function yg.time.getTime()</h2>
-<p>Returns the time since application start in [seconds].</p>
-<blockquote>
-<p><code>yg.time.getTime()</code> -&gt; <code>number</code></p>
-</blockquote>
-<h2 id="function-ygtimegetclockperiod">function yg.time.getClockPeriod()</h2>
-<p>Returns the clock tick period in [seconds]. This is a diagnostic value and not relevant for the user.</p>
-<blockquote>
-<p><code>yg.time.getClockPeriod()</code> -&gt; <code>number</code></p>
-</blockquote>
+<h1 id="yourgame-changelog">Yourgame Changelog</h1>
+<h2 id="v001">v0.0.1</h2>
+<p>Download here: <a href="https://github.com/duddel/yourgame/releases/tag/v0.0.1">https://github.com/duddel/yourgame/releases/tag/v0.0.1</a></p>
+<ul>
+<li>Initial release</li>
+</ul>
 
 
 
