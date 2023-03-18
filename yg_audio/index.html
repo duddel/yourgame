@@ -15,7 +15,7 @@
         <link rel="next" href="../yg_control/">
       
       <link rel="icon" href="../yg_logo.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.7bf56d0a.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.c4a75a56.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -385,6 +385,34 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-ygaudioinit" class="md-nav__link">
+    function yg.audio.init()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-ygaudioshutdown" class="md-nav__link">
+    function yg.audio.shutdown()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-ygaudioisinitialized" class="md-nav__link">
+    function yg.audio.isInitialized()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#function-ygaudiostorefile" class="md-nav__link">
     function yg.audio.storeFile()
   </a>
@@ -394,6 +422,27 @@
         <li class="md-nav__item">
   <a href="#function-ygaudioplay" class="md-nav__link">
     function yg.audio.play()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-ygaudiostop" class="md-nav__link">
+    function yg.audio.stop()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-ygaudiopause" class="md-nav__link">
+    function yg.audio.pause()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-ygaudiosetchannelgains" class="md-nav__link">
+    function yg.audio.setChannelGains()
   </a>
   
 </li>
@@ -566,6 +615,34 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-ygaudioinit" class="md-nav__link">
+    function yg.audio.init()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-ygaudioshutdown" class="md-nav__link">
+    function yg.audio.shutdown()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-ygaudioisinitialized" class="md-nav__link">
+    function yg.audio.isInitialized()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#function-ygaudiostorefile" class="md-nav__link">
     function yg.audio.storeFile()
   </a>
@@ -575,6 +652,27 @@
         <li class="md-nav__item">
   <a href="#function-ygaudioplay" class="md-nav__link">
     function yg.audio.play()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-ygaudiostop" class="md-nav__link">
+    function yg.audio.stop()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-ygaudiopause" class="md-nav__link">
+    function yg.audio.pause()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-ygaudiosetchannelgains" class="md-nav__link">
+    function yg.audio.setChannelGains()
   </a>
   
 </li>
@@ -596,10 +694,72 @@
 
 <h1 id="ygaudio">yg.audio</h1>
 <p>Functions for audio playback.</p>
+<h2 id="example">Example</h2>
+<div class="highlight"><pre><span></span><code><span class="kr">function</span> <span class="nf">init</span><span class="p">()</span>
+    <span class="c1">-- Initialize the audio module with:</span>
+    <span class="c1">--   5 sources</span>
+    <span class="c1">--   Default number of channels</span>
+    <span class="c1">--   Default sample rate</span>
+    <span class="n">yg</span><span class="p">.</span><span class="n">audio</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="c1">-- Store a file to play it back</span>
+    <span class="n">yg</span><span class="p">.</span><span class="n">audio</span><span class="p">.</span><span class="n">storeFile</span><span class="p">(</span><span class="s2">&quot;a//noise.ogg&quot;</span><span class="p">)</span>
+    <span class="c1">-- Play the file looped endless and get the source id</span>
+    <span class="n">noiseSource</span> <span class="o">=</span> <span class="n">yg</span><span class="p">.</span><span class="n">audio</span><span class="p">.</span><span class="n">play</span><span class="p">(</span><span class="s2">&quot;a//noise.ogg&quot;</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">tick</span><span class="p">()</span>
+    <span class="c1">-- Manipulate the channel gains to simulate a moving object</span>
+    <span class="n">gains</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">gains</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">gains</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.3</span>
+    <span class="n">yg</span><span class="p">.</span><span class="n">audio</span><span class="p">.</span><span class="n">setChannelGains</span><span class="p">(</span><span class="n">noiseSource</span><span class="p">,</span> <span class="n">gains</span><span class="p">)</span>
+<span class="kr">end</span>
+</code></pre></div>
+<h2 id="function-ygaudioinit">function yg.audio.init()</h2>
+<p>Enables the audio module.</p>
+<blockquote>
+<p><code>yg.audio.init(numSources, numChannels, sampleRate)</code> -&gt; <code>number</code> (0 if successful)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>numSources</code></td>
+<td>number</td>
+<td>Maximum number of audio sources to be mixed during playback [<code>integer</code>]</td>
+</tr>
+<tr>
+<td><code>numChannels</code></td>
+<td>number</td>
+<td>Number of audio playback channels [<code>integer</code>]. <strong>set 0 for device default.</strong></td>
+</tr>
+<tr>
+<td><code>sampleRate</code></td>
+<td>number</td>
+<td>Sample rate. <strong>Set 0 for device default.</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="function-ygaudioshutdown">function yg.audio.shutdown()</h2>
+<p>Shuts down the audio module.</p>
+<blockquote>
+<p><code>yg.audio.shutdown()</code> -&gt; <code>void</code></p>
+</blockquote>
+<h2 id="function-ygaudioisinitialized">function yg.audio.isInitialized()</h2>
+<p>Returns <code>true</code> if the audio module is initialized, <code>false</code> otherwise.</p>
+<blockquote>
+<p><code>yg.audio.isInitialized()</code> -&gt; <code>boolean</code></p>
+</blockquote>
 <h2 id="function-ygaudiostorefile">function yg.audio.storeFile()</h2>
 <p>Loads a sound file (.ogg) and stores it for being played back.</p>
 <blockquote>
-<p><code>yg.audio.storeFile(filename)</code> -&gt; <code>number</code> (Status code 0 if successful)</p>
+<p><code>yg.audio.storeFile(filename)</code> -&gt; <code>number</code> (0 if successful)</p>
 </blockquote>
 <table>
 <thead>
@@ -618,9 +778,9 @@
 </tbody>
 </table>
 <h2 id="function-ygaudioplay">function yg.audio.play()</h2>
-<p>Starts the playback of a previously stored audio file.</p>
+<p>Starts the playback of a previously stored audio file, <strong>if a free source slot is available</strong>. In this case, the index of the source is returnes <code>[0,numSources-1]</code>. On error, a negative value is returned. The source index can be used to manipulate the playback once it has started (see <a href="#function-ygaudiostop">yg.audio.stop()</a>, <a href="#function-ygaudiopause">yg.audio.pause()</a>, etc.).</p>
 <blockquote>
-<p><code>src_idx = yg.audio.play(filename, loop)</code> -&gt; <code>number</code> (Audio source index)</p>
+<p><code>yg.audio.play(filename, loop)</code> -&gt; <code>number</code> (Audio source index, or &lt; 0 on error)</p>
 </blockquote>
 <table>
 <thead>
@@ -639,7 +799,80 @@
 <tr>
 <td><code>loop</code></td>
 <td>boolean</td>
-<td>If true, playback loops. Once otherwise.</td>
+<td>If <code>true</code>, playback loops endless. Plays once otherwise.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="function-ygaudiostop">function yg.audio.stop()</h2>
+<p>Stops the playback of a source and clears the slot.</p>
+<blockquote>
+<p><code>yg.audio.stop(sourceId)</code> -&gt; <code>number</code> (0 if successful)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sourceId</code></td>
+<td>number</td>
+<td>Index of the source, retrieved from <a href="#function-ygaudioplay">yg.audio.play()</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="function-ygaudiopause">function yg.audio.pause()</h2>
+<p>Pauses the playback of a source.</p>
+<blockquote>
+<p><code>yg.audio.pause(sourceId, pause)</code> -&gt; <code>number</code> (0 if successful)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sourceId</code></td>
+<td>number</td>
+<td>Index of the source, retrieved from <a href="#function-ygaudioplay">yg.audio.play()</a></td>
+</tr>
+<tr>
+<td><code>pause</code></td>
+<td>boolean</td>
+<td>If <code>true</code>, playback is paused. Options: <code>true</code>, <code>false</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="function-ygaudiosetchannelgains">function yg.audio.setChannelGains()</h2>
+<p>Sets the channel gains of a source: array of numbers, typically in <code>[0,1]</code> to reduce gain on individual channels. The audio signal of each channel gets multiplied by the appropriate gain value.</p>
+<blockquote>
+<p><code>yg.audio.setChannelGains(sourceId, gains)</code> -&gt; <code>number</code> (0 if successful)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sourceId</code></td>
+<td>number</td>
+<td>Index of the source, retrieved from <a href="#function-ygaudioplay">yg.audio.play()</a></td>
+</tr>
+<tr>
+<td><code>gains</code></td>
+<td>{number}</td>
+<td>Gain values in <code>[0,1]</code> for each channel (array of number)</td>
 </tr>
 </tbody>
 </table>
@@ -683,7 +916,7 @@
     <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.fc8c2696.min.js"></script>
+      <script src="../assets/javascripts/bundle.efa0ade1.min.js"></script>
       
     
   </body>

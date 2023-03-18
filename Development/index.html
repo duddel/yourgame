@@ -15,7 +15,7 @@
         <link rel="next" href="../Api/">
       
       <link rel="icon" href="../yg_logo.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.7bf56d0a.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.c4a75a56.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -288,9 +288,67 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Development
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         Development
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#facts" class="md-nav__link">
+    Facts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-checklist" class="md-nav__link">
+    Release Checklist
+  </a>
+  
+    <nav class="md-nav" aria-label="Release Checklist">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#before-tag" class="md-nav__link">
+    Before Tag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#after-tag" class="md-nav__link">
+    After Tag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -519,6 +577,48 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#facts" class="md-nav__link">
+    Facts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-checklist" class="md-nav__link">
+    Release Checklist
+  </a>
+  
+    <nav class="md-nav" aria-label="Release Checklist">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#before-tag" class="md-nav__link">
+    Before Tag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#after-tag" class="md-nav__link">
+    After Tag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -533,9 +633,9 @@
 
 
 <h1 id="development">Development</h1>
-<p>Some preliminary facts about the development of <code>yourgame</code>.</p>
+<h2 id="facts">Facts</h2>
 <ul>
-<li>A new <a href="https://github.com/duddel/yourgame/releases">release</a> every 2-4 weeks, if something meaningful happens</li>
+<li>A new <a href="https://github.com/duddel/yourgame/releases">release</a> every couple of weeks, if something meaningful happens</li>
 <li>Semantic Versioning approach (<code>MAJOR.MINOR.PATCH</code>)<ul>
 <li><strong>But none of the rules regarding compatibility apply as long as <code>MAJOR</code> version is 0</strong></li>
 <li>Expect breaking API changes, catch up using the <a href="../Changelog/">Changelog</a></li>
@@ -543,6 +643,19 @@
 </li>
 <li><code>yourgame</code> is based on <code>yourgamelib</code>, which is hosted <a href="https://github.com/duddel/yourgamelib">here</a></li>
 <li><code>ToDo</code>s are scattered all over the place to mark unfinished stuff. No dedicated list.</li>
+</ul>
+<h2 id="release-checklist">Release Checklist</h2>
+<h3 id="before-tag">Before Tag</h3>
+<ul>
+<li>Check if version is correct in <code>project()</code> in <code>CMakeLists.txt</code></li>
+<li>Check if version is correct in <a href="../Changelog/">Changelog</a></li>
+<li>Remove <code>(unreleased)</code> from version in <a href="../Changelog/">Changelog</a></li>
+<li>Check generated build artifacts (<code>Actions</code>)</li>
+</ul>
+<h3 id="after-tag">After Tag</h3>
+<ul>
+<li>Set next version in <code>project()</code> in <code>CMakeLists.txt</code></li>
+<li>Add next version to <a href="../Changelog/">Changelog</a> with <code>(unreleased)</code></li>
 </ul>
 
 
@@ -584,7 +697,7 @@
     <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.fc8c2696.min.js"></script>
+      <script src="../assets/javascripts/bundle.efa0ade1.min.js"></script>
       
     
   </body>
