@@ -427,15 +427,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#class-ygglgeometry" class="md-nav__link">
-    class yg.gl.Geometry
+  <a href="#function-yggldepthtest" class="md-nav__link">
+    function yg.gl.depthTest()
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#class-ygglshader" class="md-nav__link">
-    class yg.gl.Shader
+  <a href="#function-ygglclearcolor" class="md-nav__link">
+    function yg.gl.clearColor()
   </a>
   
 </li>
@@ -444,6 +444,33 @@
   <a href="#class-yggltexture" class="md-nav__link">
     class yg.gl.Texture
   </a>
+  
+    <nav class="md-nav" aria-label="class yg.gl.Texture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#function-yggltexturegetcoords" class="md-nav__link">
+    function yg.gl.Texture.getCoords()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-yggltexturegetframecoords" class="md-nav__link">
+    function yg.gl.Texture.getFrameCoords()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-yggltexturegetgridcoords" class="md-nav__link">
+    function yg.gl.Texture.getGridCoords()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -454,6 +481,13 @@
   
     <nav class="md-nav" aria-label="class yg.gl.Lightsource">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    constructor
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#function-yggllightsourcesetambient" class="md-nav__link">
@@ -485,6 +519,27 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-ygglgeometry" class="md-nav__link">
+    class yg.gl.Geometry
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-ygglshader" class="md-nav__link">
+    class yg.gl.Shader
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-yggltexturecoords" class="md-nav__link">
+    class yg.gl.TextureCoords
+  </a>
   
 </li>
       
@@ -642,15 +697,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#class-ygglgeometry" class="md-nav__link">
-    class yg.gl.Geometry
+  <a href="#function-yggldepthtest" class="md-nav__link">
+    function yg.gl.depthTest()
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#class-ygglshader" class="md-nav__link">
-    class yg.gl.Shader
+  <a href="#function-ygglclearcolor" class="md-nav__link">
+    function yg.gl.clearColor()
   </a>
   
 </li>
@@ -659,6 +714,33 @@
   <a href="#class-yggltexture" class="md-nav__link">
     class yg.gl.Texture
   </a>
+  
+    <nav class="md-nav" aria-label="class yg.gl.Texture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#function-yggltexturegetcoords" class="md-nav__link">
+    function yg.gl.Texture.getCoords()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-yggltexturegetframecoords" class="md-nav__link">
+    function yg.gl.Texture.getFrameCoords()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-yggltexturegetgridcoords" class="md-nav__link">
+    function yg.gl.Texture.getGridCoords()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -669,6 +751,13 @@
   
     <nav class="md-nav" aria-label="class yg.gl.Lightsource">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    constructor
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#function-yggllightsourcesetambient" class="md-nav__link">
@@ -700,6 +789,27 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-ygglgeometry" class="md-nav__link">
+    class yg.gl.Geometry
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-ygglshader" class="md-nav__link">
+    class yg.gl.Shader
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-yggltexturecoords" class="md-nav__link">
+    class yg.gl.TextureCoords
+  </a>
   
 </li>
       
@@ -767,12 +877,214 @@
 </tbody>
 </table>
 <h2 id="function-yggldrawsprite">function yg.gl.drawSprite()</h2>
-<p>tbc...</p>
-<h2 id="class-ygglgeometry">class yg.gl.Geometry</h2>
-<h2 id="class-ygglshader">class yg.gl.Shader</h2>
+<p>Draws a 2-d sprite in screen space. Screen origin (<code>x=0, y=0</code>) in upper left corner.</p>
+<p>Returns an array of 4 numbers (<code>xmin, xmax, ymin, ymax</code>) denoting the screen space axis aligned bounding box (AABB), the sprite is drawn in, <strong>as if it was not rotated</strong>.</p>
+<p>The <code>coords</code> argument must be retrieved from <code>texture</code> to get valid coordinate information for a sprite from an atlas or grid texture. To draw an entire texture, <a href="#function-yggltexturegetgridcoords">yg.gl.Texture.getGridCoords(1, 1, 0)</a> can be used. See example:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Example for yg.gl.drawSprite()</span>
+<span class="kr">function</span> <span class="nf">init</span><span class="p">()</span>
+    <span class="n">yg</span><span class="p">.</span><span class="n">asset</span><span class="p">.</span><span class="n">loadTexture</span><span class="p">(</span><span class="s2">&quot;demo&quot;</span><span class="p">,</span> <span class="s2">&quot;a//demo.png&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                         <span class="s2">&quot;diffuse&quot;</span><span class="p">,</span> <span class="s2">&quot;linear&quot;</span><span class="p">,</span> <span class="s2">&quot;repeat&quot;</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+    <span class="c1">-- Get coords for the entire texture, to draw it with drawSprite()</span>
+    <span class="n">coordsDemo</span> <span class="o">=</span> <span class="n">yg</span><span class="p">.</span><span class="n">asset</span><span class="p">.</span><span class="n">getTexture</span><span class="p">(</span><span class="s2">&quot;demo&quot;</span><span class="p">):</span><span class="n">getGridCoords</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">tick</span><span class="p">()</span>
+    <span class="c1">-- Use screenPos to detect clicks or collisions</span>
+    <span class="n">screenPos</span> <span class="o">=</span> <span class="n">yg</span><span class="p">.</span><span class="n">gl</span><span class="p">.</span><span class="n">drawSprite</span><span class="p">(</span><span class="n">yg</span><span class="p">.</span><span class="n">asset</span><span class="p">.</span><span class="n">getTexture</span><span class="p">(</span><span class="s2">&quot;demo&quot;</span><span class="p">),</span>
+                                 <span class="n">coordsDemo</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="kr">end</span>
+</code></pre></div>
+<blockquote>
+<p><code>yg.gl.drawSprite(texture, coords, x, y, width, height, angle)</code> -&gt; <code>{number}</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>texture</code></td>
+<td><a href="#class-yggltexture">yg.gl.Texture</a></td>
+<td>Texture to draw from</td>
+</tr>
+<tr>
+<td><code>coords</code></td>
+<td><a href="#class-yggltexturecoords">yg.gl.TextureCoords</a></td>
+<td>Subtexture coordinate info to pick sprite from atlas/grid</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>number</td>
+<td>X-position (<strong>center of sprite</strong>)</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>number</td>
+<td>Y-position (<strong>center of sprite</strong>)</td>
+</tr>
+<tr>
+<td><code>width</code></td>
+<td>number</td>
+<td>Width of sprite [pixels]</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td>number</td>
+<td>Height of sprite [pixels]</td>
+</tr>
+<tr>
+<td><code>angle</code></td>
+<td>number</td>
+<td>Counter-clockwise rotation of sprite [rad]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="function-yggldepthtest">function yg.gl.depthTest()</h2>
+<p>Enables/disables depth test via <code>glEnable(GL_DEPTH_TEST)</code> / <code>glDisable(GL_DEPTH_TEST)</code>.</p>
+<blockquote>
+<p><code>yg.gl.depthTest(enable)</code> -&gt; <code>void</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enable</code></td>
+<td>boolean</td>
+<td>Options: <code>true</code>: enable, <code>false</code>: disable</td>
+</tr>
+</tbody>
+</table>
+<h2 id="function-ygglclearcolor">function yg.gl.clearColor()</h2>
+<p>Sets the clear color via <code>glClearColor()</code>.</p>
+<blockquote>
+<p><code>yg.gl.clearColor(r, g, b, a)</code> -&gt; <code>void</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>r</code></td>
+<td>number</td>
+<td>Red</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td>number</td>
+<td>Green</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td>number</td>
+<td>Blue</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td>number</td>
+<td>Alpha</td>
+</tr>
+</tbody>
+</table>
 <h2 id="class-yggltexture">class yg.gl.Texture</h2>
+<h3 id="function-yggltexturegetcoords">function yg.gl.Texture.getCoords()</h3>
+<p>Returns coordinate information of a sprite called <code>name</code>. Typically used with textures loaded together with an atlas file, see <a href="../yg_asset/#function-ygassetloadtexture">yg.asset.loadTexture()</a>.</p>
+<blockquote>
+<p><code>yg.gl.Texture.getCoords(name)</code> -&gt; <a href="#class-yggltexturecoords"><code>yg.gl.TextureCoords</code></a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Name of the sprite</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-yggltexturegetframecoords">function yg.gl.Texture.getFrameCoords()</h3>
+<p>Returns coordinate information of a sprite which is a frame of a sequence. <code>frame</code> is always wrapped into valid range and may be negative. Typically used with textures loaded together with an atlas file, see <a href="../yg_asset/#function-ygassetloadtexture">yg.asset.loadTexture()</a>.</p>
+<blockquote>
+<p><code>yg.gl.Texture.getFrameCoords(sequenceName, frame)</code> -&gt; <a href="#class-yggltexturecoords"><code>yg.gl.TextureCoords</code></a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sequenceName</code></td>
+<td>string</td>
+<td>Name of the sprite sequence</td>
+</tr>
+<tr>
+<td><code>frame</code></td>
+<td>number</td>
+<td>Frame index</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-yggltexturegetgridcoords">function yg.gl.Texture.getGridCoords()</h3>
+<p>Returns texture coordinates of a grid cell. Any grid size can be used for any texture. To get coordinates for the entire texture, call <code>yg.gl.Texture.getGridCoords(1, 1, 0)</code>. </p>
+<blockquote>
+<p><code>yg.gl.Texture.getGridCoords(gridWidth, gridHeight, index)</code> -&gt; <a href="#class-yggltexturecoords"><code>yg.gl.TextureCoords</code></a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gridWidth</code></td>
+<td>number</td>
+<td>Number of grid columns</td>
+</tr>
+<tr>
+<td><code>gridHeight</code></td>
+<td>number</td>
+<td>Number of grid rows</td>
+</tr>
+<tr>
+<td><code>index</code></td>
+<td>number</td>
+<td>Index of the grid cell to return coordinates for, starting top-left with index <code>0</code></td>
+</tr>
+</tbody>
+</table>
 <h2 id="class-yggllightsource">class yg.gl.Lightsource</h2>
 <p>Represents a lightsource.</p>
+<h3 id="constructor">constructor</h3>
+<blockquote>
+<p><code>yg.gl.Lightsource()</code> -&gt; <a href="#class-yggllightsource"><code>yg.gl.Lightsource</code></a></p>
+</blockquote>
 <h3 id="function-yggllightsourcesetambient">function yg.gl.lightsource.setAmbient()</h3>
 <p>Sets ambient light component.</p>
 <blockquote>
@@ -897,6 +1209,12 @@
 </tr>
 </tbody>
 </table>
+<h2 id="class-ygglgeometry">class yg.gl.Geometry</h2>
+<p>No functionality accessible. Used to pass around instances, like from <a href="../yg_asset/#function-ygassetgetgeometry">yg.asset.getGeometry()</a> to <a href="#function-yggldraw">yg.gl.draw()</a>.</p>
+<h2 id="class-ygglshader">class yg.gl.Shader</h2>
+<p>No functionality accessible. Used to pass around instances, like from <a href="../yg_asset/#function-ygassetgetshader">yg.asset.getShader()</a> to <a href="#function-yggldraw">yg.gl.draw()</a>.</p>
+<h2 id="class-yggltexturecoords">class yg.gl.TextureCoords</h2>
+<p>No functionality accessible. Used to pass around instances, like from <a href="#function-yggltexturegetcoords">yg.gl.Texture.getCoords()</a> to <a href="#function-yggldrawsprite">yg.gl.drawSprite()</a>.</p>
 
 
 
