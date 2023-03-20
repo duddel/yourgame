@@ -305,29 +305,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#how-to-make-sprite-sheets-texture-atlases" class="md-nav__link">
-    How to make Sprite Sheets (Texture Atlases)
+  <a href="#texture-atlases-sprite-sheets" class="md-nav__link">
+    Texture Atlases (Sprite Sheets)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#how-to-make-sky-images" class="md-nav__link">
-    How to make Sky images
+  <a href="#3d-models-and-materials" class="md-nav__link">
+    3D Models and Materials
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#how-to-write-glsl-shaders" class="md-nav__link">
-    How to write GLSL Shaders
+  <a href="#sky-images" class="md-nav__link">
+    Sky images
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#how-to-make-3d-models" class="md-nav__link">
-    How to make 3d models
+  <a href="#glsl-shaders" class="md-nav__link">
+    GLSL Shaders
   </a>
   
 </li>
@@ -634,29 +634,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#how-to-make-sprite-sheets-texture-atlases" class="md-nav__link">
-    How to make Sprite Sheets (Texture Atlases)
+  <a href="#texture-atlases-sprite-sheets" class="md-nav__link">
+    Texture Atlases (Sprite Sheets)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#how-to-make-sky-images" class="md-nav__link">
-    How to make Sky images
+  <a href="#3d-models-and-materials" class="md-nav__link">
+    3D Models and Materials
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#how-to-write-glsl-shaders" class="md-nav__link">
-    How to write GLSL Shaders
+  <a href="#sky-images" class="md-nav__link">
+    Sky images
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#how-to-make-3d-models" class="md-nav__link">
-    How to make 3d models
+  <a href="#glsl-shaders" class="md-nav__link">
+    GLSL Shaders
   </a>
   
 </li>
@@ -693,15 +693,68 @@
 <p>All files go into <code>assets/</code>. Entrypoint is <code>main.lua</code>.</p>
 <h2 id="assets">Assets</h2>
 <h3 id="supported-file-formats">Supported file formats</h3>
-<p>ToDo: <code>.png</code>, <code>.jpg</code>, <code>.ogg</code>, <code>.obj</code>, <code>.mtl</code>, <code>.json</code>, <code>.lua</code>, ...</p>
-<h3 id="how-to-make-sprite-sheets-texture-atlases">How to make Sprite Sheets (Texture Atlases)</h3>
-<p>ToDo: Mention <code>Free Texture Packer</code> and manual access to grid based sprites.</p>
-<h3 id="how-to-make-sky-images">How to make Sky images</h3>
-<p>ToDo: Mention equirectangular projection and the skytool.</p>
-<h3 id="how-to-write-glsl-shaders">How to write GLSL Shaders</h3>
-<p>ToDo: Mention GLSL conventions (uniform names, attribute locations).</p>
-<h3 id="how-to-make-3d-models">How to make 3d models</h3>
+<table>
+<thead>
+<tr>
+<th>Usage</th>
+<th>Supported formats</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Code</td>
+<td><code>.lua</code></td>
+<td>The main script (entry point) must be called <code>main.lua</code></td>
+</tr>
+<tr>
+<td>Texture</td>
+<td><code>.png</code>, <code>.jpg</code></td>
+<td>Image formats to load with <a href="../yg_asset/#function-ygassetloadtexture">yg.asset.loadTexture()</a></td>
+</tr>
+<tr>
+<td>Texture Atlas</td>
+<td><code>.json</code></td>
+<td>See <a href="#texture-atlases-sprite-sheets">Texture Atlases (Sprite Sheets)</a></td>
+</tr>
+<tr>
+<td>Audio</td>
+<td><code>.ogg</code></td>
+<td>Audio format to load with <a href="../yg_audio/#function-ygaudiostorefile">yg.audio.storeFile()</a></td>
+</tr>
+<tr>
+<td>3D Model</td>
+<td><code>.obj</code></td>
+<td>See <a href="#3d-models-and-materials">3D Models and Materials</a></td>
+</tr>
+<tr>
+<td>Material</td>
+<td><code>.mtl</code></td>
+<td>See <a href="#3d-models-and-materials">3D Models and Materials</a></td>
+</tr>
+<tr>
+<td>GLSL Shaders</td>
+<td><code>.vert</code>, <code>.frag</code></td>
+<td>Naming convnetion. See <a href="#glsl-shaders">GLSL Shaders</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="texture-atlases-sprite-sheets">Texture Atlases (Sprite Sheets)</h3>
+<p>Packed texture atlases created with the tool <code>Free Texture Packer</code> (<code>FTP</code>) are supported and can be loaded with <a href="../yg_asset/#function-ygassetloadtexture">yg.asset.loadTexture()</a>.</p>
+<p>Tested version: <strong>v0.6.7</strong></p>
+<p>The following <code>FTP</code> settings are required. The rest can be set to users taste.</p>
+<ul>
+<li>Format: <code>JSON (hash)</code> or <code>JSON (array)</code></li>
+<li>Allow rotation: <code>No</code></li>
+<li>Allow trim: <code>No</code></li>
+<li>Padding: <code>&gt;= 2</code> (recommended)</li>
+</ul>
+<h3 id="3d-models-and-materials">3D Models and Materials</h3>
 <p>ToDo: Mention simple Blender workflow and Kenney assets.</p>
+<h3 id="sky-images">Sky images</h3>
+<p>ToDo: Mention equirectangular projection and the skytool.</p>
+<h3 id="glsl-shaders">GLSL Shaders</h3>
+<p>ToDo: Mention GLSL conventions (uniform names, attribute locations).</p>
 <h2 id="file-access">File access</h2>
 <p>ToDo: Mention <code>a//</code>. Link this from all functions etc. that take filenames.</p>
 
