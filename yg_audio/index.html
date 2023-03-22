@@ -710,9 +710,7 @@
 <span class="kr">function</span> <span class="nf">tick</span><span class="p">()</span>
     <span class="c1">-- Manipulate the channel gains to simulate a moving object</span>
     <span class="c1">-- (assuming 2 channels)</span>
-    <span class="n">gains</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">gains</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
-    <span class="n">gains</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.3</span>
+    <span class="n">gains</span> <span class="o">=</span> <span class="p">{</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">}</span>
     <span class="n">yg</span><span class="p">.</span><span class="n">audio</span><span class="p">.</span><span class="n">setChannelGains</span><span class="p">(</span><span class="n">noiseSource</span><span class="p">,</span> <span class="n">gains</span><span class="p">)</span>
 <span class="kr">end</span>
 </code></pre></div>
@@ -914,7 +912,7 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../assets/javascripts/bundle.efa0ade1.min.js"></script>
