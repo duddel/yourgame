@@ -290,6 +290,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#file-access" class="md-nav__link">
+    File access
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#texture-atlases-sprite-sheets" class="md-nav__link">
     Texture Atlases (Sprite Sheets)
   </a>
@@ -362,12 +369,25 @@
     GLSL Shaders
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#file-access" class="md-nav__link">
-    File access
+    <nav class="md-nav" aria-label="GLSL Shaders">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes-conventions" class="md-nav__link">
+    Attributes Conventions
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uniforms-conventions" class="md-nav__link">
+    Uniforms Conventions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -648,6 +668,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#file-access" class="md-nav__link">
+    File access
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#texture-atlases-sprite-sheets" class="md-nav__link">
     Texture Atlases (Sprite Sheets)
   </a>
@@ -720,12 +747,25 @@
     GLSL Shaders
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#file-access" class="md-nav__link">
-    File access
+    <nav class="md-nav" aria-label="GLSL Shaders">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes-conventions" class="md-nav__link">
+    Attributes Conventions
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uniforms-conventions" class="md-nav__link">
+    Uniforms Conventions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -750,48 +790,50 @@
 <thead>
 <tr>
 <th>Usage</th>
-<th>Supported formats</th>
+<th>Supported Formats</th>
 <th>Note</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Code</td>
-<td><code>.lua</code></td>
+<td><strong><code>.lua</code></strong></td>
 <td>The main script (entry point) must be called <code>main.lua</code></td>
 </tr>
 <tr>
 <td>Texture</td>
-<td><code>.png</code>, <code>.jpg</code></td>
+<td><strong><code>.png</code></strong>, <strong><code>.jpg</code></strong></td>
 <td>Image formats to load with <a href="../yg_asset/#function-ygassetloadtexture">yg.asset.loadTexture()</a></td>
 </tr>
 <tr>
 <td>Texture Atlas</td>
-<td><code>.json</code></td>
+<td><strong><code>.json</code></strong></td>
 <td>See <a href="#texture-atlases-sprite-sheets">Texture Atlases (Sprite Sheets)</a></td>
 </tr>
 <tr>
 <td>Audio</td>
-<td><code>.ogg</code></td>
+<td><strong><code>.ogg</code></strong></td>
 <td>Audio format to load with <a href="../yg_audio/#function-ygaudiostorefile">yg.audio.storeFile()</a></td>
 </tr>
 <tr>
 <td>3D Model</td>
-<td><code>.obj</code></td>
+<td><strong><code>.obj</code></strong></td>
 <td>See <a href="#3d-models-and-materials">3D Models and Materials</a></td>
 </tr>
 <tr>
 <td>Material</td>
-<td><code>.mtl</code></td>
+<td><strong><code>.mtl</code></strong></td>
 <td>See <a href="#3d-models-and-materials">3D Models and Materials</a></td>
 </tr>
 <tr>
 <td>GLSL Shaders</td>
-<td><code>.vert</code>, <code>.frag</code></td>
+<td><strong><code>.vert</code></strong>, <strong><code>.frag</code></strong></td>
 <td>Naming convention. See <a href="#glsl-shaders">GLSL Shaders</a></td>
 </tr>
 </tbody>
 </table>
+<h2 id="file-access">File access</h2>
+<p>Whenever loading a file from <code>assets/</code>, <code>a//</code> has to be prepended to the actual filename. Example: <code>"a//sprites.png"</code></p>
 <h2 id="texture-atlases-sprite-sheets">Texture Atlases (Sprite Sheets)</h2>
 <p>Packed texture atlases created with the tool <code>Free Texture Packer</code> (<code>FTP</code>) are supported and can be loaded with <a href="../yg_asset/#function-ygassetloadtexture">yg.asset.loadTexture()</a>.</p>
 <p>Tested with <strong>Free Texture Packer v0.6.7</strong>.</p>
@@ -864,9 +906,140 @@ like walking_01, or walking-01, but NOT: walking01
 <h3 id="other-tools-and-3d-assets">Other Tools and 3D Assets</h3>
 <p>Of course, other 3D tools can be used to generate <code>yourgame</code> compatible data. Also, some <code>.obj</code> based 3D game assets, made by <code>Kenney</code>, can be imported directly without modification.</p>
 <h2 id="glsl-shaders">GLSL Shaders</h2>
-<p>ToDo: GLSL conventions (uniform names, attribute locations)</p>
-<h2 id="file-access">File access</h2>
-<p>ToDo: <code>a//</code></p>
+<h3 id="attributes-conventions">Attributes Conventions</h3>
+<table>
+<thead>
+<tr>
+<th>Usage</th>
+<th>Type</th>
+<th>Location</th>
+<th>GLSL Vertex Shader Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Position</td>
+<td>vec3</td>
+<td><strong>0</strong></td>
+<td><code>layout(location = 0) in vec3 inPosition;</code></td>
+</tr>
+<tr>
+<td>Normal</td>
+<td>vec3</td>
+<td><strong>1</strong></td>
+<td><code>layout(location = 1) in vec3 inNormal;</code></td>
+</tr>
+<tr>
+<td>Texcoords</td>
+<td>vec2</td>
+<td><strong>2</strong></td>
+<td><code>layout(location = 2) in vec2 inTexcoords;</code></td>
+</tr>
+<tr>
+<td>Color</td>
+<td>vec3</td>
+<td><strong>3</strong></td>
+<td><code>layout(location = 3) in vec3 inColor;</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="uniforms-conventions">Uniforms Conventions</h3>
+<table>
+<thead>
+<tr>
+<th>Usage</th>
+<th>Type</th>
+<th>Name</th>
+<th>GLSL Shader Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MVP Matrix</td>
+<td>mat4</td>
+<td><strong><code>mvpMat</code></strong></td>
+<td><code>uniform mat4        mvpMat;</code></td>
+</tr>
+<tr>
+<td>VP Matrix</td>
+<td>mat4</td>
+<td><strong><code>vpMat</code></strong></td>
+<td><code>uniform mat4        vpMat;</code></td>
+</tr>
+<tr>
+<td>Model Matrix</td>
+<td>mat4</td>
+<td><strong><code>modelMat</code></strong></td>
+<td><code>uniform mat4        modelMat;</code></td>
+</tr>
+<tr>
+<td>Normal Matrix</td>
+<td>mat3</td>
+<td><strong><code>normalMat</code></strong></td>
+<td><code>uniform mat3        normalMat;</code></td>
+</tr>
+<tr>
+<td>Camera Position</td>
+<td>vec3</td>
+<td><strong><code>camPos</code></strong></td>
+<td><code>uniform vec3        camPos;</code></td>
+</tr>
+<tr>
+<td>Camera Trafo</td>
+<td>mat4</td>
+<td><strong><code>camTrafo</code></strong></td>
+<td><code>uniform mat4        camTrafo;</code></td>
+</tr>
+<tr>
+<td>Sky Rotation Inverse</td>
+<td>mat3</td>
+<td><strong><code>skyRotInv</code></strong></td>
+<td><code>uniform mat3        skyRotInv;</code></td>
+</tr>
+<tr>
+<td>Texture Diffuse</td>
+<td>sampler2D</td>
+<td><strong><code>textureDiffuse</code></strong></td>
+<td><code>uniform sampler2D   textureDiffuse;</code></td>
+</tr>
+<tr>
+<td>Texture Sky</td>
+<td>samplerCube</td>
+<td><strong><code>textureSky</code></strong></td>
+<td><code>uniform samplerCube textureSky;</code></td>
+</tr>
+<tr>
+<td>Light Ambient</td>
+<td>vec3</td>
+<td><strong><code>lightAmbient</code></strong></td>
+<td><code>uniform vec3        lightAmbient;</code></td>
+</tr>
+<tr>
+<td>Light Diffuse</td>
+<td>vec3</td>
+<td><strong><code>lightDiffuse</code></strong></td>
+<td><code>uniform vec3        lightDiffuse;</code></td>
+</tr>
+<tr>
+<td>Light Specular</td>
+<td>vec3</td>
+<td><strong><code>lightSpecular</code></strong></td>
+<td><code>uniform vec3        lightSpecular;</code></td>
+</tr>
+<tr>
+<td>Light Position</td>
+<td>vec3</td>
+<td><strong><code>lightPosition</code></strong></td>
+<td><code>uniform vec3        lightPosition;</code></td>
+</tr>
+<tr>
+<td>Subtexture Coordinates</td>
+<td>vec4</td>
+<td><strong><code>subtex</code></strong></td>
+<td><code>uniform vec4        subtex;</code></td>
+</tr>
+</tbody>
+</table>
 
 
 

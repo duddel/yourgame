@@ -883,7 +883,7 @@
 <div class="highlight"><pre><span></span><code><span class="c1">-- Example for yg.gl.drawSprite()</span>
 <span class="kr">function</span> <span class="nf">init</span><span class="p">()</span>
     <span class="n">yg</span><span class="p">.</span><span class="n">asset</span><span class="p">.</span><span class="n">loadTexture</span><span class="p">(</span><span class="s2">&quot;demo&quot;</span><span class="p">,</span> <span class="s2">&quot;a//demo.png&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-                         <span class="s2">&quot;diffuse&quot;</span><span class="p">,</span> <span class="s2">&quot;linear&quot;</span><span class="p">,</span> <span class="s2">&quot;repeat&quot;</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+                         <span class="s2">&quot;DIFFUSE&quot;</span><span class="p">,</span> <span class="s2">&quot;LINEAR&quot;</span><span class="p">,</span> <span class="s2">&quot;REPEAT&quot;</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
     <span class="c1">-- Get coords for the entire texture, to draw it with drawSprite()</span>
     <span class="n">coordsDemo</span> <span class="o">=</span> <span class="n">yg</span><span class="p">.</span><span class="n">asset</span><span class="p">.</span><span class="n">getTexture</span><span class="p">(</span><span class="s2">&quot;demo&quot;</span><span class="p">):</span><span class="n">getGridCoords</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="kr">end</span>
