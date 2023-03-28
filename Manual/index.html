@@ -283,15 +283,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#supported-asset-file-formats" class="md-nav__link">
-    Supported Asset file formats
+  <a href="#loading-files" class="md-nav__link">
+    Loading Files
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#file-access" class="md-nav__link">
-    File access
+  <a href="#supported-asset-file-formats" class="md-nav__link">
+    Supported Asset File Formats
   </a>
   
 </li>
@@ -318,7 +318,7 @@
       
         <li class="md-nav__item">
   <a href="#sky-images" class="md-nav__link">
-    Sky images
+    Sky Images
   </a>
   
 </li>
@@ -333,14 +333,7 @@
         
           <li class="md-nav__item">
   <a href="#object-obj-and-material-mtl-support" class="md-nav__link">
-    Object (.obj) and Material (.mtl) support
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#smooth-vs-flat-shading" class="md-nav__link">
-    Smooth vs. Flat Shading
+    Object (.obj) and Material (.mtl) Support
   </a>
   
 </li>
@@ -661,15 +654,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#supported-asset-file-formats" class="md-nav__link">
-    Supported Asset file formats
+  <a href="#loading-files" class="md-nav__link">
+    Loading Files
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#file-access" class="md-nav__link">
-    File access
+  <a href="#supported-asset-file-formats" class="md-nav__link">
+    Supported Asset File Formats
   </a>
   
 </li>
@@ -696,7 +689,7 @@
       
         <li class="md-nav__item">
   <a href="#sky-images" class="md-nav__link">
-    Sky images
+    Sky Images
   </a>
   
 </li>
@@ -711,14 +704,7 @@
         
           <li class="md-nav__item">
   <a href="#object-obj-and-material-mtl-support" class="md-nav__link">
-    Object (.obj) and Material (.mtl) support
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#smooth-vs-flat-shading" class="md-nav__link">
-    Smooth vs. Flat Shading
+    Object (.obj) and Material (.mtl) Support
   </a>
   
 </li>
@@ -785,7 +771,11 @@
 
 
 <h1 id="manual">Manual</h1>
-<h2 id="supported-asset-file-formats">Supported Asset file formats</h2>
+<h2 id="loading-files">Loading Files</h2>
+<p>Whenever a function takes a filename argument to load a file, <code>a//</code> has to be prepended to the actual filename to load it from <code>assets/</code>.</p>
+<p><strong>Example:</strong> <code>"a//sprites.png"</code></p>
+<p>This is done to distinguish other directories to load from, that might be used in the future.</p>
+<h2 id="supported-asset-file-formats">Supported Asset File Formats</h2>
 <table>
 <thead>
 <tr>
@@ -832,8 +822,6 @@
 </tr>
 </tbody>
 </table>
-<h2 id="file-access">File access</h2>
-<p>Whenever loading a file from <code>assets/</code>, <code>a//</code> has to be prepended to the actual filename. Example: <code>"a//sprites.png"</code></p>
 <h2 id="texture-atlases-sprite-sheets">Texture Atlases (Sprite Sheets)</h2>
 <p>Packed texture atlases created with the tool <code>Free Texture Packer</code> (<code>FTP</code>) are supported and can be loaded with <a href="../yg_asset/#function-ygassetloadtexture">yg.asset.loadTexture()</a>.</p>
 <p>Tested with <strong>Free Texture Packer v0.6.7</strong>.</p>
@@ -845,17 +833,21 @@
 <li>Padding: <code>&gt;= 2</code> (recommended)</li>
 </ul>
 <h3 id="accessing-sprites-and-sequences">Accessing Sprites and Sequences</h3>
+<p>To draw a sprite from a texture atlas, the draw function must know where to find the desired sprite in the texture. The following functions can be used on a <a href="../yg_gl/#class-yggltexture">yg.gl.Texture</a> to retrieve these coordinate information.</p>
 <ul>
-<li>get named sprite always with <a href="../yg_gl/#function-yggltexturegetcoords">yg.gl.Texture.getCoords()</a></li>
-<li>get sequence frame sprite with <a href="../yg_gl/#function-yggltexturegetframecoords">yg.gl.Texture.getFrameCoords()</a></li>
+<li><a href="../yg_gl/#function-yggltexturegetcoords">yg.gl.Texture.getCoords()</a>: get coordinates  for a sprite that has been listed in the atlas file (<code>.json</code>) by it's <strong>name</strong>. This is always possible, even if the sprite is part of a sequence</li>
+<li><a href="../yg_gl/#function-yggltexturegetframecoords">yg.gl.Texture.getFrameCoords()</a>: get coordinates from a frame index of a <strong>sequence</strong></li>
 </ul>
-<div class="highlight"><pre><span></span><code>matches sprite names that have indexes at the end (with - or _),
-like walking_01, or walking-01, but NOT: walking01
-</code></pre></div>
-<p>ToDo: link from these functions back to here</p>
-<h2 id="sky-images">Sky images</h2>
+<p>During texture loading, sequences are detected if the sprite names have indexes at the end, separated with <code>-</code> or <code>_</code>.</p>
+<p><strong>Examples:</strong></p>
+<ul>
+<li><code>walking_01</code> -&gt; sequence <code>walking</code> detected, <a href="../yg_gl/#function-yggltexturegetframecoords">yg.gl.Texture.getFrameCoords()</a> can be used</li>
+<li><code>walking-01</code> -&gt; sequence <code>walking</code> detected, <a href="../yg_gl/#function-yggltexturegetframecoords">yg.gl.Texture.getFrameCoords()</a> can be used</li>
+<li><code>walking01</code> -&gt; no sequence detected, only <a href="../yg_gl/#function-yggltexturegetcoords">yg.gl.Texture.getCoords()</a> can be used</li>
+</ul>
+<h2 id="sky-images">Sky Images</h2>
 <blockquote>
-<p><strong>Drawing Sky is not yet supported, but will be soon.</strong></p>
+<p><strong>Drawing Sky is not yet supported.</strong></p>
 </blockquote>
 <p>To draw sky in the scene, an image with <strong>equirectangular projection</strong> (aspect ratio 2:1) is used. These are images that typically 360-degree cameras generate.</p>
 <p>ToDo: Photo example</p>
@@ -865,39 +857,39 @@ like walking_01, or walking-01, but NOT: walking01
 <iframe frameborder="0" src="https://itch.io/embed/1120244?bg_color=465360&amp;fg_color=ffffff&amp;link_color=d6e5f5&amp;border_color=515c68" width="552" height="167"><a href="https://didaduddel.itch.io/skytool">Skybox Composing Tool by didaduddel</a></iframe>
 
 <h2 id="3d-models-and-materials">3D Models and Materials</h2>
-<h3 id="object-obj-and-material-mtl-support">Object (.obj) and Material (.mtl) support</h3>
+<h3 id="object-obj-and-material-mtl-support">Object (.obj) and Material (.mtl) Support</h3>
 <p>3D models in <code>.obj</code> format can be loaded by <code>yourgame</code>, optionally together with a material template library <code>.mtl</code>.</p>
 <p>This is what <code>yourgame</code> does:</p>
 <ul>
-<li>Vertices are made unique<ul>
-<li>Example: If multiple faces contain the same vertex position, but different normals, <code>yourgame</code> clones the position data and creates individual vertices with different normals</li>
-<li>This preserves edges during rendering</li>
-<li>For model parts where smooth shading is desired, adjacent faces must share identical vertices, meaning the face normals must be averaged</li>
-<li>More details: <a href="#smooth-vs-flat-shading">Smooth vs. Flat Shading</a></li>
+<li>Normals remain unchanged, preserving edges and smooth areas<ul>
+<li>Note for <code>Blender</code>: the options <code>Shade Smooth</code> and <code>Shade Flat</code> have an impact on the exported <code>.obj</code> data</li>
 </ul>
 </li>
-<li>The diffuse color <code>Kd</code> from Material (<code>.mtl</code>) is provided as color input to the vertex shader<ul>
+<li>The diffuse color <code>Kd</code> from materials (<code>.mtl</code>) is attached to the <code>.obj</code> data during import and provided as <code>Color</code> input to the vertex shader<ul>
 <li>This way, <code>Vertex Color Shading</code> can be performed</li>
 <li>See <a href="#glsl-shaders">GLSL Shaders</a> on how to use vertex color in Shaders</li>
 </ul>
 </li>
 </ul>
-<h3 id="smooth-vs-flat-shading">Smooth vs. Flat Shading</h3>
-<p>ToDo: show how this Blender option is reflected in <code>yourgame</code></p>
 <h3 id="create-with-blender">Create with Blender</h3>
 <p>Geometry can be created and exported with <code>Blender</code>, in <code>.obj</code> format with limited Material (<code>.mtl</code>) support.</p>
 <p>Tested with <strong>Blender v3.4.1</strong>.</p>
 <p>Here is a basic workflow, some <code>Blender</code> knowledge is required.</p>
 <p><img alt="blender_001.png" src="../blender_001.png" /></p>
-<p>Select all parts of your model and export it with the Wavefront (<code>.obj</code>) (legacy) exporter and the recommended settings below.</p>
+<p>Select all desired meshes and export them with the <code>Wavefront (.obj)</code> exporter using the recommended settings below.</p>
 <ul>
-<li>ToDo: explain settings below, mention/test Forward/Up, etc.</li>
+<li>Limit to: Selected Only</li>
+<li>Forward Axis: <code>-Z</code> (maps Blender's Forward axis <strong>Y</strong> to the typical GL Forward <strong>-Z</strong>)</li>
+<li>Up Axis: <code>Y</code> (maps Blender's Up axis <strong>Z</strong> to the typical GL Up <strong>Y</strong>)</li>
+<li>Objects: Apply Modifiers</li>
+<li>Geometry: Export <code>UV Coordinates</code>, <code>Normals</code> and make the Mesh <code>Triangulated</code></li>
+<li>Materials: Export</li>
 </ul>
 <p><img alt="blender_001.png" src="../blender_003.png" /></p>
-<p>The generic <code>Principled BSDF</code> Shader has an impact on the exported <code>.mtl</code>. If you want to use it, apply this Shader to your model (or different parts of your model):</p>
+<p>The generic <code>Principled BSDF</code> shader has an impact on the exported materials in the <code>.mtl</code> file. If you want to use it, apply this shader to your meshes.</p>
 <ul>
-<li>Principled BSDF <code>Base Color</code> is exported as <code>Kd</code> (diffuse color) into the Material (<code>.mtl</code>) <ul>
-<li>The <code>Base Color</code> in the example Shader below causes this <code>Kd</code> entry in the exported <code>.mtl</code> file: <code>Kd 0.102684 0.235477 1.000000</code></li>
+<li>Principled BSDF <code>Base Color</code> is exported as <code>Kd</code> (diffuse color) into the materials (<code>.mtl</code>) <ul>
+<li>The <code>Base Color</code> in the example shader below causes this <code>Kd</code> entry in the exported material: <code>Kd 0.102684 0.235477 1.000000</code></li>
 </ul>
 </li>
 </ul>

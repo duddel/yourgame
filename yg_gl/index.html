@@ -877,7 +877,7 @@
 </tbody>
 </table>
 <h2 id="function-yggldrawsprite">function yg.gl.drawSprite()</h2>
-<p>Draws a 2-d sprite in screen space. Screen origin (<code>x=0, y=0</code>) in upper left corner.</p>
+<p>Draws a 2D sprite in screen space. Screen origin (<code>x=0, y=0</code>) in upper left corner.</p>
 <p>Returns an array of 4 numbers (<code>xmin, xmax, ymin, ymax</code>) denoting the screen space axis aligned bounding box (AABB), the sprite is drawn in, <strong>as if it was not rotated</strong>.</p>
 <p>The <code>coords</code> argument must be retrieved from <code>texture</code> to get valid coordinate information for a sprite from an atlas or grid texture. To draw an entire texture, <a href="#function-yggltexturegetgridcoords">yg.gl.Texture.getGridCoords(1, 1, 0)</a> can be used. See example:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Example for yg.gl.drawSprite()</span>
@@ -1002,7 +1002,7 @@
 </table>
 <h2 id="class-yggltexture">class yg.gl.Texture</h2>
 <h3 id="function-yggltexturegetcoords">function yg.gl.Texture.getCoords()</h3>
-<p>Returns coordinate information of a sprite called <code>name</code>. Typically used with textures loaded together with an atlas file, see <a href="../yg_asset/#function-ygassetloadtexture">yg.asset.loadTexture()</a>.</p>
+<p>Returns coordinate information of a sprite called <code>name</code>. Typically used with textures loaded together with an atlas file, see <a href="../yg_asset/#function-ygassetloadtexture">yg.asset.loadTexture()</a>. See also <a href="../Manual/#accessing-sprites-and-sequences">Accessing Sprites and Sequences</a> in the Manual.</p>
 <blockquote>
 <p><code>yg.gl.Texture.getCoords(name)</code> -&gt; <a href="#class-yggltexturecoords"><code>yg.gl.TextureCoords</code></a></p>
 </blockquote>
@@ -1023,7 +1023,7 @@
 </tbody>
 </table>
 <h3 id="function-yggltexturegetframecoords">function yg.gl.Texture.getFrameCoords()</h3>
-<p>Returns coordinate information of a sprite which is a frame of a sequence. <code>frame</code> is always wrapped into valid range and may be negative. Typically used with textures loaded together with an atlas file, see <a href="../yg_asset/#function-ygassetloadtexture">yg.asset.loadTexture()</a>.</p>
+<p>Returns coordinate information of a sprite which is a frame of a sequence. <code>frame</code> is always wrapped into valid range and may be negative. Typically used with textures loaded together with an atlas file, see <a href="../yg_asset/#function-ygassetloadtexture">yg.asset.loadTexture()</a>. See also <a href="../Manual/#accessing-sprites-and-sequences">Accessing Sprites and Sequences</a> in the Manual.</p>
 <blockquote>
 <p><code>yg.gl.Texture.getFrameCoords(sequenceName, frame)</code> -&gt; <a href="#class-yggltexturecoords"><code>yg.gl.TextureCoords</code></a></p>
 </blockquote>

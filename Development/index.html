@@ -313,8 +313,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#facts" class="md-nav__link">
-    Facts
+  <a href="#notes" class="md-nav__link">
+    Notes
   </a>
   
 </li>
@@ -586,8 +586,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#facts" class="md-nav__link">
-    Facts
+  <a href="#notes" class="md-nav__link">
+    Notes
   </a>
   
 </li>
@@ -635,7 +635,7 @@
 
 
 <h1 id="development">Development</h1>
-<h2 id="facts">Facts</h2>
+<h2 id="notes">Notes</h2>
 <ul>
 <li>A new <a href="https://github.com/duddel/yourgame/releases">release</a> every couple of weeks, if something meaningful happens</li>
 <li>Semantic Versioning approach (<code>MAJOR.MINOR.PATCH</code>)<ul>
@@ -644,7 +644,7 @@
 </ul>
 </li>
 <li><code>yourgame</code> is based on <code>yourgamelib</code>, which is hosted <a href="https://github.com/duddel/yourgamelib">here</a></li>
-<li><code>ToDo</code>s are scattered all over the place to mark unfinished stuff. No dedicated list.</li>
+<li><code>ToDo</code>s are scattered in the code and docs. No dedicated list.</li>
 </ul>
 <h2 id="release-checklist">Release Checklist</h2>
 <h3 id="before-tag">Before Tag</h3>
@@ -653,9 +653,11 @@
 <li>Check if version is correct in <a href="../Changelog/">Changelog</a></li>
 <li>Remove <code>(unreleased)</code> from version in <a href="../Changelog/">Changelog</a></li>
 <li>Check generated build artifacts (<code>Actions</code>)</li>
+<li>Check web demo</li>
 </ul>
 <h3 id="after-tag">After Tag</h3>
 <ul>
+<li>Create release on GitHub and upload build artifacts</li>
 <li>Set next version in <code>project()</code> in <code>CMakeLists.txt</code></li>
 <li>Add next version to <a href="../Changelog/">Changelog</a> with <code>(unreleased)</code></li>
 </ul>
