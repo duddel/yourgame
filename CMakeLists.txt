@@ -5,13 +5,6 @@ cmake_minimum_required(VERSION 3.6)
 find_package(Git)
 
 project(yourgame VERSION 0.0.1)
-
-# web platform only.
-# enable this option to copy assets (if any) into the wasm file system.
-# only recommended if the assets are final and not to be updated.
-# otherwise, assets are loaded from assets/ directory during runtime.
-set(WEB_PACK_ASSETS OFF)
-
 # enable this option to clone yourgamelib and checkout the commit, defined
 # as YOURGAME_GIT_COMMIT_REQUESTED. otherwise, the original path, where
 # this project has been initialized from, is used.
@@ -123,10 +116,47 @@ if(YOURGAME_PLATFORM STREQUAL "android")
 endif()
 
 if(YOURGAME_PLATFORM STREQUAL "web" OR YOURGAME_PLATFORM STREQUAL "desktop")
+  # main (core) executable target
   add_executable(${CMAKE_PROJECT_NAME}
     ${MYGAME_SRC_FILES}
+  ) 
+  # a 2nd executable target ("_demo") is defined and configured to allow CPack to
+  # generate additional archives with demo assets for desktop and web (see below).
+  # the compilation is identical. for _demo, the demo assets are copied into the archive
+  add_executable("${CMAKE_PROJECT_NAME}_demo" EXCLUDE_FROM_ALL
+    ${MYGAME_SRC_FILES}
   )
+  set_target_properties("${CMAKE_PROJECT_NAME}_demo" PROPERTIES OUTPUT_NAME "yourgame")
+
+  # include dirs for demo project
+  target_include_directories("${CMAKE_PROJECT_NAME}_demo" PRIVATE ${MYGAME_INC_DIRS_PRIVATE})
+
+  # link libraries for demo project
+  target_link_libraries("${CMAKE_PROJECT_NAME}_demo" PRIVATE yrgame)
 endif()
+
+# include dirs for core project
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${MYGAME_INC_DIRS_PRIVATE})
+
+# link libraries for core project
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE yrgame)
+
+# configure "components" for CPack, corresponding to the executable targets defined above
+if(CPACK_GENERATOR)
+  set(CPACK_COMPONENTS_ALL core demo)
+  set(CPACK_ARCHIVE_COMPONENT_INSTALL ON)
+  set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY 0)
+  include(CPack)
+  cpack_add_component(core)
+  cpack_add_component(demo)
+endif()
+
+  # retrieve asset files to copy
+  file(GLOB CORE_ASSETS ${CMAKE_CURRENT_SOURCE_DIR}/assets/*)
+  # this matches only the core assets starting with yg_, not the stub main.lua.
+  # used for demo project, which provides an own main.lua:
+  file(GLOB CORE_ASSETS_YG_ONLY ${CMAKE_CURRENT_SOURCE_DIR}/assets/*yg_*)
+  file(GLOB DEMO_ASSETS ${CMAKE_CURRENT_SOURCE_DIR}/demo/assets/*)
 
 if(YOURGAME_PLATFORM STREQUAL "desktop")
   # create savefiles/ beside the executable
@@ -137,12 +167,25 @@ if(YOURGAME_PLATFORM STREQUAL "desktop")
     "$<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>/savefiles"
   )
 
+  add_custom_command(
+    TARGET "${CMAKE_PROJECT_NAME}_demo"
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory
+    "$<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>/savefiles"
+  )
+
   if(CPACK_GENERATOR)
-    install(TARGETS ${CMAKE_PROJECT_NAME} DESTINATION .)
-    install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION .) # copy assets/
-    install(DIRECTORY DESTINATION ./savefiles) # create empty savefiles/
-    set(CPACK_PACKAGE_INSTALL_DIRECTORY ${CMAKE_PROJECT_NAME})
-    include(CPack)
+    # core: yourgame
+    install(TARGETS "${CMAKE_PROJECT_NAME}" DESTINATION . COMPONENT core)
+    install(FILES ${CORE_ASSETS} DESTINATION ./assets COMPONENT core)
+    # create empty savefiles/ 
+    install(DIRECTORY DESTINATION ./savefiles COMPONENT core)
+
+    # demo: yourgame with demo assets
+    install(TARGETS "${CMAKE_PROJECT_NAME}_demo" DESTINATION . COMPONENT demo)
+    install(FILES ${CORE_ASSETS_YG_ONLY} ${DEMO_ASSETS} DESTINATION ./assets COMPONENT demo)
+    # create empty savefiles/ 
+    install(DIRECTORY DESTINATION ./savefiles COMPONENT demo)
   endif()
 endif()
 
@@ -152,9 +195,6 @@ if(YOURGAME_PLATFORM STREQUAL "web")
   set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES SUFFIX ".html")
   # enforce GLFW v3 API (default is v2)
   # enforce WEB GL v2 (default is v1)
-  # ALLOW_MEMORY_GROWTH=1 was added after commit bd08b66, where initializing
-  # of flecs caused the web app to crash
-  # todo: what exactly does ALLOW_MEMORY_GROWTH mean?
   # ASYNCIFY is required for emscripten_wget_data() etc.
   set(C_CXX_FLAGS_FOR_EM
     "-s USE_GLFW=3 \
@@ -163,44 +203,20 @@ if(YOURGAME_PLATFORM STREQUAL "web")
     -s ASYNCIFY \
     --shell-file ${CMAKE_CURRENT_SOURCE_DIR}/build/shell.html")
     
-  # check if there are any assets
-  file(GLOB ASSET_FILES ${CMAKE_CURRENT_SOURCE_DIR}/assets/*.*)
-  
-  if(WEB_PACK_ASSETS AND ASSET_FILES)
-    set(C_CXX_FLAGS_FOR_EM "${C_CXX_FLAGS_FOR_EM} \
-      --preload-file ${CMAKE_CURRENT_SOURCE_DIR}/assets@/home/web_user/")
-  endif()
-
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${C_CXX_FLAGS_FOR_EM}")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${C_CXX_FLAGS_FOR_EM}")
 
   if(CPACK_GENERATOR)
-    # these 4 files are typically created by emscripten: .html, .js, .wasm, .data.
-    # the .data file is only available if any asset files have been packed (see above)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.html DESTINATION . RENAME index.html)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.js DESTINATION .)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.wasm DESTINATION .)
+    # core: yourgame
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.html DESTINATION . RENAME index.html COMPONENT core)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.js DESTINATION . COMPONENT core)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.wasm DESTINATION . COMPONENT core)
+    install(FILES ${CORE_ASSETS} DESTINATION ./assets COMPONENT core)
 
-    # pack asset files, if any.
-    # either pack the .data file, if WEB_PACK_ASSETS == ON,
-    # or pack separate assets/ directory, otherwise.
-    if(ASSET_FILES)
-      if(WEB_PACK_ASSETS)
-        install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.data DESTINATION .)
-      else()
-        install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/assets/ DESTINATION ./assets/)
-      endif()
-    endif()
-
-    set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY 0)
-    include(CPack)
+    # demo: yourgame with demo assets
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.html DESTINATION . RENAME index.html COMPONENT demo)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.js DESTINATION . COMPONENT demo)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.wasm DESTINATION . COMPONENT demo)
+    install(FILES ${CORE_ASSETS_YG_ONLY} ${DEMO_ASSETS} DESTINATION ./assets COMPONENT demo)
   endif()
 endif()
-
-target_include_directories(${CMAKE_PROJECT_NAME}
-  PRIVATE ${MYGAME_INC_DIRS_PRIVATE}
-)
-
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
-  yrgame
-)

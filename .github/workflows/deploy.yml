@@ -1,6 +1,5 @@
-# deploy builds are done for all commits on all branches.
-# deploy demo to gh-pages is done on branches main and
-# develop (see job deploy_demo_gh_pages).
+# jobs deploy_{desktop,web,android} are done for all commits on all branches
+# job  deploy_demo_gh_pages pushes the demo to gh-pages, on branches main,develop
 name: deploy
 on: push
 
@@ -39,7 +38,7 @@ jobs:
         if: startsWith(matrix.os, 'windows')
         shell: cmd
       - name: upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           path: build/_deploy/*
 
@@ -64,7 +63,7 @@ jobs:
           cd build
           ./build_web_release.bash
       - name: upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           path: build/_deploy/*
 
@@ -79,7 +78,7 @@ jobs:
           cd build
           ./build_android_release.bash
       - name: upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           path: build/_deploy/*
 
@@ -92,19 +91,17 @@ jobs:
       github.ref == 'refs/heads/develop'
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
-          name: artifact # default name (by not giving any name to actions/upload-artifact@v2)
+          name: artifact # default name (by not giving any name to actions/upload-artifact@v3)
           path: _artifact
       - name: unzip
-        # assuming there is only one *Emscripten.zip file
+        # assuming there is only one *Emscripten-demo.zip file
         run: |
           mkdir _deploy
-          unzip _artifact/*Emscripten.zip -d _deploy
-      - name: copy demo
-        run: cp demo/assets/* _deploy/assets
+          unzip _artifact/*Emscripten-demo.zip -d _deploy
       - name: deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.8
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: _deploy
