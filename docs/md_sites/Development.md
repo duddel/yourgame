@@ -13,11 +13,13 @@
 
 ### Before Tag
 
--   Check if version is correct in `project()` in `CMakeLists.txt`
--   Check if version is correct in [Changelog](Changelog.md)
+-   Is `YOURGAME_GIT_COMMIT_REQUESTED` in `CMakeLists.txt` on `yourgamelib`'s `main` branch?
+-   Is the version correct in `project()` in `CMakeLists.txt`?
+-   Is the version correct in [Changelog](Changelog.md)?
 -   Remove `(unreleased)` from version in [Changelog](Changelog.md)
--   Check generated build artifacts (`Actions`)
--   Check web demo
+-   Is the LICENSE file up to date? (dependencies provided by `yourgamelib` updated?)
+-   Are the build artifacts (`Actions`) working?
+-   Is the web demo working?
 
 ### After Tag
 
