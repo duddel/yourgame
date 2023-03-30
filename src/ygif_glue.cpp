@@ -368,7 +368,7 @@ namespace mygame
     void gl_draw(yg::gl::Geometry *geo,
                  yg::gl::Lightsource *light,
                  yg::gl::Shader *shader,
-                 yg::gl::Texture *texture, // todo make a list
+                 yg::gl::Texture *texture, // ToDo make a list
                  yg::math::Camera *camera,
                  yg::math::Trafo *trafo)
     {
@@ -386,7 +386,7 @@ namespace mygame
         }
         cfg.shader = shader;
 
-        // todo...
+        // ToDo...
         if (texture)
             cfg.textures.push_back(texture);
 

@@ -14,6 +14,7 @@
 ### Before Tag
 
 -   Is `YOURGAME_GIT_COMMIT_REQUESTED` in `CMakeLists.txt` on `yourgamelib`'s `main` branch?
+-   Search for `ToDo`. Any quick fixes possible or already fixed?
 -   Is the version correct in `project()` in `CMakeLists.txt`?
 -   Is the version correct in [Changelog](Changelog.md)?
 -   Remove `(unreleased)` from version in [Changelog](Changelog.md)

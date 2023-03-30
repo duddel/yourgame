@@ -43,7 +43,7 @@ end
 
 Adds an idle segment to the Motion.
 
-Todo: check if chaining works and if this function returns a Motion reference.
+ToDo: check if chaining works and if this function returns a Motion reference.
 
 > `yg.util.Motion.addIdle(dt, val)` -> `void`
 
@@ -56,7 +56,7 @@ Todo: check if chaining works and if this function returns a Motion reference.
 
 Adds a ramp segment to the Motion.
 
-Todo: check if chaining works and if this function returns a Motion reference.
+ToDo: check if chaining works and if this function returns a Motion reference.
 
 > `yg.util.Motion.addRamp(dt, val0, val1, ease)` -> `void`
 

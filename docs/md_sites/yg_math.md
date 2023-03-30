@@ -128,7 +128,7 @@ Resets the transform. Resulting matrix is identity.
 
 ### function yg.math.Trafo.getAxisLocal(ax)
 
-Returns a **local axis** of the transform (array of 3 numbers), expressed in world system. TODO: this function is not wrapped to accept STRINGS. Does it even work?
+Returns a **local axis** of the transform (array of 3 numbers), expressed in world system.
 
 > `yg.math.Trafo.getAxisLocal(ax)` -> `{number}`
 
@@ -143,8 +143,6 @@ Returns a **global axis** of the transform (array of 3 numbers).
 -   `"X"` -> {1, 0, 0}
 -   `"Y"` -> {0, 1, 0}
 -   `"Z"` -> {0, 0, 1}
-
-TODO: this function is not wrapped to accept STRINGS. Does it even work?
 
 > `yg.math.Trafo.getAxisGlobal(ax)` -> `{number}`
 
