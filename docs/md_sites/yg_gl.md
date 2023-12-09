@@ -52,6 +52,33 @@ end
 | `height`  | number                                          | Height of sprite [pixels]                                 |
 | `angle`   | number                                          | Counter-clockwise rotation of sprite [rad]                |
 
+## function yg.gl.drawSky()
+
+Draws sky from image texture.
+
+> `yg.gl.drawSky(texture, camera, tint)` -> `void`
+
+| Argument  | Type                                            | Info                                                                                        |
+| --------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `texture` | [yg.gl.Texture](#class-yggltexture)             | Sky texture                                                                                 |
+| `camera`  | [yg.math.Camera](yg_math.md#class-ygmathcamera) | Camera to use                                                                               |
+| `tint`    | {number}                                        | Tint, ends up as ambient color in shader. Default (neutral): `{1,1,1}` (array of 3 numbers) |
+
+
+## function yg.gl.drawSky2()
+
+Draws sky from image texture, advanced.
+
+> `yg.gl.drawSky2(texture, camera, tint, shader, trafo)` -> `void`
+
+| Argument  | Type                                            | Info                                                                                        |
+| --------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `texture` | [yg.gl.Texture](#class-yggltexture)             | Sky texture                                                                                 |
+| `camera`  | [yg.math.Camera](yg_math.md#class-ygmathcamera) | Camera to use                                                                               |
+| `tint`    | {number}                                        | Tint, ends up as ambient color in shader. Default (neutral): `{1,1,1}` (array of 3 numbers) |
+| `shader`  | [yg.gl.Shader](#class-ygglshader)               | Shader to use. May be `nil` (for default sky shader)                                        |
+| `trafo`   | [yg.math.Trafo](yg_math.md#class-ygmathtrafo)   | Rotation of `trafo` is applied to sky. May be `nil`                                         |
+
 ## function yg.gl.depthTest()
 
 Enables/disables depth test via `glEnable(GL_DEPTH_TEST)` / `glDisable(GL_DEPTH_TEST)`.
@@ -104,10 +131,10 @@ Returns texture coordinates of a grid cell. Any grid size can be used for any te
 
 > `yg.gl.Texture.getGridCoords(gridWidth, gridHeight, index)` -> [`yg.gl.TextureCoords`](#class-yggltexturecoords)
 
-| Argument     | Type   | Info                                                                                |
-| ------------ | ------ | ----------------------------------------------------------------------------------- |
-| `gridWidth`  | number | Number of grid columns                                                              |
-| `gridHeight` | number | Number of grid rows                                                                 |
+| Argument     | Type   | Info                                                                               |
+| ------------ | ------ | ---------------------------------------------------------------------------------- |
+| `gridWidth`  | number | Number of grid columns                                                             |
+| `gridHeight` | number | Number of grid rows                                                                |
 | `index`      | number | Index of the grid cell to return coordinates for, starting top-left with index `0` |
 
 ## class yg.gl.Lightsource

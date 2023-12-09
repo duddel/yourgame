@@ -368,7 +368,7 @@ namespace mygame
     void gl_draw(yg::gl::Geometry *geo,
                  yg::gl::Lightsource *light,
                  yg::gl::Shader *shader,
-                 yg::gl::Texture *texture, // ToDo make a list
+                 yg::gl::Texture *texture, // ToDo: allow passing of multiple textures
                  yg::math::Camera *camera,
                  yg::math::Trafo *trafo)
     {
@@ -386,9 +386,10 @@ namespace mygame
         }
         cfg.shader = shader;
 
-        // ToDo...
         if (texture)
+        {
             cfg.textures.push_back(texture);
+        }
 
         yg::gl::drawGeo(geo, cfg);
     }
@@ -463,6 +464,66 @@ namespace mygame
         yg::gl::drawGeo(g_assets.get<yg::gl::Geometry>("quad"), cfg);
 
         return screenPos;
+    }
+
+    void gl_drawSky2(yg::gl::Texture *texture,
+                     yg::math::Camera *camera,
+                     std::array<float, 3> tint,
+                     yg::gl::Shader *shader,
+                     yg::math::Trafo *trafo)
+    {
+        if (!texture || !camera)
+        {
+            return;
+        }
+
+        yg::gl::Geometry *geo = g_assets.get<yg::gl::Geometry>("sphere_inside");
+
+        yg::gl::Shader *shaderToUse;
+        if (shader)
+        {
+            shaderToUse = shader;
+        }
+        else
+        {
+            shaderToUse = g_assets.get<yg::gl::Shader>("sky");
+        }
+
+        yg::gl::DrawConfig cfg;
+
+        cfg.textures.push_back(texture);
+        cfg.shader = shaderToUse;
+
+        {
+            yg::gl::Lightsource light;
+            light.setAmbient(tint);
+            shaderToUse->useProgram(&light, camera);
+        }
+
+        // we do not pass camera to the draw config (cfg) and
+        // build the model matrix (used as mvp) manually:
+        if (trafo)
+        {
+            cfg.modelMat = camera->pMat(0.1f, 2.0f) *             // "custom" zNear, zFar for skybox camera projection
+                           glm::mat4(glm::mat3(camera->vMat())) * // rotation part of camera view matrix
+                           glm::mat4(glm::mat3(trafo->mat()));    // rotation part of skybox transformation
+        }
+        else
+        {
+            cfg.modelMat = camera->pMat(0.1f, 2.0f) *            // "custom" zNear, zFar for skybox camera projection
+                           glm::mat4(glm::mat3(camera->vMat())); // rotation part of camera view matrix
+        }
+
+        glDepthMask(GL_FALSE);
+        yg::gl::drawGeo(geo, cfg);
+        glDepthMask(GL_TRUE);
+    }
+
+    void gl_drawSky(yg::gl::Texture *texture,
+                    yg::math::Camera *camera,
+                    std::array<float, 3> tint)
+    {
+        gl_drawSky2(texture, camera, tint, nullptr, nullptr);
     }
 
     void gl_depthTest(bool enable)
@@ -864,7 +925,9 @@ namespace mygame
     void loadBaseAssets()
     {
         asset_loadVertFragShader("sprite", "a//yg_sprite.vert", "a//yg_sprite.frag");
+        asset_loadVertFragShader("sky", "a//yg_default.vert", "a//yg_ambienttex.frag");
         asset_loadGeometry("quad", "a//yg_quad.obj", "");
+        asset_loadGeometry("sphere_inside", "a//yg_sphere_inside.obj", "");
     }
 
     void registerLua(lua_State *L)
@@ -964,6 +1027,8 @@ namespace mygame
             .beginNamespace("gl")
             .addFunction("draw", gl_draw)
             .addFunction("drawSprite", gl_drawSprite)
+            .addFunction("drawSky", gl_drawSky)
+            .addFunction("drawSky2", gl_drawSky2)
             .addFunction("depthTest", gl_depthTest)
             .addFunction("clearColor", gl_clearColor)
             .beginClass<yg::gl::Lightsource>("Lightsource")

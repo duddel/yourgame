@@ -61,7 +61,7 @@ Loads a sound file (.ogg) and stores it for being played back.
 
 ## function yg.audio.play()
 
-Starts the playback of a previously stored audio file, **if a free source slot is available**. In this case, the index of the source is returnes `[0,numSources-1]`. On error, a negative value is returned. The source index can be used to manipulate the playback once it has started (see [yg.audio.stop()](#function-ygaudiostop), [yg.audio.pause()](#function-ygaudiopause), etc.).
+Starts the playback of a previously stored audio file, **if a free source slot is available**. In this case, the index of the source is returned `[0,numSources-1]`. On error, a negative value is returned. The source index can be used to manipulate the playback once it has started (see [yg.audio.stop()](#function-ygaudiostop), [yg.audio.pause()](#function-ygaudiopause), etc.).
 
 > `yg.audio.play(filename, loop)` -> `number` (Audio source index, or < 0 on error)
 

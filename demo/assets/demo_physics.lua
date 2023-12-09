@@ -16,7 +16,7 @@ function init()
 
     -- light and color
     yg.gl.clearColor(0.212, 0.235, 0.270, 1.000)
-    lightAmbient = {0.05, 0.05, 0.175}
+    lightAmbient = {0.1, 0.1, 0.25}
     lightDiffuse = {1.0, 0.9, 0.7}
     lightPosition = {20, 10, 0}
 
@@ -143,11 +143,11 @@ function tick()
     c:trafo():rotateLocal(yg.time.getDelta() * 1.25 * yg.input.get("KEY_UP"), "X")
     c:trafo():rotateLocal(yg.time.getDelta() * -1.25 * yg.input.get("KEY_DOWN"), "X")
     move = {}
-    move[1] = yg.time.getDelta() * 7.0 * yg.input.get("KEY_G") - 
-              yg.time.getDelta() * 7.0 * yg.input.get("KEY_D")
+    move[1] = yg.time.getDelta() * 7.0 * yg.input.get("KEY_D") - 
+              yg.time.getDelta() * 7.0 * yg.input.get("KEY_A")
     move[2] = 0
-    move[3] = yg.time.getDelta() * 7.0 * yg.input.get("KEY_F") - 
-              yg.time.getDelta() * 7.0 * yg.input.get("KEY_R")
+    move[3] = yg.time.getDelta() * 7.0 * yg.input.get("KEY_S") - 
+              yg.time.getDelta() * 7.0 * yg.input.get("KEY_W")
     c:trafo():translateLocal(move)
 
     -- move kinematic body

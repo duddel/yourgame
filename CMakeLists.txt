@@ -4,7 +4,7 @@
 cmake_minimum_required(VERSION 3.6)
 find_package(Git)
 
-project(yourgame VERSION 0.0.1)
+project(yourgame VERSION 0.0.2)
 # enable this option to clone yourgamelib and checkout the commit, defined
 # as YOURGAME_GIT_COMMIT_REQUESTED. otherwise, the original path, where
 # this project has been initialized from, is used.

@@ -33,6 +33,12 @@ function tick()
     aabbPhysics[3] = screenPos[3]
     aabbPhysics[4] = screenPos[3] + ((screenPos[4] - screenPos[3]) * 0.424)
 
+    aabbSkylight = {}
+    aabbSkylight[1] = screenPos[1]
+    aabbSkylight[2] = screenPos[1] + ((screenPos[2] - screenPos[1]) * 0.333)
+    aabbSkylight[3] = screenPos[3] + ((screenPos[4] - screenPos[3]) * 0.477)
+    aabbSkylight[4] = screenPos[3] + ((screenPos[4] - screenPos[3]) * 0.855)
+
     -- detect clicks
     if yg.input.getDelta("MOUSE_BUTTON_1") > 0 then
         if hitAabb2(aabbSprites, yg.input.get("MOUSE_X"), yg.input.get("MOUSE_Y")) then
@@ -40,6 +46,9 @@ function tick()
         end
         if hitAabb2(aabbPhysics, yg.input.get("MOUSE_X"), yg.input.get("MOUSE_Y")) then
             runAnotherScript = "a//demo_physics.lua"
+        end
+        if hitAabb2(aabbSkylight, yg.input.get("MOUSE_X"), yg.input.get("MOUSE_Y")) then
+            runAnotherScript = "a//demo_skylight.lua"
         end
     end
 

@@ -4,3 +4,7 @@ yourgamelib/
 *.log
 .vscode/*
 docs/site
+
+# ignore all temporary assets (without yg_ prefix)
+assets/*
+!assets/yg_*

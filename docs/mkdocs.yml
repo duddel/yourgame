@@ -31,10 +31,19 @@ repo_name: duddel/yourgame
 edit_uri: ""
 nav:
   - Getting Started: index.md
-  - Manual: Manual.md
+  - Manual:
+    - Overview: Manual.md
+    - Load Files: man_files.md
+    - Sprites: man_sprites.md
+    - 3D Models:
+      - Load Models: man_3dmodels_load.md
+      - Create with Blender: man_3dmodels_blender.md
+      - Create with Blockbench: man_3dmodels_blockbench.md
+    - Sky: man_sky.md
+    - GLSL Shaders: man_glsl.md
   - Changelog: Changelog.md
   - Development: Development.md
-  - "API":
+  - API:
     - Overview: Api.md
     - yg.asset: yg_asset.md
     - yg.audio: yg_audio.md
