@@ -9,17 +9,17 @@
       
       
       
-        <link rel="prev" href="../yg_input/">
+        <link rel="prev" href="../man_sky/">
       
       
-        <link rel="next" href="../yg_log/">
+        <link rel="next" href="../Changelog/">
       
       <link rel="icon" href="../yg_logo.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.1.21">
     
     
       
-        <title>yg.interact - yourgame</title>
+        <title>GLSL Shaders - yourgame</title>
       
     
     
@@ -71,7 +71,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#yginteract" class="md-skip">
+        <a href="#glsl-shaders" class="md-skip">
           Skip to content
         </a>
       
@@ -105,7 +105,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              yg.interact
+              GLSL Shaders
             
           </span>
         </div>
@@ -253,16 +253,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
       
       
       
@@ -271,7 +271,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Manual
@@ -416,11 +416,59 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../man_glsl/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          GLSL Shaders
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         GLSL Shaders
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#attributes-conventions" class="md-nav__link">
+    Attributes Conventions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uniforms-conventions" class="md-nav__link">
+    Uniforms Conventions
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -468,16 +516,16 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
       
       
       
@@ -486,7 +534,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_5">
           <span class="md-nav__icon md-icon"></span>
           API
@@ -581,171 +629,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          yg.interact
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../yg_interact/" class="md-nav__link">
         yg.interact
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractaddnumber" class="md-nav__link">
-    function yg.interact.addNumber()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractaddinteger" class="md-nav__link">
-    function yg.interact.addInteger()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractaddvector2" class="md-nav__link">
-    function yg.interact.addVector2()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractaddvector3" class="md-nav__link">
-    function yg.interact.addVector3()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractaddbinary" class="md-nav__link">
-    function yg.interact.addBinary()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractaddrgb" class="md-nav__link">
-    function yg.interact.addRGB()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractaddrgba" class="md-nav__link">
-    function yg.interact.addRGBA()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractaddaction" class="md-nav__link">
-    function yg.interact.addAction()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractaddselect" class="md-nav__link">
-    function yg.interact.addSelect()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractgetnumber" class="md-nav__link">
-    function yg.interact.getNumber()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractgetinteger" class="md-nav__link">
-    function yg.interact.getInteger()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractgetvector2" class="md-nav__link">
-    function yg.interact.getVector2()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractgetvector3" class="md-nav__link">
-    function yg.interact.getVector3()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractgetbinary" class="md-nav__link">
-    function yg.interact.getBinary()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractgetrgb" class="md-nav__link">
-    function yg.interact.getRGB()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractgetrgba" class="md-nav__link">
-    function yg.interact.getRGBA()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractgetaction" class="md-nav__link">
-    function yg.interact.getAction()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractgetselect" class="md-nav__link">
-    function yg.interact.getSelect()
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -854,127 +742,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#function-yginteractaddnumber" class="md-nav__link">
-    function yg.interact.addNumber()
+  <a href="#attributes-conventions" class="md-nav__link">
+    Attributes Conventions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#function-yginteractaddinteger" class="md-nav__link">
-    function yg.interact.addInteger()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractaddvector2" class="md-nav__link">
-    function yg.interact.addVector2()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractaddvector3" class="md-nav__link">
-    function yg.interact.addVector3()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractaddbinary" class="md-nav__link">
-    function yg.interact.addBinary()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractaddrgb" class="md-nav__link">
-    function yg.interact.addRGB()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractaddrgba" class="md-nav__link">
-    function yg.interact.addRGBA()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractaddaction" class="md-nav__link">
-    function yg.interact.addAction()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractaddselect" class="md-nav__link">
-    function yg.interact.addSelect()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractgetnumber" class="md-nav__link">
-    function yg.interact.getNumber()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractgetinteger" class="md-nav__link">
-    function yg.interact.getInteger()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractgetvector2" class="md-nav__link">
-    function yg.interact.getVector2()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractgetvector3" class="md-nav__link">
-    function yg.interact.getVector3()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractgetbinary" class="md-nav__link">
-    function yg.interact.getBinary()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractgetrgb" class="md-nav__link">
-    function yg.interact.getRGB()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractgetrgba" class="md-nav__link">
-    function yg.interact.getRGBA()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractgetaction" class="md-nav__link">
-    function yg.interact.getAction()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yginteractgetselect" class="md-nav__link">
-    function yg.interact.getSelect()
+  <a href="#uniforms-conventions" class="md-nav__link">
+    Uniforms Conventions
   </a>
   
 </li>
@@ -994,508 +770,138 @@
                   
 
 
-<h1 id="yginteract">yg.interact</h1>
-<p>Functions for adding and reading values from interact GUI items.</p>
-<h2 id="function-yginteractaddnumber">function yg.interact.addNumber()</h2>
-<p>Adds an interact GUI item for controlling a number (float scalar) value.</p>
-<blockquote>
-<p><code>function yg.interact.addNumber(name, unit, value, min, max)</code> -&gt; <code>void</code></p>
-</blockquote>
+<h1 id="glsl-shaders">GLSL Shaders</h1>
+<h2 id="attributes-conventions">Attributes Conventions</h2>
 <table>
 <thead>
 <tr>
-<th>Argument</th>
+<th>Usage</th>
 <th>Type</th>
-<th>Info</th>
+<th>Location</th>
+<th>GLSL Vertex Shader Code</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>Name (label) of the interact item</td>
+<td>Position</td>
+<td>vec3</td>
+<td><strong>0</strong></td>
+<td><code>layout(location = 0) in vec3 inPosition;</code></td>
 </tr>
 <tr>
-<td><code>unit</code></td>
-<td>string</td>
-<td>Unit label for the value of the item</td>
+<td>Normal</td>
+<td>vec3</td>
+<td><strong>1</strong></td>
+<td><code>layout(location = 1) in vec3 inNormal;</code></td>
 </tr>
 <tr>
-<td><code>value</code></td>
-<td>number</td>
-<td>Initial value</td>
+<td>Texcoords</td>
+<td>vec2</td>
+<td><strong>2</strong></td>
+<td><code>layout(location = 2) in vec2 inTexcoords;</code></td>
 </tr>
 <tr>
-<td><code>min</code></td>
-<td>number</td>
-<td>Minimum value</td>
-</tr>
-<tr>
-<td><code>max</code></td>
-<td>number</td>
-<td>Maximum value</td>
+<td>Color</td>
+<td>vec3</td>
+<td><strong>3</strong></td>
+<td><code>layout(location = 3) in vec3 inColor;</code></td>
 </tr>
 </tbody>
 </table>
-<h2 id="function-yginteractaddinteger">function yg.interact.addInteger()</h2>
-<p>Adds an interact GUI item for controlling an integer (int scalar) value.</p>
-<blockquote>
-<p><code>function yg.interact.addInteger(name, unit, value, min, max)</code> -&gt; <code>void</code></p>
-</blockquote>
+<h2 id="uniforms-conventions">Uniforms Conventions</h2>
 <table>
 <thead>
 <tr>
-<th>Argument</th>
+<th>Usage</th>
 <th>Type</th>
-<th>Info</th>
+<th>Name</th>
+<th>GLSL Shader Code</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>Name (label) of the interact item</td>
+<td>MVP Matrix</td>
+<td>mat4</td>
+<td><strong><code>mvpMat</code></strong></td>
+<td><code>uniform mat4        mvpMat;</code></td>
 </tr>
 <tr>
-<td><code>unit</code></td>
-<td>string</td>
-<td>Unit label for the value of the item</td>
+<td>VP Matrix</td>
+<td>mat4</td>
+<td><strong><code>vpMat</code></strong></td>
+<td><code>uniform mat4        vpMat;</code></td>
 </tr>
 <tr>
-<td><code>value</code></td>
-<td>number</td>
-<td>Initial value</td>
+<td>Model Matrix</td>
+<td>mat4</td>
+<td><strong><code>modelMat</code></strong></td>
+<td><code>uniform mat4        modelMat;</code></td>
 </tr>
 <tr>
-<td><code>min</code></td>
-<td>number</td>
-<td>Minimum value</td>
+<td>Normal Matrix</td>
+<td>mat3</td>
+<td><strong><code>normalMat</code></strong></td>
+<td><code>uniform mat3        normalMat;</code></td>
 </tr>
 <tr>
-<td><code>max</code></td>
-<td>number</td>
-<td>Maximum value</td>
-</tr>
-</tbody>
-</table>
-<h2 id="function-yginteractaddvector2">function yg.interact.addVector2()</h2>
-<p>Adds an interact GUI item for controlling a 2-component vector.</p>
-<blockquote>
-<p><code>function yg.interact.addVector2(name, x, y)</code> -&gt; <code>void</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Info</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>Name (label) of the interact item</td>
+<td>Camera Position</td>
+<td>vec3</td>
+<td><strong><code>camPos</code></strong></td>
+<td><code>uniform vec3        camPos;</code></td>
 </tr>
 <tr>
-<td><code>x</code></td>
-<td>number</td>
-<td>Initial x value</td>
+<td>Camera Trafo</td>
+<td>mat4</td>
+<td><strong><code>camTrafo</code></strong></td>
+<td><code>uniform mat4        camTrafo;</code></td>
 </tr>
 <tr>
-<td><code>y</code></td>
-<td>number</td>
-<td>Initial y value</td>
-</tr>
-</tbody>
-</table>
-<h2 id="function-yginteractaddvector3">function yg.interact.addVector3()</h2>
-<p>Adds an interact GUI item for controlling a 3-component vector.</p>
-<blockquote>
-<p><code>function yg.interact.addVector3(name, x, y, z)</code> -&gt; <code>void</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Info</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>Name (label) of the interact item</td>
+<td>Sky Rotation Inverse</td>
+<td>mat3</td>
+<td><strong><code>skyRotInv</code></strong></td>
+<td><code>uniform mat3        skyRotInv;</code></td>
 </tr>
 <tr>
-<td><code>x</code></td>
-<td>number</td>
-<td>Initial x value</td>
+<td>Texture Diffuse</td>
+<td>sampler2D</td>
+<td><strong><code>textureDiffuse</code></strong></td>
+<td><code>uniform sampler2D   textureDiffuse;</code></td>
 </tr>
 <tr>
-<td><code>y</code></td>
-<td>number</td>
-<td>Initial y value</td>
+<td>Texture Sky</td>
+<td>samplerCube</td>
+<td><strong><code>textureSky</code></strong></td>
+<td><code>uniform samplerCube textureSky;</code></td>
 </tr>
 <tr>
-<td><code>z</code></td>
-<td>number</td>
-<td>Initial z value</td>
-</tr>
-</tbody>
-</table>
-<h2 id="function-yginteractaddbinary">function yg.interact.addBinary()</h2>
-<p>Adds an interact GUI item for controlling a boolean.</p>
-<blockquote>
-<p><code>function yg.interact.addBinary(name, unit, value)</code> -&gt; <code>void</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Info</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>Name (label) of the interact item</td>
+<td>Light Ambient</td>
+<td>vec3</td>
+<td><strong><code>lightAmbient</code></strong></td>
+<td><code>uniform vec3        lightAmbient;</code></td>
 </tr>
 <tr>
-<td><code>unit</code></td>
-<td>string</td>
-<td>Unit label for the value of the item</td>
+<td>Light Diffuse</td>
+<td>vec3</td>
+<td><strong><code>lightDiffuse</code></strong></td>
+<td><code>uniform vec3        lightDiffuse;</code></td>
 </tr>
 <tr>
-<td><code>value</code></td>
-<td>boolean</td>
-<td>Initial state</td>
-</tr>
-</tbody>
-</table>
-<h2 id="function-yginteractaddrgb">function yg.interact.addRGB()</h2>
-<p>Adds an interact GUI item for controlling RGB values (color picker).</p>
-<blockquote>
-<p><code>function yg.interact.addRGB(name, r, g, b)</code> -&gt; <code>void</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Info</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>Name (label) of the interact item</td>
+<td>Light Specular</td>
+<td>vec3</td>
+<td><strong><code>lightSpecular</code></strong></td>
+<td><code>uniform vec3        lightSpecular;</code></td>
 </tr>
 <tr>
-<td><code>r</code></td>
-<td>number</td>
-<td>Initial red value</td>
+<td>Light Position</td>
+<td>vec3</td>
+<td><strong><code>lightPosition</code></strong></td>
+<td><code>uniform vec3        lightPosition;</code></td>
 </tr>
 <tr>
-<td><code>g</code></td>
-<td>number</td>
-<td>Initial green value</td>
-</tr>
-<tr>
-<td><code>b</code></td>
-<td>number</td>
-<td>Initial blue value</td>
-</tr>
-</tbody>
-</table>
-<h2 id="function-yginteractaddrgba">function yg.interact.addRGBA()</h2>
-<p>Adds an interact GUI item for controlling RGBA values (color picker).</p>
-<blockquote>
-<p><code>function yg.interact.addRGBA(name, r, g, b, a)</code> -&gt; <code>void</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Info</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>Name (label) of the interact item</td>
-</tr>
-<tr>
-<td><code>r</code></td>
-<td>number</td>
-<td>Initial red value</td>
-</tr>
-<tr>
-<td><code>g</code></td>
-<td>number</td>
-<td>Initial green value</td>
-</tr>
-<tr>
-<td><code>b</code></td>
-<td>number</td>
-<td>Initial blue value</td>
-</tr>
-<tr>
-<td><code>a</code></td>
-<td>number</td>
-<td>Initial alpha value</td>
-</tr>
-</tbody>
-</table>
-<h2 id="function-yginteractaddaction">function yg.interact.addAction()</h2>
-<p>Adds an interact GUI item for performing an action (button).</p>
-<blockquote>
-<p><code>function yg.interact.addAction(name, unit)</code> -&gt; <code>void</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Info</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>Name (label) of the interact item</td>
-</tr>
-<tr>
-<td><code>unit</code></td>
-<td>string</td>
-<td>Button label</td>
-</tr>
-</tbody>
-</table>
-<h2 id="function-yginteractaddselect">function yg.interact.addSelect()</h2>
-<p>Adds an interact GUI item for picking an item (list box).</p>
-<blockquote>
-<p><code>function yg.interact.addSelect(name, items, value)</code> -&gt; <code>void</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Info</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>Name (label) of the interact item</td>
-</tr>
-<tr>
-<td><code>items</code></td>
-<td>{string}</td>
-<td>Names of the items (array of strings)</td>
-</tr>
-<tr>
-<td><code>value</code></td>
-<td>number</td>
-<td>Index of the initially selected item</td>
-</tr>
-</tbody>
-</table>
-<h2 id="function-yginteractgetnumber">function yg.interact.getNumber()</h2>
-<p>Returns the current value of a number interact GUI item.</p>
-<blockquote>
-<p><code>function yg.interact.getNumber(name)</code> -&gt; <code>number</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Info</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>Name of the interact item to get data from</td>
-</tr>
-</tbody>
-</table>
-<h2 id="function-yginteractgetinteger">function yg.interact.getInteger()</h2>
-<p>Returns the current value of an integer interact GUI item.</p>
-<blockquote>
-<p><code>function yg.interact.getInteger(name)</code> -&gt; <code>number</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Info</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>Name of the interact item to get data from</td>
-</tr>
-</tbody>
-</table>
-<h2 id="function-yginteractgetvector2">function yg.interact.getVector2()</h2>
-<p>Returns the current values of a 2-component vector interact GUI item.</p>
-<blockquote>
-<p><code>function yg.interact.getVector2(name)</code> -&gt; <code>{number}</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Info</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>Name of the interact item to get data from</td>
-</tr>
-</tbody>
-</table>
-<h2 id="function-yginteractgetvector3">function yg.interact.getVector3()</h2>
-<p>Returns the current values of a 3-component vector interact GUI item.</p>
-<blockquote>
-<p><code>function yg.interact.getVector3(name)</code> -&gt; <code>{number}</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Info</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>Name of the interact item to get data from</td>
-</tr>
-</tbody>
-</table>
-<h2 id="function-yginteractgetbinary">function yg.interact.getBinary()</h2>
-<p>Returns the current value of a boolean interact GUI item.</p>
-<blockquote>
-<p><code>function yg.interact.getBinary(name)</code> -&gt; <code>boolean</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Info</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>Name of the interact item to get data from</td>
-</tr>
-</tbody>
-</table>
-<h2 id="function-yginteractgetrgb">function yg.interact.getRGB()</h2>
-<p>Returns the current values of a RGB (color picker) interact GUI item.</p>
-<blockquote>
-<p><code>function yg.interact.getRGB(name)</code> -&gt; <code>{number}</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Info</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>Name of the interact item to get data from</td>
-</tr>
-</tbody>
-</table>
-<h2 id="function-yginteractgetrgba">function yg.interact.getRGBA()</h2>
-<p>Returns the current values of a RGBA (color picker) interact GUI item.</p>
-<blockquote>
-<p><code>function yg.interact.getRGBA(name)</code> -&gt; <code>{number}</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Info</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>Name of the interact item to get data from</td>
-</tr>
-</tbody>
-</table>
-<h2 id="function-yginteractgetaction">function yg.interact.getAction()</h2>
-<p>Returns <code>true</code> if the action was initiated (button was clicked).</p>
-<blockquote>
-<p><code>function yg.interact.getAction(name)</code> -&gt; <code>boolean</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Info</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>Name of the interact item to get data from</td>
-</tr>
-</tbody>
-</table>
-<h2 id="function-yginteractgetselect">function yg.interact.getSelect()</h2>
-<p>Returns the index of the currently selected item of the list box.</p>
-<blockquote>
-<p><code>function yg.interact.getSelect(name)</code> -&gt; <code>number</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Info</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>Name of the interact item to get data from</td>
+<td>Subtexture Coordinates</td>
+<td>vec4</td>
+<td><strong><code>subtex</code></strong></td>
+<td><code>uniform vec4        subtex;</code></td>
 </tr>
 </tbody>
 </table>
