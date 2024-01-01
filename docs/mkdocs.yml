@@ -4,8 +4,8 @@ theme:
   name: material
   logo: yg_logo.png
   favicon: yg_logo.png
-  features:
-    - navigation.expand
+  # features:
+  #   - navigation.expand
   icon:
     repo: fontawesome/brands/github
   palette:

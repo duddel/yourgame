@@ -33,6 +33,12 @@ function tick()
     aabbPhysics[3] = screenPos[3]
     aabbPhysics[4] = screenPos[3] + ((screenPos[4] - screenPos[3]) * 0.424)
 
+    aabbTrafoCamera = {}
+    aabbTrafoCamera[1] = screenPos[1] + ((screenPos[2] - screenPos[1]) * 0.666)
+    aabbTrafoCamera[2] = screenPos[1] + ((screenPos[2] - screenPos[1]) * 0.999)
+    aabbTrafoCamera[3] = screenPos[3]
+    aabbTrafoCamera[4] = screenPos[3] + ((screenPos[4] - screenPos[3]) * 0.424)
+
     aabbSkylight = {}
     aabbSkylight[1] = screenPos[1]
     aabbSkylight[2] = screenPos[1] + ((screenPos[2] - screenPos[1]) * 0.333)
@@ -44,9 +50,15 @@ function tick()
         if hitAabb2(aabbSprites, yg.input.get("MOUSE_X"), yg.input.get("MOUSE_Y")) then
             runAnotherScript = "a//demo_sprites.lua"
         end
+
         if hitAabb2(aabbPhysics, yg.input.get("MOUSE_X"), yg.input.get("MOUSE_Y")) then
             runAnotherScript = "a//demo_physics.lua"
         end
+
+        if hitAabb2(aabbTrafoCamera, yg.input.get("MOUSE_X"), yg.input.get("MOUSE_Y")) then
+            runAnotherScript = "a//demo_trafocamera.lua"
+        end
+
         if hitAabb2(aabbSkylight, yg.input.get("MOUSE_X"), yg.input.get("MOUSE_Y")) then
             runAnotherScript = "a//demo_skylight.lua"
         end
