@@ -4,9 +4,12 @@
 
 Download here: <https://github.com/duddel/yourgame/releases/tag/v0.0.2>
 
-- New functions for drawing sky
-- New demo: skylight
-- WIP: Restructuring the manual
+- New API for drawing sky
+- New API for GL post processing
+- New demo: Trafo & Camera
+- New demo: Sky & light
+- New demo: Post Processing
+- Restructured manual
 
 ## v0.0.1
 

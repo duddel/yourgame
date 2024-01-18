@@ -23,6 +23,7 @@ function init()
     up = {0, 1, 0}
     c:trafo():lookAt(eye, center, up)
 
+    -- make lightsource
     light = yg.gl.Lightsource()
     lightAmbient = {0.5, 0.5, 0.5}
     lightDiffuse = {0.5, 0.5, 0.5}

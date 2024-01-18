@@ -11,5 +11,6 @@
 -   [`yg.log`](yg_log.md)
 -   [`yg.math`](yg_math.md)
 -   [`yg.phys`](yg_phys.md)
+-   [`yg.postproc`](yg_postproc.md)
 -   [`yg.time`](yg_time.md)
 -   [`yg.util`](yg_util.md)

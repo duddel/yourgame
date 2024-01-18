@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2019-2023 Alexander Scholz
+Copyright (c) 2019-2024 Alexander Scholz
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -45,12 +45,18 @@ namespace yg = yourgame; // convenience
 
 namespace mygame
 {
+    // These variables are declared in mygame.cpp
     extern std::map<std::string, size_t> g_interact;
     extern std::vector<InteractItem> g_interactItems;
     extern yg::util::AssetManager g_assets;
     extern std::string g_luaScriptName;
     extern bool g_reinitEnvironment;
     extern lua_State *g_Lua;
+    // Post processing/Framebuffer
+    extern yg::gl::Framebuffer *g_framebuf;
+    extern yg::gl::Shader *g_postprocShader;
+    extern uint32_t g_framebufWidth;
+    extern uint32_t g_framebufHeight;
 
     // log ...
     void log_debug(std::string s)
@@ -543,6 +549,61 @@ namespace mygame
         glClearColor(r, g, b, a);
     }
 
+    // postproc ...
+    void postproc_init(int width, int height)
+    {
+        g_framebufWidth = (uint32_t)(width < 0 ? 0 : width);
+        g_framebufHeight = (uint32_t)(height < 0 ? 0 : height);
+        bool autoResize = (g_framebufWidth < 1 || g_framebufHeight < 1);
+
+        g_framebuf = yg::gl::Framebuffer::make(
+            autoResize ? yg::input::geti(yg::input::WINDOW_WIDTH) : g_framebufWidth,
+            autoResize ? yg::input::geti(yg::input::WINDOW_HEIGHT) : g_framebufHeight,
+            {{GL_RGBA8,
+              GL_RGBA,
+              GL_UNSIGNED_BYTE,
+              yg::gl::textureUnitBufferColor0,
+              {{GL_TEXTURE_MIN_FILTER, GL_NEAREST},
+               {GL_TEXTURE_MAG_FILTER, GL_NEAREST},
+               {GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE},
+               {GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE}},
+              GL_COLOR_ATTACHMENT0},
+             {GL_DEPTH_COMPONENT16,
+              GL_DEPTH_COMPONENT,
+              GL_UNSIGNED_SHORT,
+              yg::gl::textureUnitBufferDepth,
+              {{GL_TEXTURE_MIN_FILTER, GL_NEAREST},
+               {GL_TEXTURE_MAG_FILTER, GL_NEAREST},
+               {GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE},
+               {GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE}},
+              GL_DEPTH_ATTACHMENT}});
+    }
+
+    void postproc_shutdown()
+    {
+        if (g_framebuf)
+        {
+            delete g_framebuf;
+            g_framebuf = nullptr;
+        }
+    }
+
+    bool postproc_isInitialized()
+    {
+        return g_framebuf != nullptr;
+    }
+
+    void postproc_resize(int width, int height)
+    {
+        g_framebufWidth = (uint32_t)(width < 0 ? 0 : width);
+        g_framebufHeight = (uint32_t)(height < 0 ? 0 : height);
+    }
+
+    void postproc_use(yg::gl::Shader *shader)
+    {
+        g_postprocShader = shader;
+    }
+
     // interact ...
     void interact_insert(InteractItem &flav)
     {
@@ -926,6 +987,7 @@ namespace mygame
     {
         asset_loadVertFragShader("sprite", "a//yg_sprite.vert", "a//yg_sprite.frag");
         asset_loadVertFragShader("sky", "a//yg_default.vert", "a//yg_ambienttex.frag");
+        asset_loadVertFragShader("post_null", "a//yg_post.vert", "a//yg_post_null.frag");
         asset_loadGeometry("quad", "a//yg_quad.obj", "");
         asset_loadGeometry("sphere_inside", "a//yg_sphere_inside.obj", "");
     }
@@ -1049,6 +1111,15 @@ namespace mygame
             .endClass()
             .beginClass<yg::gl::Geometry>("Geometry")
             .endClass()
+            .endNamespace()
+
+            // namespace postproc ...
+            .beginNamespace("postproc")
+            .addFunction("init", postproc_init)
+            .addFunction("shutdown", postproc_shutdown)
+            .addFunction("isInitialized", postproc_isInitialized)
+            .addFunction("resize", postproc_resize)
+            .addFunction("use", postproc_use)
             .endNamespace()
 
             // namespace interact ...
