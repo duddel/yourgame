@@ -9,17 +9,17 @@
       
       
       
-        <link rel="prev" href="../yg_interact/">
+        <link rel="prev" href="../yg_phys/">
       
       
-        <link rel="next" href="../yg_math/">
+        <link rel="next" href="../yg_time/">
       
       <link rel="icon" href="../yg_logo.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.1.21">
     
     
       
-        <title>yg.log - yourgame</title>
+        <title>yg.postproc - yourgame</title>
       
     
     
@@ -71,7 +71,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#yglog" class="md-skip">
+        <a href="#ygpostproc" class="md-skip">
           Skip to content
         </a>
       
@@ -105,7 +105,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              yg.log
+              yg.postproc
             
           </span>
         </div>
@@ -591,73 +591,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          yg.log
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../yg_log/" class="md-nav__link">
         yg.log
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#function-yglogdebug" class="md-nav__link">
-    function yg.log.debug()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-ygloginfo" class="md-nav__link">
-    function yg.log.info()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yglogwarn" class="md-nav__link">
-    function yg.log.warn()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-yglogerror" class="md-nav__link">
-    function yg.log.error()
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -695,11 +633,73 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../yg_postproc/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          yg.postproc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         yg.postproc
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#function-ygpostprocinit" class="md-nav__link">
+    function yg.postproc.init()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-ygpostprocshutdown" class="md-nav__link">
+    function yg.postproc.shutdown()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-ygpostprocresize" class="md-nav__link">
+    function yg.postproc.resize()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-ygpostprocuse" class="md-nav__link">
+    function yg.postproc.use()
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -766,29 +766,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#function-yglogdebug" class="md-nav__link">
-    function yg.log.debug()
+  <a href="#function-ygpostprocinit" class="md-nav__link">
+    function yg.postproc.init()
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#function-ygloginfo" class="md-nav__link">
-    function yg.log.info()
+  <a href="#function-ygpostprocshutdown" class="md-nav__link">
+    function yg.postproc.shutdown()
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#function-yglogwarn" class="md-nav__link">
-    function yg.log.warn()
+  <a href="#function-ygpostprocresize" class="md-nav__link">
+    function yg.postproc.resize()
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#function-yglogerror" class="md-nav__link">
-    function yg.log.error()
+  <a href="#function-ygpostprocuse" class="md-nav__link">
+    function yg.postproc.use()
   </a>
   
 </li>
@@ -808,12 +808,12 @@
                   
 
 
-<h1 id="yglog">yg.log</h1>
-<p>Functions for logging.</p>
-<h2 id="function-yglogdebug">function yg.log.debug()</h2>
-<p>Logs a message with log level <code>debug</code>.</p>
+<h1 id="ygpostproc">yg.postproc</h1>
+<p>Functions for GL post processing.</p>
+<h2 id="function-ygpostprocinit">function yg.postproc.init()</h2>
+<p>Initializes the frame buffer for post processing. If <code>width</code> or <code>height</code> is <code>&lt; 1</code>, the frame buffer size will be synced to the window size.</p>
 <blockquote>
-<p><code>yg.log.debug(message)</code> -&gt; <code>void</code></p>
+<p><code>yg.postproc.init(width, height)</code> -&gt; <code>void</code></p>
 </blockquote>
 <table>
 <thead>
@@ -825,16 +825,26 @@
 </thead>
 <tbody>
 <tr>
-<td><code>message</code></td>
-<td>string</td>
-<td>Log message</td>
+<td><code>width</code></td>
+<td>number</td>
+<td>Width of the frame buffer. If <code>&lt; 1</code>, size is synced with window size</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td>number</td>
+<td>Height of the frame buffer. If <code>&lt; 1</code>, size is synced with window size</td>
 </tr>
 </tbody>
 </table>
-<h2 id="function-ygloginfo">function yg.log.info()</h2>
-<p>Logs a message with log level <code>info</code>.</p>
+<h2 id="function-ygpostprocshutdown">function yg.postproc.shutdown()</h2>
+<p>Shuts down the post processing frame buffer.</p>
 <blockquote>
-<p><code>yg.log.info(message)</code>-&gt; <code>void</code></p>
+<p><code>yg.postproc.shutdown()</code> -&gt; <code>void</code></p>
+</blockquote>
+<h2 id="function-ygpostprocresize">function yg.postproc.resize()</h2>
+<p>Resizes the post processing frame buffer. If <code>width</code> or <code>height</code> is <code>&lt; 1</code>, the frame buffer size will be synced to the window size.</p>
+<blockquote>
+<p><code>yg.postproc.resize(width, height)</code> -&gt; <code>void</code></p>
 </blockquote>
 <table>
 <thead>
@@ -846,16 +856,21 @@
 </thead>
 <tbody>
 <tr>
-<td><code>message</code></td>
-<td>string</td>
-<td>Log message</td>
+<td><code>width</code></td>
+<td>number</td>
+<td>Width of the frame buffer. If <code>&lt; 1</code>, size is synced with window size</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td>number</td>
+<td>Height of the frame buffer. If <code>&lt; 1</code>, size is synced with window size</td>
 </tr>
 </tbody>
 </table>
-<h2 id="function-yglogwarn">function yg.log.warn()</h2>
-<p>Logs a message with log level <code>warn</code>.</p>
+<h2 id="function-ygpostprocuse">function yg.postproc.use()</h2>
+<p>Sets the post processing shader to use.</p>
 <blockquote>
-<p><code>yg.log.warn(message)</code>-&gt; <code>void</code></p>
+<p><code>yg.postproc.use(shader)</code> -&gt; <code>void</code></p>
 </blockquote>
 <table>
 <thead>
@@ -867,30 +882,9 @@
 </thead>
 <tbody>
 <tr>
-<td><code>message</code></td>
-<td>string</td>
-<td>Log message</td>
-</tr>
-</tbody>
-</table>
-<h2 id="function-yglogerror">function yg.log.error()</h2>
-<p>Logs a message with log level <code>error</code>.</p>
-<blockquote>
-<p><code>yg.log.error(message)</code>-&gt; <code>void</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Info</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>message</code></td>
-<td>string</td>
-<td>Log message</td>
+<td><code>shader</code></td>
+<td><a href="../yg_gl/#class-ygglshader">yg.gl.Shader</a></td>
+<td>Post processing shader to use. <code>nil</code> for neutral shader</td>
 </tr>
 </tbody>
 </table>
