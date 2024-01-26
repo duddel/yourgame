@@ -57,6 +57,8 @@ namespace mygame
     extern yg::gl::Shader *g_postprocShader;
     extern uint32_t g_framebufWidth;
     extern uint32_t g_framebufHeight;
+    extern uint32_t g_framebufWidthActual;
+    extern uint32_t g_framebufHeightActual;
 
     // log ...
     void log_debug(std::string s)
@@ -441,8 +443,18 @@ namespace mygame
 
         std::array<float, 4> screenPos;
         {
-            float windowWidth = yg::input::get(yg::input::WINDOW_WIDTH);
-            float windowHeight = yg::input::get(yg::input::WINDOW_HEIGHT);
+            float windowWidth;
+            float windowHeight;
+            if (g_framebuf != nullptr)
+            {
+                windowWidth = static_cast<float>(g_framebufWidthActual);
+                windowHeight = static_cast<float>(g_framebufHeightActual);
+            }
+            else
+            {
+                windowWidth = yg::input::get(yg::input::WINDOW_WIDTH);
+                windowHeight = yg::input::get(yg::input::WINDOW_HEIGHT);
+            }
 
             // 1. make a transform to position the sprite quad in the "world", where the
             //    length units match screen space pixels.

@@ -42,15 +42,15 @@ end
 ```
 > `yg.gl.drawSprite(texture, coords, x, y, width, height, angle)` -> `{number}`
 
-| Argument  | Type                                            | Info                                                      |
-| --------- | ----------------------------------------------- | --------------------------------------------------------- |
-| `texture` | [yg.gl.Texture](#class-yggltexture)             | Texture to draw from                                      |
-| `coords`  | [yg.gl.TextureCoords](#class-yggltexturecoords) | Subtexture coordinate info to pick sprite from atlas/grid |
-| `x`       | number                                          | X-position (**center of sprite**)                         |
-| `y`       | number                                          | Y-position (**center of sprite**)                         |
-| `width`   | number                                          | Width of sprite [pixels]                                  |
-| `height`  | number                                          | Height of sprite [pixels]                                 |
-| `angle`   | number                                          | Counter-clockwise rotation of sprite [rad]                |
+| Argument  | Type                                            | Info                                                                                |
+| --------- | ----------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `texture` | [yg.gl.Texture](#class-yggltexture)             | Texture to draw from                                                                |
+| `coords`  | [yg.gl.TextureCoords](#class-yggltexturecoords) | Subtexture coordinate info to pick sprite from atlas/grid                           |
+| `x`       | number                                          | X-position (**center of sprite**)                                                   |
+| `y`       | number                                          | Y-position (**center of sprite**)                                                   |
+| `width`   | number                                          | Width of sprite [pixels]. If `0.0`, width is determined from original sprite size   |
+| `height`  | number                                          | Height of sprite [pixels]. If `0.0`, height is determined from original sprite size |
+| `angle`   | number                                          | Counter-clockwise rotation of sprite [rad]                                          |
 
 ## function yg.gl.drawSky()
 

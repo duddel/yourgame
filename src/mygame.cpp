@@ -97,6 +97,8 @@ namespace mygame
     yg::gl::Shader *g_postprocShader = nullptr;
     uint32_t g_framebufWidth = 0;
     uint32_t g_framebufHeight = 0;
+    uint32_t g_framebufWidthActual = 0;
+    uint32_t g_framebufHeightActual = 0;
 
     // forward declarations
     void renderImgui();
@@ -233,29 +235,27 @@ namespace mygame
         // framebuffer
         bool framebufAutoResize = (g_framebufWidth < 1 || g_framebufHeight < 1);
         bool framebufResizeRequired;
-        uint32_t framebufWidthActual;
-        uint32_t framebufHeightActual;
         static uint32_t framebufWidthActualPrev = 0;
         static uint32_t framebufHeightActualPrev = 0;
 
         if (framebufAutoResize)
         {
-            framebufWidthActual = yg::input::geti(yg::input::WINDOW_WIDTH);
-            framebufHeightActual = yg::input::geti(yg::input::WINDOW_HEIGHT);
+            g_framebufWidthActual = yg::input::geti(yg::input::WINDOW_WIDTH);
+            g_framebufHeightActual = yg::input::geti(yg::input::WINDOW_HEIGHT);
         }
         else
         {
-            framebufWidthActual = g_framebufWidth;
-            framebufHeightActual = g_framebufHeight;
+            g_framebufWidthActual = g_framebufWidth;
+            g_framebufHeightActual = g_framebufHeight;
         }
 
         // check if desired framebuffer size changed since last pass
-        if (framebufWidthActual != framebufWidthActualPrev ||
-            framebufHeightActual != framebufHeightActualPrev)
+        if (g_framebufWidthActual != framebufWidthActualPrev ||
+            g_framebufHeightActual != framebufHeightActualPrev)
         {
             framebufResizeRequired = true;
-            framebufWidthActualPrev = framebufWidthActual;
-            framebufHeightActualPrev = framebufHeightActual;
+            framebufWidthActualPrev = g_framebufWidthActual;
+            framebufHeightActualPrev = g_framebufHeightActual;
         }
         else
         {
@@ -267,15 +267,15 @@ namespace mygame
         {
             if (framebufResizeRequired)
             {
-                g_framebuf->resize(framebufWidthActual, framebufHeightActual);
+                g_framebuf->resize(g_framebufWidthActual, g_framebufHeightActual);
             }
 
             g_framebuf->bind();
 
             glViewport(0,
                        0,
-                       framebufWidthActual,
-                       framebufHeightActual);
+                       g_framebufWidthActual,
+                       g_framebufHeightActual);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         }
         else
