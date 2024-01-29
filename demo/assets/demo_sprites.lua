@@ -1,5 +1,4 @@
 function init()
-    yg.control.enableVSync(true)
     yg.gl.clearColor(0.137, 0.255, 0.615, 1.000)
 
     -- register interact values

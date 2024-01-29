@@ -1,6 +1,5 @@
 function init()
     math.randomseed(os.time())
-    yg.control.enableVSync(true)
     yg.gl.depthTest(true)
 
     -- register interact values

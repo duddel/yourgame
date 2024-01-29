@@ -28,6 +28,16 @@ Enables/disables vertical sync.
 | -------- | ------- | ---------------------------------------------- |
 | `enable` | boolean | Enable vertical sync. Options: `true`, `false` |
 
+## function yg.control.enableDrawGui()
+
+Enables/disables drawing of the GUI.
+
+> `yg.control.enableDrawGui(enable)` -> `void`
+
+| Argument | Type    | Info                                         |
+| -------- | ------- | -------------------------------------------- |
+| `enable` | boolean | Enable GUI drawing. Options: `true`, `false` |
+
 ## function yg.control.catchMouse()
 
 Enables/disables catched mouse.

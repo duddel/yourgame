@@ -1,5 +1,4 @@
 function init()
-    yg.control.enableVSync(true)
     yg.gl.depthTest(true)
     yg.gl.clearColor(0.125, 0.225, 0.35, 1.000)
 

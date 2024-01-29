@@ -52,6 +52,7 @@ namespace mygame
     extern std::string g_luaScriptName;
     extern bool g_reinitEnvironment;
     extern lua_State *g_Lua;
+    extern bool g_renderImgui;
     // Post processing/Framebuffer
     extern yg::gl::Framebuffer *g_framebuf;
     extern yg::gl::Shader *g_postprocShader;
@@ -995,6 +996,11 @@ namespace mygame
         }
     }
 
+    void control_enableDrawGui(bool enable)
+    {
+        g_renderImgui = enable;
+    }
+
     void loadBaseAssets()
     {
         asset_loadVertFragShader("sprite", "a//yg_sprite.vert", "a//yg_sprite.frag");
@@ -1035,6 +1041,7 @@ namespace mygame
             .addFunction("sendCmdToEnv", yg::control::sendCmdToEnv)
             .addFunction("enableFullscreen", yg::control::enableFullscreen)
             .addFunction("enableVSync", yg::control::enableVSync)
+            .addFunction("enableDrawGui", control_enableDrawGui)
             .addFunction("catchMouse", yg::control::catchMouse)
             .addFunction("runScript", control_runScript)
             .addFunction("loadScript", control_loadScript)

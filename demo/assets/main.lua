@@ -1,5 +1,5 @@
 function init()
-    yg.control.enableVSync(true)
+    yg.control.enableDrawGui(true)
     yg.gl.clearColor(1, 1, 1, 1)
 
     -- load main texture atlas and get coord infos

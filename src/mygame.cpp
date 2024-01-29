@@ -90,7 +90,7 @@ namespace mygame
     std::vector<InteractItem> g_interactItems;
     yg::util::AssetManager g_assets;
 
-    bool g_renderImgui = true;
+    bool g_renderImgui = false;
 
     // Post processing/Framebuffer
     yg::gl::Framebuffer *g_framebuf = nullptr;
@@ -131,6 +131,7 @@ namespace mygame
         {
             delete g_framebuf;
             g_framebuf = nullptr;
+            g_postprocShader = nullptr;
         }
     }
 

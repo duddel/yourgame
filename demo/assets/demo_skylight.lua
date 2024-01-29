@@ -1,5 +1,4 @@
 function init()
-    yg.control.enableVSync(true)
     yg.gl.depthTest(true)
 
     -- register interact values
