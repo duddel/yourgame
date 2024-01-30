@@ -12,7 +12,7 @@ jobs:
         os: [ubuntu-latest, windows-latest]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       # ubuntu: install deps, configure/build
       - name: install deps
         run: |
@@ -38,8 +38,9 @@ jobs:
         if: startsWith(matrix.os, 'windows')
         shell: cmd
       - name: upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
+          name: artifact_${{ matrix.os }}
           path: build/_deploy/*
 
   deploy_web:
@@ -47,7 +48,7 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: install emsdk
         run: |
           git clone https://github.com/emscripten-core/emsdk.git
@@ -63,8 +64,9 @@ jobs:
           cd build
           ./build_web_release.bash
       - name: upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
+          name: artifact_web
           path: build/_deploy/*
 
   deploy_android:
@@ -72,14 +74,15 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: assemble
         run: |
           cd build
           ./build_android_release.bash
       - name: upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
+          name: artifact_android
           path: build/_deploy/*
 
   deploy_demo_gh_pages:
@@ -90,10 +93,10 @@ jobs:
       github.ref == 'refs/heads/main' ||
       github.ref == 'refs/heads/develop'
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v3
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
         with:
-          name: artifact # default name (by not giving any name to actions/upload-artifact@v3)
+          name: artifact_web
           path: _artifact
       - name: unzip
         # assuming there is only one *Emscripten-demo.zip file

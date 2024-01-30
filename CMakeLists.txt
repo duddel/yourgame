@@ -4,7 +4,7 @@
 cmake_minimum_required(VERSION 3.6)
 find_package(Git)
 
-project(yourgame VERSION 0.0.2)
+project(yourgame VERSION 0.1.0)
 # enable this option to clone yourgamelib and checkout the commit, defined
 # as YOURGAME_GIT_COMMIT_REQUESTED. otherwise, the original path, where
 # this project has been initialized from, is used.
@@ -16,7 +16,7 @@ set(YOURGAME_GIT_REMOTE https://github.com/duddel/yourgamelib)
 # the initial value of YOURGAME_GIT_COMMIT_REQUESTED is the commit of yourgamelib
 # during initialization of this project.
 # it should be adjusted if another (newer) version of yourgamelib is supported.
-set(YOURGAME_GIT_COMMIT_REQUESTED c5b6d24fce013aca48e6c59a1ddef5ce786eade0)
+set(YOURGAME_GIT_COMMIT_REQUESTED 262abf6b6d4c56406bd074e74d32315008fe5da8)
 
 # enforce C++11 and disable extensions
 set(CMAKE_CXX_STANDARD 11)
