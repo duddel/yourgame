@@ -1,5 +1,7 @@
 # Changelog
 
+## v0.2.0 (unreleased)
+
 ## v0.1.0
 
 Download here: <https://github.com/duddel/yourgame/releases/tag/v0.1.0>

@@ -4,7 +4,7 @@
 cmake_minimum_required(VERSION 3.6)
 find_package(Git)
 
-project(yourgame VERSION 0.1.0)
+project(yourgame VERSION 0.2.0)
 # enable this option to clone yourgamelib and checkout the commit, defined
 # as YOURGAME_GIT_COMMIT_REQUESTED. otherwise, the original path, where
 # this project has been initialized from, is used.
@@ -16,7 +16,7 @@ set(YOURGAME_GIT_REMOTE https://github.com/duddel/yourgamelib)
 # the initial value of YOURGAME_GIT_COMMIT_REQUESTED is the commit of yourgamelib
 # during initialization of this project.
 # it should be adjusted if another (newer) version of yourgamelib is supported.
-set(YOURGAME_GIT_COMMIT_REQUESTED 262abf6b6d4c56406bd074e74d32315008fe5da8)
+set(YOURGAME_GIT_COMMIT_REQUESTED fdfee5faf15c017fe211182655856bf94ded6887)
 
 # enforce C++11 and disable extensions
 set(CMAKE_CXX_STANDARD 11)
@@ -97,7 +97,7 @@ list(APPEND MYGAME_INC_DIRS_PRIVATE
 )
 
 if(YOURGAME_PLATFORM STREQUAL "android")
-  add_library(${CMAKE_PROJECT_NAME} SHARED
+  add_library("${CMAKE_PROJECT_NAME}_core" SHARED
     ${MYGAME_SRC_FILES}
   )
   set(CMAKE_SHARED_LINKER_FLAGS
@@ -107,7 +107,7 @@ if(YOURGAME_PLATFORM STREQUAL "android")
   # todo: convincing the Android Studio project to use ${CMAKE_CURRENT_SOURCE_DIR}/assets
   #       as the assets directory for the app is preferred, but unsolved.
   add_custom_command(
-    TARGET ${CMAKE_PROJECT_NAME}
+    TARGET "${CMAKE_PROJECT_NAME}_core"
     POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
     "${CMAKE_CURRENT_SOURCE_DIR}/assets"
@@ -117,29 +117,35 @@ endif()
 
 if(YOURGAME_PLATFORM STREQUAL "web" OR YOURGAME_PLATFORM STREQUAL "desktop")
   # main (core) executable target
-  add_executable(${CMAKE_PROJECT_NAME}
+  add_executable("${CMAKE_PROJECT_NAME}_core"
     ${MYGAME_SRC_FILES}
-  ) 
+  )
+
   # a 2nd executable target ("_demo") is defined and configured to allow CPack to
   # generate additional archives with demo assets for desktop and web (see below).
   # the compilation is identical. for _demo, the demo assets are copied into the archive
   add_executable("${CMAKE_PROJECT_NAME}_demo" EXCLUDE_FROM_ALL
     ${MYGAME_SRC_FILES}
   )
-  set_target_properties("${CMAKE_PROJECT_NAME}_demo" PROPERTIES OUTPUT_NAME "yourgame")
+  set_target_properties("${CMAKE_PROJECT_NAME}_demo" PROPERTIES OUTPUT_NAME ${CMAKE_PROJECT_NAME})
 
   # include dirs for demo project
   target_include_directories("${CMAKE_PROJECT_NAME}_demo" PRIVATE ${MYGAME_INC_DIRS_PRIVATE})
 
   # link libraries for demo project
-  target_link_libraries("${CMAKE_PROJECT_NAME}_demo" PRIVATE yrgame)
+  target_link_libraries("${CMAKE_PROJECT_NAME}_demo" PRIVATE yourgame)
 endif()
 
 # include dirs for core project
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${MYGAME_INC_DIRS_PRIVATE})
+target_include_directories("${CMAKE_PROJECT_NAME}_core" PRIVATE ${MYGAME_INC_DIRS_PRIVATE})
 
 # link libraries for core project
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE yrgame)
+target_link_libraries("${CMAKE_PROJECT_NAME}_core" PRIVATE yourgame)
+
+# the main target is called "${CMAKE_PROJECT_NAME}_core" (= yourgame_core), see above
+# add_executable(..), add_library(..), to be able to link the yourgame library (same name).
+# here, the output name is reset to ${CMAKE_PROJECT_NAME} (= yourgame)
+set_target_properties("${CMAKE_PROJECT_NAME}_core" PROPERTIES OUTPUT_NAME ${CMAKE_PROJECT_NAME})
 
 # configure "components" for CPack, corresponding to the executable targets defined above
 if(CPACK_GENERATOR)
@@ -161,7 +167,7 @@ endif()
 if(YOURGAME_PLATFORM STREQUAL "desktop")
   # create savefiles/ beside the executable
   add_custom_command(
-    TARGET ${CMAKE_PROJECT_NAME}
+    TARGET "${CMAKE_PROJECT_NAME}_core"
     POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E make_directory
     "$<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>/savefiles"
@@ -176,7 +182,7 @@ if(YOURGAME_PLATFORM STREQUAL "desktop")
 
   if(CPACK_GENERATOR)
     # core: yourgame
-    install(TARGETS "${CMAKE_PROJECT_NAME}" DESTINATION . COMPONENT core)
+    install(TARGETS "${CMAKE_PROJECT_NAME}_core" DESTINATION . COMPONENT core)
     install(FILES ${CORE_ASSETS} DESTINATION ./assets COMPONENT core)
     # create empty savefiles/ 
     install(DIRECTORY DESTINATION ./savefiles COMPONENT core)
@@ -192,7 +198,7 @@ endif()
 if(YOURGAME_PLATFORM STREQUAL "web")
   # setting the output file extension to .html lets emscripten
   # generate an additional .html file along the .js and .wasm
-  set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES SUFFIX ".html")
+  set_target_properties("${CMAKE_PROJECT_NAME}_core" PROPERTIES SUFFIX ".html")
   # enforce GLFW v3 API (default is v2)
   # enforce WEB GL v2 (default is v1)
   # ASYNCIFY is required for emscripten_wget_data() etc.
