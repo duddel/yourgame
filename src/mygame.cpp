@@ -27,8 +27,6 @@ SOFTWARE.
 #include "mygame_version.h"
 #include "ygif_glue.h"
 #include "imgui.h"
-#include "TextEditor.h" // this is ImGuiColorTextEdit
-#include "imgui_memory_editor.h"
 #include "yg_interact.h"
 
 extern "C"
@@ -43,46 +41,10 @@ namespace yg = yourgame; // convenience
 
 namespace mygame
 {
-    struct FileTextEditor
-    {
-        bool *winOpened;
-        TextEditor editor;
-        FileTextEditor()
-        {
-            winOpened = new bool{true};
-        }
-        ~FileTextEditor()
-        {
-            delete winOpened;
-        }
-    };
-
-    struct FileHexEditor
-    {
-        bool *winOpened;
-        MemoryEditor editor;
-        std::vector<uint8_t> data;
-        FileHexEditor()
-        {
-            winOpened = new bool{true};
-        }
-        ~FileHexEditor()
-        {
-            delete winOpened;
-        }
-    };
-
-    const std::set<std::string> g_excludeFiles = {
-        "./",
-        "../",
-        "yg_LICENSES.txt"};
-
     // initial Lua script name to execute
     std::string g_luaScriptName = "a//main.lua";
     bool g_reinitEnvironment = false;
 
-    std::map<std::string, FileTextEditor> g_openedEditors;
-    std::map<std::string, FileHexEditor> g_openedHexEditors;
     std::string *g_licenseStr = nullptr;
     lua_State *g_Lua = nullptr;
 
@@ -207,68 +169,22 @@ namespace mygame
             yg::control::catchMouse(!yg::input::geti(yg::input::MOUSE_CATCHED));
         }
 
-        // remove closed Code Editor windows
-        for (auto it = g_openedEditors.cbegin(); it != g_openedEditors.cend();)
-        {
-            if (!*(it->second.winOpened))
-            {
-                it = g_openedEditors.erase(it);
-            }
-            else
-            {
-                ++it;
-            }
-        }
-
-        // remove closed Code Hex Editor windows
-        for (auto it = g_openedHexEditors.cbegin(); it != g_openedHexEditors.cend();)
-        {
-            if (!*(it->second.winOpened))
-            {
-                it = g_openedHexEditors.erase(it);
-            }
-            else
-            {
-                ++it;
-            }
-        }
-
         // framebuffer
-        bool framebufAutoResize = (g_framebufWidth < 1 || g_framebufHeight < 1);
-        bool framebufResizeRequired;
-        static uint32_t framebufWidthActualPrev = 0;
-        static uint32_t framebufHeightActualPrev = 0;
-
-        if (framebufAutoResize)
-        {
-            g_framebufWidthActual = yg::input::geti(yg::input::WINDOW_WIDTH);
-            g_framebufHeightActual = yg::input::geti(yg::input::WINDOW_HEIGHT);
-        }
-        else
-        {
-            g_framebufWidthActual = g_framebufWidth;
-            g_framebufHeightActual = g_framebufHeight;
-        }
-
-        // check if desired framebuffer size changed since last pass
-        if (g_framebufWidthActual != framebufWidthActualPrev ||
-            g_framebufHeightActual != framebufHeightActualPrev)
-        {
-            framebufResizeRequired = true;
-            framebufWidthActualPrev = g_framebufWidthActual;
-            framebufHeightActualPrev = g_framebufHeightActual;
-        }
-        else
-        {
-            framebufResizeRequired = false;
-        }
-
         // set up framebuffer for this call if desired
         if (g_framebuf)
         {
-            if (framebufResizeRequired)
+            static uint32_t framebufWidthActualPrev = 0;
+            static uint32_t framebufHeightActualPrev = 0;
+
+            updateFramebufSizeActual();
+
+            // check if desired framebuffer size changed since last pass
+            if (g_framebufWidthActual != framebufWidthActualPrev ||
+                g_framebufHeightActual != framebufHeightActualPrev)
             {
                 g_framebuf->resize(g_framebufWidthActual, g_framebufHeightActual);
+                framebufWidthActualPrev = g_framebufWidthActual;
+                framebufHeightActualPrev = g_framebufHeightActual;
             }
 
             g_framebuf->bind();
@@ -296,7 +212,8 @@ namespace mygame
         {
             g_framebuf->unbindTarget();
 
-            if (framebufAutoResize)
+            // Framebuffer size == window size
+            if (g_framebufWidth < 1 && g_framebufHeight < 1)
             {
                 // framebuffer size matches window size (if auto resize desired)
                 glViewport(0,
@@ -309,7 +226,7 @@ namespace mygame
                 // framebuffer size is fixed. draw framebuffer stretched and centered
                 // in window, while maintaining the aspect ratio
 
-                float aspectFramebuf = (float)g_framebufWidth / (float)g_framebufHeight;
+                float aspectFramebuf = (float)g_framebufWidthActual / (float)g_framebufHeightActual;
 
                 if (yg::input::get(yg::input::WINDOW_ASPECT_RATIO) > aspectFramebuf)
                 {
@@ -496,91 +413,6 @@ namespace mygame
             ImGui::End();
         }
 
-        // Explorer
-        if (false) // disabled
-        {
-            // get asset files
-            std::vector<std::string> assetFiles = yg::file::ls("a//*");
-
-            // get project files
-            std::vector<std::string> projectFiles;
-            if (yg::file::getProjectFilePath("") != "")
-            {
-                projectFiles = yg::file::ls("p//*");
-            }
-
-            ImGui::SetNextWindowPos({0.0f, mainMenuBarHeight});
-            ImGui::SetNextWindowSizeConstraints({200.0f, sideBarHeight}, {500.0f, sideBarHeight});
-            ImGui::Begin("Explorer", nullptr, (0));
-
-            // lambda for button drawing, used multiple times below (collapsing headers)
-            auto drawButtons = [](const std::vector<std::string> &filenames, const std::string &filePrefix)
-            {
-                for (const auto &f : filenames)
-                {
-                    if (g_excludeFiles.find(f) != g_excludeFiles.end())
-                    {
-                        continue;
-                    }
-
-                    std::string file = filePrefix + f;
-
-                    if (ImGui::Button((std::string("txt##") + f + filePrefix).c_str()))
-                    {
-                        // open new Code Editor window
-                        if (g_openedEditors.find(file) == g_openedEditors.end())
-                        {
-                            // read file
-                            std::vector<uint8_t> data;
-                            yg::file::readFile(file, data);
-
-                            // insert new default-constructed FileTextEditor
-                            g_openedEditors[file];
-
-                            // set editor language
-                            if (yg::file::getFileExtension(file).compare("lua") == 0)
-                            {
-                                g_openedEditors[file].editor.SetLanguageDefinition(TextEditor::LanguageDefinition::Lua());
-                            }
-                            else if ((yg::file::getFileExtension(file).compare("vert") == 0) ||
-                                     (yg::file::getFileExtension(file).compare("frag") == 0))
-                            {
-                                g_openedEditors[file].editor.SetLanguageDefinition(TextEditor::LanguageDefinition::GLSL());
-                            }
-
-                            // fill editor with initial content
-                            std::string dataStr = std::string(data.begin(), data.end());
-                            g_openedEditors[file].editor.SetText(dataStr);
-                        }
-                    }
-
-                    ImGui::SameLine();
-                    if (ImGui::Button((std::string("bin##") + f + filePrefix).c_str()))
-                    {
-                        // insert new default-constructed FileHexEditor
-                        g_openedHexEditors[file];
-
-                        // read file
-                        yg::file::readFile(file, g_openedHexEditors[file].data);
-                    }
-                    ImGui::SameLine();
-                    ImGui::Text("%s", f.c_str());
-                }
-            };
-
-            if (ImGui::CollapsingHeader("Assets", ImGuiTreeNodeFlags_DefaultOpen))
-            {
-                drawButtons(assetFiles, "a//");
-            }
-
-            if (ImGui::CollapsingHeader("Project", ImGuiTreeNodeFlags_DefaultOpen))
-            {
-                drawButtons(projectFiles, "p//");
-            }
-
-            ImGui::End();
-        }
-
         // Interact Editor
         if (g_interactItems.size() > 0)
         {
@@ -708,59 +540,6 @@ namespace mygame
                 ImGui::PopID();
             }
 
-            ImGui::End();
-        }
-
-        // Code Editor windows
-        for (auto &w : g_openedEditors)
-        {
-            ImGui::Begin((w.first + "##txt").c_str(), w.second.winOpened,
-                         (ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_MenuBar));
-            ImGui::SetWindowSize(ImVec2(yg::input::get(yg::input::WINDOW_WIDTH) * 0.5f,
-                                        yg::input::get(yg::input::WINDOW_HEIGHT) * 0.75f),
-                                 ImGuiCond_FirstUseEver);
-
-            if (ImGui::BeginMenuBar())
-            {
-                if (ImGui::BeginMenu("File"))
-                {
-                    if (ImGui::MenuItem("Save"))
-                    {
-                        std::string textToSave = w.second.editor.GetText();
-                        yg::file::writeFile(w.first, &(textToSave[0]), textToSave.size());
-                    }
-                    ImGui::EndMenu();
-                }
-                ImGui::EndMenuBar();
-            }
-
-            w.second.editor.Render("TextEditor");
-            ImGui::End();
-        }
-
-        // Code Hex Editor windows
-        for (auto &w : g_openedHexEditors)
-        {
-            ImGui::Begin((w.first + "##hex").c_str(), w.second.winOpened,
-                         (ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_MenuBar));
-            ImGui::SetWindowSize(ImVec2(yg::input::get(yg::input::WINDOW_WIDTH) * 0.5f,
-                                        yg::input::get(yg::input::WINDOW_HEIGHT) * 0.75f),
-                                 ImGuiCond_FirstUseEver);
-
-            if (ImGui::BeginMenuBar())
-            {
-                if (ImGui::BeginMenu("File"))
-                {
-                    if (ImGui::MenuItem("Save"))
-                    {
-                        yg::file::writeFile(w.first, &(w.second.data[0]), w.second.data.size());
-                    }
-                    ImGui::EndMenu();
-                }
-                ImGui::EndMenuBar();
-            }
-
-            w.second.editor.DrawContents(&(w.second.data[0]), w.second.data.size());
             ImGui::End();
         }
     }

@@ -61,6 +61,32 @@ namespace mygame
     extern uint32_t g_framebufWidthActual;
     extern uint32_t g_framebufHeightActual;
 
+    void updateFramebufSizeActual()
+    {
+        if (g_framebufWidth < 1 && g_framebufHeight < 1)
+        {
+            g_framebufWidthActual = yg::input::geti(yg::input::WINDOW_WIDTH);
+            g_framebufHeightActual = yg::input::geti(yg::input::WINDOW_HEIGHT);
+        }
+        else if (g_framebufWidth < 1)
+        {
+            g_framebufWidthActual = static_cast<uint32_t>(static_cast<float>(g_framebufHeight) *
+                                                          yg::input::get(yg::input::WINDOW_ASPECT_RATIO));
+            g_framebufHeightActual = g_framebufHeight;
+        }
+        else if (g_framebufHeight < 1)
+        {
+            g_framebufWidthActual = g_framebufWidth;
+            g_framebufHeightActual = static_cast<uint32_t>(static_cast<float>(g_framebufWidth) *
+                                                           yg::input::get(yg::input::WINDOW_ASPECT_RATIO_INVERSE));
+        }
+        else
+        {
+            g_framebufWidthActual = g_framebufWidth;
+            g_framebufHeightActual = g_framebufHeight;
+        }
+    }
+
     // log ...
     void log_debug(std::string s)
     {
@@ -563,15 +589,21 @@ namespace mygame
     }
 
     // postproc ...
-    void postproc_init(int width, int height)
+    void postproc_resize(int width, int height)
     {
         g_framebufWidth = (uint32_t)(width < 0 ? 0 : width);
         g_framebufHeight = (uint32_t)(height < 0 ? 0 : height);
-        bool autoResize = (g_framebufWidth < 1 || g_framebufHeight < 1);
+    }
+
+    void postproc_init(int width, int height)
+    {
+        postproc_resize(width, height);
+
+        updateFramebufSizeActual();
 
         g_framebuf = yg::gl::Framebuffer::make(
-            autoResize ? yg::input::geti(yg::input::WINDOW_WIDTH) : g_framebufWidth,
-            autoResize ? yg::input::geti(yg::input::WINDOW_HEIGHT) : g_framebufHeight,
+            g_framebufWidthActual,
+            g_framebufHeightActual,
             {{GL_RGBA8,
               GL_RGBA,
               GL_UNSIGNED_BYTE,
@@ -604,12 +636,6 @@ namespace mygame
     bool postproc_isInitialized()
     {
         return g_framebuf != nullptr;
-    }
-
-    void postproc_resize(int width, int height)
-    {
-        g_framebufWidth = (uint32_t)(width < 0 ? 0 : width);
-        g_framebufHeight = (uint32_t)(height < 0 ? 0 : height);
     }
 
     void postproc_use(yg::gl::Shader *shader)

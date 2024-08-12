@@ -4,14 +4,17 @@ Functions for GL post processing.
 
 ## function yg.postproc.init()
 
-Initializes the frame buffer for post processing. If `width` or `height` is `< 1`, the frame buffer size will be synced to the window size.
+Initializes the frame buffer for post processing.
+-   If both `width` and `height` are `> 0`, this will be the frame buffer size
+-   If both `width` and `height` are `0`, the frame buffer size will be synced to the window size
+-   If exactly one of `width` and `height` is `0`, this dimensions will be set suitable, maintaining the windows aspect ratio
 
 > `yg.postproc.init(width, height)` -> `void`
 
-| Argument | Type   | Info                                                                  |
-| -------- | ------ | --------------------------------------------------------------------- |
-| `width`  | number | Width of the frame buffer. If `< 1`, size is synced with window size  |
-| `height` | number | Height of the frame buffer. If `< 1`, size is synced with window size |
+| Argument | Type   | Info                                                          |
+| -------- | ------ | ------------------------------------------------------------- |
+| `width`  | number | Width of the frame buffer. If `0`, will be set automatically  |
+| `height` | number | Height of the frame buffer. If `0`, will be set automatically |
 
 ## function yg.postproc.shutdown()
 
@@ -27,14 +30,14 @@ Returns `true` if post processing is initialized, `false` otherwise.
 
 ## function yg.postproc.resize()
 
-Resizes the post processing frame buffer. If `width` or `height` is `< 1`, the frame buffer size will be synced to the window size.
+Resizes the post processing frame buffer. See [yg.postproc.init()](#function-ygpostprocinit)
 
 > `yg.postproc.resize(width, height)` -> `void`
 
-| Argument | Type   | Info                                                                  |
-| -------- | ------ | --------------------------------------------------------------------- |
-| `width`  | number | Width of the frame buffer. If `< 1`, size is synced with window size  |
-| `height` | number | Height of the frame buffer. If `< 1`, size is synced with window size |
+| Argument | Type   | Info                                                          |
+| -------- | ------ | ------------------------------------------------------------- |
+| `width`  | number | Width of the frame buffer. If `0`, will be set automatically  |
+| `height` | number | Height of the frame buffer. If `0`, will be set automatically |
 
 ## function yg.postproc.use()
 
