@@ -165,33 +165,14 @@ endif()
   file(GLOB DEMO_ASSETS ${CMAKE_CURRENT_SOURCE_DIR}/demo/assets/*)
 
 if(YOURGAME_PLATFORM STREQUAL "desktop")
-  # create savefiles/ beside the executable
-  add_custom_command(
-    TARGET "${CMAKE_PROJECT_NAME}_core"
-    POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E make_directory
-    "$<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>/savefiles"
-  )
-
-  add_custom_command(
-    TARGET "${CMAKE_PROJECT_NAME}_demo"
-    POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E make_directory
-    "$<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>/savefiles"
-  )
-
   if(CPACK_GENERATOR)
     # core: yourgame
     install(TARGETS "${CMAKE_PROJECT_NAME}_core" DESTINATION . COMPONENT core)
     install(FILES ${CORE_ASSETS} DESTINATION ./assets COMPONENT core)
-    # create empty savefiles/ 
-    install(DIRECTORY DESTINATION ./savefiles COMPONENT core)
 
     # demo: yourgame with demo assets
     install(TARGETS "${CMAKE_PROJECT_NAME}_demo" DESTINATION . COMPONENT demo)
     install(FILES ${CORE_ASSETS_YG_ONLY} ${DEMO_ASSETS} DESTINATION ./assets COMPONENT demo)
-    # create empty savefiles/ 
-    install(DIRECTORY DESTINATION ./savefiles COMPONENT demo)
   endif()
 endif()
 
