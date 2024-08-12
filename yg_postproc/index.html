@@ -825,10 +825,12 @@
 <h1 id="ygpostproc">yg.postproc</h1>
 <p>Functions for GL post processing.</p>
 <h2 id="function-ygpostprocinit">function yg.postproc.init()</h2>
-<p>Initializes the frame buffer for post processing.
--   If both <code>width</code> and <code>height</code> are <code>&gt; 0</code>, this will be the frame buffer size
--   If both <code>width</code> and <code>height</code> are <code>0</code>, the frame buffer size will be synced to the window size
--   If exactly one of <code>width</code> and <code>height</code> is <code>0</code>, this dimensions will be set suitable, maintaining the windows aspect ratio</p>
+<p>Initializes the frame buffer for post processing.</p>
+<ul>
+<li>If both <code>width</code> and <code>height</code> are <code>&gt; 0</code>, this will be the frame buffer size</li>
+<li>If both <code>width</code> and <code>height</code> are <code>0</code>, the frame buffer size will be synced to the window size</li>
+<li>If exactly one of <code>width</code> and <code>height</code> is <code>0</code>, this dimensions will be set suitable, maintaining the windows aspect ratio</li>
+</ul>
 <blockquote>
 <p><code>yg.postproc.init(width, height)</code> -&gt; <code>void</code></p>
 </blockquote>
