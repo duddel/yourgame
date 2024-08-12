@@ -5,6 +5,7 @@ Functions for GL post processing.
 ## function yg.postproc.init()
 
 Initializes the frame buffer for post processing.
+
 -   If both `width` and `height` are `> 0`, this will be the frame buffer size
 -   If both `width` and `height` are `0`, the frame buffer size will be synced to the window size
 -   If exactly one of `width` and `height` is `0`, this dimensions will be set suitable, maintaining the windows aspect ratio
