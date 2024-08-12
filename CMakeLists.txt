@@ -16,7 +16,7 @@ set(YOURGAME_GIT_REMOTE https://github.com/duddel/yourgamelib)
 # the initial value of YOURGAME_GIT_COMMIT_REQUESTED is the commit of yourgamelib
 # during initialization of this project.
 # it should be adjusted if another (newer) version of yourgamelib is supported.
-set(YOURGAME_GIT_COMMIT_REQUESTED fdfee5faf15c017fe211182655856bf94ded6887)
+set(YOURGAME_GIT_COMMIT_REQUESTED 945131c604f2ccccbcc4b53ac4013d92130aa413)
 
 # enforce C++11 and disable extensions
 set(CMAKE_CXX_STANDARD 11)
