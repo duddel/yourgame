@@ -825,7 +825,10 @@
 <h1 id="ygpostproc">yg.postproc</h1>
 <p>Functions for GL post processing.</p>
 <h2 id="function-ygpostprocinit">function yg.postproc.init()</h2>
-<p>Initializes the frame buffer for post processing. If <code>width</code> or <code>height</code> is <code>&lt; 1</code>, the frame buffer size will be synced to the window size.</p>
+<p>Initializes the frame buffer for post processing.
+-   If both <code>width</code> and <code>height</code> are <code>&gt; 0</code>, this will be the frame buffer size
+-   If both <code>width</code> and <code>height</code> are <code>0</code>, the frame buffer size will be synced to the window size
+-   If exactly one of <code>width</code> and <code>height</code> is <code>0</code>, this dimensions will be set suitable, maintaining the windows aspect ratio</p>
 <blockquote>
 <p><code>yg.postproc.init(width, height)</code> -&gt; <code>void</code></p>
 </blockquote>
@@ -841,12 +844,12 @@
 <tr>
 <td><code>width</code></td>
 <td>number</td>
-<td>Width of the frame buffer. If <code>&lt; 1</code>, size is synced with window size</td>
+<td>Width of the frame buffer. If <code>0</code>, will be set automatically</td>
 </tr>
 <tr>
 <td><code>height</code></td>
 <td>number</td>
-<td>Height of the frame buffer. If <code>&lt; 1</code>, size is synced with window size</td>
+<td>Height of the frame buffer. If <code>0</code>, will be set automatically</td>
 </tr>
 </tbody>
 </table>
@@ -861,7 +864,7 @@
 <p><code>yg.postproc.isInitialized()</code> -&gt; <code>boolean</code></p>
 </blockquote>
 <h2 id="function-ygpostprocresize">function yg.postproc.resize()</h2>
-<p>Resizes the post processing frame buffer. If <code>width</code> or <code>height</code> is <code>&lt; 1</code>, the frame buffer size will be synced to the window size.</p>
+<p>Resizes the post processing frame buffer. See <a href="#function-ygpostprocinit">yg.postproc.init()</a></p>
 <blockquote>
 <p><code>yg.postproc.resize(width, height)</code> -&gt; <code>void</code></p>
 </blockquote>
@@ -877,12 +880,12 @@
 <tr>
 <td><code>width</code></td>
 <td>number</td>
-<td>Width of the frame buffer. If <code>&lt; 1</code>, size is synced with window size</td>
+<td>Width of the frame buffer. If <code>0</code>, will be set automatically</td>
 </tr>
 <tr>
 <td><code>height</code></td>
 <td>number</td>
-<td>Height of the frame buffer. If <code>&lt; 1</code>, size is synced with window size</td>
+<td>Height of the frame buffer. If <code>0</code>, will be set automatically</td>
 </tr>
 </tbody>
 </table>
