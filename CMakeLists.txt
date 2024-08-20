@@ -86,7 +86,6 @@ list(APPEND MYGAME_SRC_FILES
 list(APPEND MYGAME_SRC_FILES
   ${CMAKE_CURRENT_SOURCE_DIR}/src/mygame.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/ygif_camera.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/ygif_glue.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/ygif_motion.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/ygif_trafo.cpp)
 
