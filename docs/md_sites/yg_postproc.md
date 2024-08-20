@@ -4,13 +4,13 @@ Functions for GL post processing.
 
 ## function yg.postproc.init()
 
-Initializes the frame buffer for post processing.
+Activates post processing. Returns `true` on success, `false` otherwise.
 
 -   If both `width` and `height` are `> 0`, this will be the frame buffer size
 -   If both `width` and `height` are `0`, the frame buffer size will be synced to the window size
 -   If exactly one of `width` and `height` is `0`, this dimensions will be set suitable, maintaining the windows aspect ratio
 
-> `yg.postproc.init(width, height)` -> `void`
+> `yg.postproc.init(width, height)` -> `boolean`
 
 | Argument | Type   | Info                                                          |
 | -------- | ------ | ------------------------------------------------------------- |
@@ -19,13 +19,13 @@ Initializes the frame buffer for post processing.
 
 ## function yg.postproc.shutdown()
 
-Shuts down the post processing frame buffer.
+Shuts down post processing.
 
 > `yg.postproc.shutdown()` -> `void`
 
 ## function yg.postproc.isInitialized()
 
-Returns `true` if post processing is initialized, `false` otherwise.
+Returns `true` if post processing is initialized (active), `false` otherwise.
 
 > `yg.postproc.isInitialized()` -> `boolean`
 

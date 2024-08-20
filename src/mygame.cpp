@@ -54,14 +54,6 @@ namespace mygame
 
     bool g_renderImgui = false;
 
-    // Post processing/Framebuffer
-    yg::gl::Framebuffer *g_framebuf = nullptr;
-    yg::gl::Shader *g_postprocShader = nullptr;
-    uint32_t g_framebufWidth = 0;
-    uint32_t g_framebufHeight = 0;
-    uint32_t g_framebufWidthActual = 0;
-    uint32_t g_framebufHeightActual = 0;
-
     // forward declarations
     void renderImgui();
     void initLua();
@@ -86,14 +78,6 @@ namespace mygame
         if (yg::audio::isInitialized())
         {
             yg::audio::shutdown();
-        }
-
-        // deactivate post processing
-        if (g_framebuf)
-        {
-            delete g_framebuf;
-            g_framebuf = nullptr;
-            g_postprocShader = nullptr;
         }
     }
 
@@ -169,30 +153,13 @@ namespace mygame
             yg::control::catchMouse(!yg::input::geti(yg::input::MOUSE_CATCHED));
         }
 
-        // framebuffer
-        // set up framebuffer for this call if desired
-        if (g_framebuf)
+        // Set default viewport based on buffer
+        if (yg::util::postproc::isInitialized())
         {
-            static uint32_t framebufWidthActualPrev = 0;
-            static uint32_t framebufHeightActualPrev = 0;
-
-            updateFramebufSizeActual();
-
-            // check if desired framebuffer size changed since last pass
-            if (g_framebufWidthActual != framebufWidthActualPrev ||
-                g_framebufHeightActual != framebufHeightActualPrev)
-            {
-                g_framebuf->resize(g_framebufWidthActual, g_framebufHeightActual);
-                framebufWidthActualPrev = g_framebufWidthActual;
-                framebufHeightActualPrev = g_framebufHeightActual;
-            }
-
-            g_framebuf->bind();
-
             glViewport(0,
                        0,
-                       g_framebufWidthActual,
-                       g_framebufHeightActual);
+                       yg::input::geti(yg::input::FRAMEBUF_WIDTH),
+                       yg::input::geti(yg::input::FRAMEBUF_HEIGHT));
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         }
         else
@@ -206,88 +173,6 @@ namespace mygame
 
         // advance user game logic (and draw calls)
         tickLua();
-
-        // prepare default buffers for drawing framebuffer content if desired
-        if (g_framebuf)
-        {
-            g_framebuf->unbindTarget();
-
-            // Framebuffer size == window size
-            if (g_framebufWidth < 1 && g_framebufHeight < 1)
-            {
-                // framebuffer size matches window size (if auto resize desired)
-                glViewport(0,
-                           0,
-                           yg::input::geti(yg::input::WINDOW_WIDTH),
-                           yg::input::geti(yg::input::WINDOW_HEIGHT));
-            }
-            else
-            {
-                // framebuffer size is fixed. draw framebuffer stretched and centered
-                // in window, while maintaining the aspect ratio
-
-                float aspectFramebuf = (float)g_framebufWidthActual / (float)g_framebufHeightActual;
-
-                if (yg::input::get(yg::input::WINDOW_ASPECT_RATIO) > aspectFramebuf)
-                {
-                    float viewWidth = (yg::input::get(yg::input::WINDOW_HEIGHT) * aspectFramebuf);
-                    glViewport(
-                        (GLint)((yg::input::get(yg::input::WINDOW_WIDTH) - viewWidth) * 0.5f),
-                        0,
-                        (GLsizei)viewWidth,
-                        (GLsizei)yg::input::geti(yg::input::WINDOW_HEIGHT));
-                }
-                else
-                {
-                    float viewHeight = (yg::input::get(yg::input::WINDOW_WIDTH) / aspectFramebuf);
-                    glViewport(
-                        0,
-                        (GLint)((yg::input::get(yg::input::WINDOW_HEIGHT) - viewHeight) * 0.5f),
-                        (GLsizei)yg::input::geti(yg::input::WINDOW_WIDTH),
-                        (GLsizei)viewHeight);
-                }
-            }
-
-            // clear buffers while maintaining original clear color
-            {
-                // get current clear color, set in user code
-                GLfloat clearColorOrg[4];
-                glGetFloatv(GL_COLOR_CLEAR_VALUE, clearColorOrg);
-
-                // clear with black (0,0,0)
-                glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-                // restore clear color
-                glClearColor(clearColorOrg[0], clearColorOrg[1], clearColorOrg[2], clearColorOrg[3]);
-            }
-
-            // draw framebuffer textures with post processing shader
-            {
-                // simple orthographic projection that matches the quad geometry
-                auto pMat = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, 1.0f, -1.0f);
-
-                // use "null" post processing shader by default
-                yg::gl::Shader *shader = g_assets.get<yg::gl::Shader>("post_null");
-                if (g_postprocShader)
-                {
-                    shader = g_postprocShader;
-                }
-
-                yg::gl::Geometry *geo = g_assets.get<yg::gl::Geometry>("quad");
-
-                shader->useProgram();
-                yg::gl::DrawConfig cfg;
-                cfg.modelMat = pMat;
-                cfg.shader = shader;
-
-                // hand over color0 and depth texture attachments to draw call
-                cfg.textures.push_back(g_framebuf->textureAttachment(0));
-                cfg.textures.push_back(g_framebuf->textureAttachment(1));
-
-                yg::gl::drawGeo(geo, cfg);
-            }
-        }
 
         if (g_renderImgui)
         {

@@ -53,39 +53,6 @@ namespace mygame
     extern bool g_reinitEnvironment;
     extern lua_State *g_Lua;
     extern bool g_renderImgui;
-    // Post processing/Framebuffer
-    extern yg::gl::Framebuffer *g_framebuf;
-    extern yg::gl::Shader *g_postprocShader;
-    extern uint32_t g_framebufWidth;
-    extern uint32_t g_framebufHeight;
-    extern uint32_t g_framebufWidthActual;
-    extern uint32_t g_framebufHeightActual;
-
-    void updateFramebufSizeActual()
-    {
-        if (g_framebufWidth < 1 && g_framebufHeight < 1)
-        {
-            g_framebufWidthActual = yg::input::geti(yg::input::WINDOW_WIDTH);
-            g_framebufHeightActual = yg::input::geti(yg::input::WINDOW_HEIGHT);
-        }
-        else if (g_framebufWidth < 1)
-        {
-            g_framebufWidthActual = static_cast<uint32_t>(static_cast<float>(g_framebufHeight) *
-                                                          yg::input::get(yg::input::WINDOW_ASPECT_RATIO));
-            g_framebufHeightActual = g_framebufHeight;
-        }
-        else if (g_framebufHeight < 1)
-        {
-            g_framebufWidthActual = g_framebufWidth;
-            g_framebufHeightActual = static_cast<uint32_t>(static_cast<float>(g_framebufWidth) *
-                                                           yg::input::get(yg::input::WINDOW_ASPECT_RATIO_INVERSE));
-        }
-        else
-        {
-            g_framebufWidthActual = g_framebufWidth;
-            g_framebufHeightActual = g_framebufHeight;
-        }
-    }
 
     // log ...
     void log_debug(std::string s)
@@ -470,18 +437,11 @@ namespace mygame
 
         std::array<float, 4> screenPos;
         {
-            float windowWidth;
-            float windowHeight;
-            if (g_framebuf != nullptr)
-            {
-                windowWidth = static_cast<float>(g_framebufWidthActual);
-                windowHeight = static_cast<float>(g_framebufHeightActual);
-            }
-            else
-            {
-                windowWidth = yg::input::get(yg::input::WINDOW_WIDTH);
-                windowHeight = yg::input::get(yg::input::WINDOW_HEIGHT);
-            }
+            GLint viewport[4];
+            glGetIntegerv(GL_VIEWPORT, viewport);
+
+            float windowWidth = static_cast<float>(viewport[2]);
+            float windowHeight = static_cast<float>(viewport[3]);
 
             // 1. make a transform to position the sprite quad in the "world", where the
             //    length units match screen space pixels.
@@ -586,61 +546,6 @@ namespace mygame
     void gl_clearColor(float r, float g, float b, float a)
     {
         glClearColor(r, g, b, a);
-    }
-
-    // postproc ...
-    void postproc_resize(int width, int height)
-    {
-        g_framebufWidth = (uint32_t)(width < 0 ? 0 : width);
-        g_framebufHeight = (uint32_t)(height < 0 ? 0 : height);
-    }
-
-    void postproc_init(int width, int height)
-    {
-        postproc_resize(width, height);
-
-        updateFramebufSizeActual();
-
-        g_framebuf = yg::gl::Framebuffer::make(
-            g_framebufWidthActual,
-            g_framebufHeightActual,
-            {{GL_RGBA8,
-              GL_RGBA,
-              GL_UNSIGNED_BYTE,
-              yg::gl::textureUnitBufferColor0,
-              {{GL_TEXTURE_MIN_FILTER, GL_NEAREST},
-               {GL_TEXTURE_MAG_FILTER, GL_NEAREST},
-               {GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE},
-               {GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE}},
-              GL_COLOR_ATTACHMENT0},
-             {GL_DEPTH_COMPONENT16,
-              GL_DEPTH_COMPONENT,
-              GL_UNSIGNED_SHORT,
-              yg::gl::textureUnitBufferDepth,
-              {{GL_TEXTURE_MIN_FILTER, GL_NEAREST},
-               {GL_TEXTURE_MAG_FILTER, GL_NEAREST},
-               {GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE},
-               {GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE}},
-              GL_DEPTH_ATTACHMENT}});
-    }
-
-    void postproc_shutdown()
-    {
-        if (g_framebuf)
-        {
-            delete g_framebuf;
-            g_framebuf = nullptr;
-        }
-    }
-
-    bool postproc_isInitialized()
-    {
-        return g_framebuf != nullptr;
-    }
-
-    void postproc_use(yg::gl::Shader *shader)
-    {
-        g_postprocShader = shader;
     }
 
     // interact ...
@@ -1160,11 +1065,11 @@ namespace mygame
 
             // namespace postproc ...
             .beginNamespace("postproc")
-            .addFunction("init", postproc_init)
-            .addFunction("shutdown", postproc_shutdown)
-            .addFunction("isInitialized", postproc_isInitialized)
-            .addFunction("resize", postproc_resize)
-            .addFunction("use", postproc_use)
+            .addFunction("init", yg::util::postproc::init)
+            .addFunction("shutdown", yg::util::postproc::shutdown)
+            .addFunction("isInitialized", yg::util::postproc::isInitialized)
+            .addFunction("resize", yg::util::postproc::resize)
+            .addFunction("use", yg::util::postproc::use)
             .endNamespace()
 
             // namespace interact ...

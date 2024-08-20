@@ -31,7 +31,6 @@ namespace mygame
 {
     void loadBaseAssets();
     void registerLua(lua_State *L);
-    void updateFramebufSizeActual();
 }
 
 #endif
