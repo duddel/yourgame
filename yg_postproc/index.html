@@ -825,14 +825,14 @@
 <h1 id="ygpostproc">yg.postproc</h1>
 <p>Functions for GL post processing.</p>
 <h2 id="function-ygpostprocinit">function yg.postproc.init()</h2>
-<p>Initializes the frame buffer for post processing.</p>
+<p>Activates post processing. Returns <code>true</code> on success, <code>false</code> otherwise.</p>
 <ul>
 <li>If both <code>width</code> and <code>height</code> are <code>&gt; 0</code>, this will be the frame buffer size</li>
 <li>If both <code>width</code> and <code>height</code> are <code>0</code>, the frame buffer size will be synced to the window size</li>
 <li>If exactly one of <code>width</code> and <code>height</code> is <code>0</code>, this dimensions will be set suitable, maintaining the windows aspect ratio</li>
 </ul>
 <blockquote>
-<p><code>yg.postproc.init(width, height)</code> -&gt; <code>void</code></p>
+<p><code>yg.postproc.init(width, height)</code> -&gt; <code>boolean</code></p>
 </blockquote>
 <table>
 <thead>
@@ -856,12 +856,12 @@
 </tbody>
 </table>
 <h2 id="function-ygpostprocshutdown">function yg.postproc.shutdown()</h2>
-<p>Shuts down the post processing frame buffer.</p>
+<p>Shuts down post processing.</p>
 <blockquote>
 <p><code>yg.postproc.shutdown()</code> -&gt; <code>void</code></p>
 </blockquote>
 <h2 id="function-ygpostprocisinitialized">function yg.postproc.isInitialized()</h2>
-<p>Returns <code>true</code> if post processing is initialized, <code>false</code> otherwise.</p>
+<p>Returns <code>true</code> if post processing is initialized (active), <code>false</code> otherwise.</p>
 <blockquote>
 <p><code>yg.postproc.isInitialized()</code> -&gt; <code>boolean</code></p>
 </blockquote>
