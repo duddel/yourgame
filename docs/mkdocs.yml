@@ -2,8 +2,8 @@ site_name: yourgame
 docs_dir: md_sites
 theme:
   name: material
-  logo: yg_logo.png
-  favicon: yg_logo.png
+  logo: img/yg_logo.png
+  favicon: img/yg_logo.png
   # features:
   #   - navigation.expand
   icon:
@@ -33,6 +33,7 @@ nav:
   - Getting Started: index.md
   - Manual:
     - Overview: Manual.md
+    - Entry Point: man_entry_point.md
     - Load Files: man_files.md
     - Sprites: man_sprites.md
     - 3D Models:

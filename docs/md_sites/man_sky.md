@@ -11,15 +11,15 @@ Here are some examples of images, that can be used as sky in `yourgame`.
 
 ### Gradient with Horizon
 
-![Gradient with Horizon Sky](sky_gradient.png)
+![Gradient with Horizon Sky](img/sky_gradient.png)
 
 ### 360-degree Photo
 
-![360-degree Sky Photo](sky_photo.jpg)
+![360-degree Sky Photo](img/sky_photo.jpg)
 
 ### Assembled from Sprites
 
-![Assembled Sky Image](sky_assembled.png)
+![Assembled Sky Image](img/sky_assembled.png)
 
 The image above has been created with this tool:
 

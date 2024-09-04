@@ -6,7 +6,7 @@ Tested with **Blender v3.4.1**.
 
 Here is a basic workflow, some `Blender` knowledge is required.
 
-![blender_001.png](blender_001.png)
+![img/blender_001.png](img/blender_001.png)
 
 Select all desired meshes and export them with the `Wavefront (.obj)` exporter using the recommended settings below.
 
@@ -17,7 +17,7 @@ Select all desired meshes and export them with the `Wavefront (.obj)` exporter u
 -   Geometry: Export `UV Coordinates`, `Normals` and make the Mesh `Triangulated`
 -   Materials: Export
 
-![blender_001.png](blender_003.png)
+![img/blender_001.png](img/blender_003.png)
 
 The generic `Principled BSDF` shader has an impact on the exported materials in the `.mtl` file. If you want to use it, apply this shader to your meshes.
 
@@ -26,4 +26,4 @@ The generic `Principled BSDF` shader has an impact on the exported materials in 
 
 See [Object (.obj) and Material (.mtl) support](#object-obj-and-material-mtl-support) on how this information can be used in `yourgame`.
 
-![blender_001.png](blender_002.png)
+![img/blender_001.png](img/blender_002.png)
