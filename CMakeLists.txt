@@ -1,10 +1,28 @@
 # initialized from yourgamelib commit:
-# 891e9275cc1f79d5b5a085fa57f9c2edb5de822e
+# 6242c0c29166bda81c9a73d9e3698bec02f52329
 
 cmake_minimum_required(VERSION 3.6)
 find_package(Git)
 
 project(yourgame VERSION 0.2.0)
+
+# Name of the CMake target (default: name of project defined above)
+set(YOURGAME_PROJECT_TARGET_NAME "${CMAKE_PROJECT_NAME}_app")
+
+# Name of the target output files (default: name of project defined above)
+set(YOURGAME_PROJECT_OUTPUT_NAME ${CMAKE_PROJECT_NAME})
+
+# Web platform: pack assets
+# enable this option to copy assets (if any) into the wasm file system.
+# only recommended if the assets are final and not to be updated.
+# otherwise, assets are loaded from assets/ directory during runtime.
+set(WEB_PACK_ASSETS OFF)
+
+# Web platform: set GLFW implementation to use.
+# if ON: use a more complete GLFW implementation (--use-port=contrib.glfw)
+# if OFF: use the stock GLFW3 port (-sUSE_GLFW=3)
+set(YOURGAME_WEB_USE_CONTRIB_GLFW ON)
+
 # enable this option to clone yourgamelib and checkout the commit, defined
 # as YOURGAME_GIT_COMMIT_REQUESTED. otherwise, the original path, where
 # this project has been initialized from, is used.
@@ -16,12 +34,12 @@ set(YOURGAME_GIT_REMOTE https://github.com/duddel/yourgamelib)
 # the initial value of YOURGAME_GIT_COMMIT_REQUESTED is the commit of yourgamelib
 # during initialization of this project.
 # it should be adjusted if another (newer) version of yourgamelib is supported.
-set(YOURGAME_GIT_COMMIT_REQUESTED ee2485f8c8ada22d75ce45dadea23d76fbf61af8)
+set(YOURGAME_GIT_COMMIT_REQUESTED 6242c0c29166bda81c9a73d9e3698bec02f52329)
 
 # enforce C++11 and disable extensions
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+# set(CMAKE_CXX_STANDARD 11)
+# set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# set(CMAKE_CXX_EXTENSIONS OFF)
 
 # get git commit sha and test it against the requested commit of the project:
 # git describe usually returns the name of an annotated tag, but with --match="",
@@ -96,7 +114,7 @@ list(APPEND MYGAME_INC_DIRS_PRIVATE
 )
 
 if(YOURGAME_PLATFORM STREQUAL "android")
-  add_library("${CMAKE_PROJECT_NAME}_core" SHARED
+  add_library(${YOURGAME_PROJECT_TARGET_NAME} SHARED
     ${MYGAME_SRC_FILES}
   )
   set(CMAKE_SHARED_LINKER_FLAGS
@@ -106,7 +124,7 @@ if(YOURGAME_PLATFORM STREQUAL "android")
   # todo: convincing the Android Studio project to use ${CMAKE_CURRENT_SOURCE_DIR}/assets
   #       as the assets directory for the app is preferred, but unsolved.
   add_custom_command(
-    TARGET "${CMAKE_PROJECT_NAME}_core"
+    TARGET ${YOURGAME_PROJECT_TARGET_NAME}
     POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
     "${CMAKE_CURRENT_SOURCE_DIR}/assets"
@@ -115,94 +133,81 @@ if(YOURGAME_PLATFORM STREQUAL "android")
 endif()
 
 if(YOURGAME_PLATFORM STREQUAL "web" OR YOURGAME_PLATFORM STREQUAL "desktop")
-  # main (core) executable target
-  add_executable("${CMAKE_PROJECT_NAME}_core"
+  add_executable(${YOURGAME_PROJECT_TARGET_NAME}
     ${MYGAME_SRC_FILES}
   )
-
-  # a 2nd executable target ("_demo") is defined and configured to allow CPack to
-  # generate additional archives with demo assets for desktop and web (see below).
-  # the compilation is identical. for _demo, the demo assets are copied into the archive
-  add_executable("${CMAKE_PROJECT_NAME}_demo" EXCLUDE_FROM_ALL
-    ${MYGAME_SRC_FILES}
-  )
-  set_target_properties("${CMAKE_PROJECT_NAME}_demo" PROPERTIES OUTPUT_NAME ${CMAKE_PROJECT_NAME})
-
-  # include dirs for demo project
-  target_include_directories("${CMAKE_PROJECT_NAME}_demo" PRIVATE ${MYGAME_INC_DIRS_PRIVATE})
-
-  # link libraries for demo project
-  target_link_libraries("${CMAKE_PROJECT_NAME}_demo" PRIVATE yourgame)
 endif()
 
-# include dirs for core project
-target_include_directories("${CMAKE_PROJECT_NAME}_core" PRIVATE ${MYGAME_INC_DIRS_PRIVATE})
-
-# link libraries for core project
-target_link_libraries("${CMAKE_PROJECT_NAME}_core" PRIVATE yourgame)
-
-# the main target is called "${CMAKE_PROJECT_NAME}_core" (= yourgame_core), see above
-# add_executable(..), add_library(..), to be able to link the yourgame library (same name).
-# here, the output name is reset to ${CMAKE_PROJECT_NAME} (= yourgame)
-set_target_properties("${CMAKE_PROJECT_NAME}_core" PROPERTIES OUTPUT_NAME ${CMAKE_PROJECT_NAME})
-
-# configure "components" for CPack, corresponding to the executable targets defined above
-if(CPACK_GENERATOR)
-  set(CPACK_COMPONENTS_ALL core demo)
-  set(CPACK_ARCHIVE_COMPONENT_INSTALL ON)
-  set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY 0)
-  include(CPack)
-  cpack_add_component(core)
-  cpack_add_component(demo)
-endif()
-
-  # retrieve asset files to copy
-  file(GLOB CORE_ASSETS ${CMAKE_CURRENT_SOURCE_DIR}/assets/*)
-  # this matches only the core assets starting with yg_, not the stub main.lua.
-  # used for demo project, which provides an own main.lua:
-  file(GLOB CORE_ASSETS_YG_ONLY ${CMAKE_CURRENT_SOURCE_DIR}/assets/*yg_*)
-  file(GLOB DEMO_ASSETS ${CMAKE_CURRENT_SOURCE_DIR}/demo/assets/*)
+set_target_properties(${YOURGAME_PROJECT_TARGET_NAME} PROPERTIES OUTPUT_NAME ${YOURGAME_PROJECT_OUTPUT_NAME})
 
 if(YOURGAME_PLATFORM STREQUAL "desktop")
   if(CPACK_GENERATOR)
-    # core: yourgame
-    install(TARGETS "${CMAKE_PROJECT_NAME}_core" DESTINATION . COMPONENT core)
-    install(FILES ${CORE_ASSETS} DESTINATION ./assets COMPONENT core)
-
-    # demo: yourgame with demo assets
-    install(TARGETS "${CMAKE_PROJECT_NAME}_demo" DESTINATION . COMPONENT demo)
-    install(FILES ${CORE_ASSETS_YG_ONLY} ${DEMO_ASSETS} DESTINATION ./assets COMPONENT demo)
+    install(TARGETS ${YOURGAME_PROJECT_TARGET_NAME} DESTINATION .)
+    install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION .) # copy assets/
+    set(CPACK_PACKAGE_INSTALL_DIRECTORY ${YOURGAME_PROJECT_OUTPUT_NAME})
+    include(CPack)
   endif()
 endif()
 
 if(YOURGAME_PLATFORM STREQUAL "web")
   # setting the output file extension to .html lets emscripten
   # generate an additional .html file along the .js and .wasm
-  set_target_properties("${CMAKE_PROJECT_NAME}_core" PROPERTIES SUFFIX ".html")
-  # enforce GLFW v3 API (default is v2)
-  # enforce WEB GL v2 (default is v1)
-  # ASYNCIFY is required for emscripten_wget_data() etc.
-  set(C_CXX_FLAGS_FOR_EM
-    "-s USE_GLFW=3 \
-    -s USE_WEBGL2=1 \
-    -s ALLOW_MEMORY_GROWTH=1 \
-    -s ASYNCIFY \
-    --shell-file ${CMAKE_CURRENT_SOURCE_DIR}/build/shell.html")
-    
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${C_CXX_FLAGS_FOR_EM}")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${C_CXX_FLAGS_FOR_EM}")
+  set_target_properties(${YOURGAME_PROJECT_TARGET_NAME} PROPERTIES SUFFIX ".html")
+
+  set(LINKER_FLAGS_FOR_EM
+    "-sMIN_WEBGL_VERSION=2 \
+-sMAX_WEBGL_VERSION=2 \
+-sALLOW_MEMORY_GROWTH=1 \
+-sASYNCIFY \
+--shell-file ${CMAKE_CURRENT_SOURCE_DIR}/build/shell.html")
+
+  # Enable requested GLFW implementation
+  if(YOURGAME_WEB_USE_CONTRIB_GLFW)
+    set(LINKER_FLAGS_FOR_EM "${LINKER_FLAGS_FOR_EM} --use-port=contrib.glfw3")
+    # This is also a compiler flag and needs to be set for the yourgame library
+    target_compile_options(yourgame PUBLIC "--use-port=contrib.glfw3")
+  else()
+    set(LINKER_FLAGS_FOR_EM "${LINKER_FLAGS_FOR_EM} -sUSE_GLFW=3")
+  endif()
+
+  # check if there are any assets
+  file(GLOB ASSET_FILES ${CMAKE_CURRENT_SOURCE_DIR}/assets/*.*)
+
+  if(WEB_PACK_ASSETS AND ASSET_FILES)
+    set(LINKER_FLAGS_FOR_EM "${LINKER_FLAGS_FOR_EM} \
+--preload-file ${CMAKE_CURRENT_SOURCE_DIR}/assets@/home/web_user/")
+  endif()
+
+  # Set final linker flags
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${LINKER_FLAGS_FOR_EM}")
 
   if(CPACK_GENERATOR)
-    # core: yourgame
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.html DESTINATION . RENAME index.html COMPONENT core)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.js DESTINATION . COMPONENT core)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.wasm DESTINATION . COMPONENT core)
-    install(FILES ${CORE_ASSETS} DESTINATION ./assets COMPONENT core)
+    # these 4 files are typically created by emscripten: .html, .js, .wasm, .data.
+    # the .data file is only available if any asset files have been packed (see above)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${YOURGAME_PROJECT_OUTPUT_NAME}.html DESTINATION . RENAME index.html)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${YOURGAME_PROJECT_OUTPUT_NAME}.js DESTINATION .)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${YOURGAME_PROJECT_OUTPUT_NAME}.wasm DESTINATION .)
 
-    # demo: yourgame with demo assets
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.html DESTINATION . RENAME index.html COMPONENT demo)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.js DESTINATION . COMPONENT demo)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.wasm DESTINATION . COMPONENT demo)
-    install(FILES ${CORE_ASSETS_YG_ONLY} ${DEMO_ASSETS} DESTINATION ./assets COMPONENT demo)
+    # pack asset files, if any.
+    # either pack the .data file, if WEB_PACK_ASSETS == ON,
+    # or pack separate assets/ directory, otherwise.
+    if(ASSET_FILES)
+      if(WEB_PACK_ASSETS)
+        install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${YOURGAME_PROJECT_OUTPUT_NAME}.data DESTINATION .)
+      else()
+        install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/assets/ DESTINATION ./assets/)
+      endif()
+    endif()
+
+    set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY 0)
+    include(CPack)
   endif()
 endif()
+
+target_include_directories(${YOURGAME_PROJECT_TARGET_NAME}
+  PRIVATE ${MYGAME_INC_DIRS_PRIVATE}
+)
+
+target_link_libraries(${YOURGAME_PROJECT_TARGET_NAME} PRIVATE
+  yourgame
+)

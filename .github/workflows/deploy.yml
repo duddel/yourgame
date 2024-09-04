@@ -1,5 +1,3 @@
-# jobs deploy_{desktop,web,android} are done for all commits on all branches
-# job  deploy_demo_gh_pages pushes the demo to gh-pages, on branches main,develop
 name: deploy
 on: push
 
@@ -45,7 +43,7 @@ jobs:
 
   deploy_web:
     name: web
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -85,27 +83,27 @@ jobs:
           name: artifact_android
           path: build/_deploy/*
 
-  deploy_demo_gh_pages:
-    name: deploy demo to gh-pages
-    runs-on: ubuntu-22.04
-    needs: deploy_web
-    if: |
-      github.ref == 'refs/heads/main' ||
-      github.ref == 'refs/heads/develop'
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
-        with:
-          name: artifact_web
-          path: _artifact
-      - name: unzip
-        # assuming there is only one *Emscripten-demo.zip file
-        run: |
-          mkdir _deploy
-          unzip _artifact/*Emscripten-demo.zip -d _deploy
-      - name: deploy
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: _deploy
-          target-folder: demo
+  # deploy_demo_gh_pages:
+  #   name: deploy demo to gh-pages
+  #   runs-on: ubuntu-22.04
+  #   needs: deploy_web
+  #   if: |
+  #     github.ref == 'refs/heads/main' ||
+  #     github.ref == 'refs/heads/develop'
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/download-artifact@v4
+  #       with:
+  #         name: artifact_web
+  #         path: _artifact
+  #     - name: unzip
+  #       # assuming there is only one *Emscripten-demo.zip file
+  #       run: |
+  #         mkdir _deploy
+  #         unzip _artifact/*Emscripten-demo.zip -d _deploy
+  #     - name: deploy
+  #       uses: JamesIves/github-pages-deploy-action@v4
+  #       with:
+  #         branch: gh-pages
+  #         folder: _deploy
+  #         target-folder: demo
