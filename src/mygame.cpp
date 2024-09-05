@@ -1535,6 +1535,7 @@ namespace mygame
             .addFunction("setAspect", &yg::math::Camera::setAspect)
             .addFunction("setZNear", &yg::math::Camera::setZNear)
             .addFunction("setZFar", &yg::math::Camera::setZFar)
+            .addFunction("rotateFirstPerson", &yg::math::Camera::rotateFirstPerson)
             .endClass()
             .deriveClass<YgifCamera, yg::math::Camera>("Camera")
             .addConstructor<void (*)()>()

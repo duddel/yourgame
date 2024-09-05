@@ -7,13 +7,12 @@ on:
 
 jobs:
   docs:
-    name: build and deploy docs
-    runs-on: ubuntu-22.04
-
+    name: build docs
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: setup python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.10"
       - name: install python deps
@@ -24,8 +23,32 @@ jobs:
         run: |
           cd docs
           mkdocs build
-      - name: deploy docs
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: upload artifacts
+        uses: actions/upload-artifact@v4
         with:
-          branch: gh-pages
-          folder: docs/site
+          name: docs
+          path: docs/_deploy
+
+  deploy:
+    name: deploy docs
+    runs-on: ubuntu-latest
+    needs: docs
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: "refs/heads/gh-pages"
+      - name: clean-up
+        run: |
+          rm -rf ./*
+      - uses: actions/download-artifact@v4
+        with:
+          name: docs
+          path: ./
+      - name: deploy to gh-pages
+        run: |
+          git config --global user.name ${{ github.actor }}
+          git config --global user.email ${{ github.actor }}@users.noreply.github.com
+          git add .
+          git status
+          git commit --allow-empty -m "yourgame automatic docs deployment"
+          git push origin gh-pages

@@ -1,5 +1,6 @@
 site_name: yourgame
 docs_dir: md_sites
+site_dir: _deploy
 theme:
   name: material
   logo: img/yg_logo.png
