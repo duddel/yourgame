@@ -24,10 +24,7 @@ jobs:
         if: startsWith(matrix.yourgame_platform, 'android')
 
       - name: build
-        run: |
-          ls
-          docker run --rm -v $(pwd):/code yourgame /bin/bash -c "ls"
-#          docker run --rm -v $(pwd):/code yourgame /bin/bash -c "cd build && ./build_${{ matrix.yourgame_platform }}_release.bash"
+        run: docker run --rm -v $(pwd):/code yourgame /bin/bash -c "cd /code/build && ./build_${{ matrix.yourgame_platform }}_release.bash"
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.yourgame_platform }}
