@@ -20,8 +20,8 @@ function init()
     lightDist = 10
 
     -- load assets
-    yg.asset.loadTexture("sky", "a//sky.png", "", "DIFFUSE", "LINEAR", "REPEAT", false)
-    yg.asset.loadGeometry("object", "a//sphere.obj", "")
+    yg.asset.loadTexture("sky", "p//sky.png", "", "DIFFUSE", "LINEAR", "REPEAT", false)
+    yg.asset.loadGeometry("object", "p//sphere.obj", "")
     yg.asset.loadGeometry("grid", "a//yg_grid.obj", "")
     yg.asset.loadVertFragShader("diff", "a//yg_default.vert", "a//yg_diffusecolor.frag")
     yg.asset.loadVertFragShader("simple", "a//yg_default.vert", "a//yg_simplecolor.frag")

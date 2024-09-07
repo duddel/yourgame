@@ -19,7 +19,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-#include <algorithm> // std::replace()
 #include <cstring>
 #include <vector>
 #include <set>
@@ -70,6 +69,7 @@ namespace mygame
     void shutdownLua();
     void createEnvironment();
     void destroyEnvironment();
+    void findEntryPoint(int argc, char *argv[]);
     void registerLua(lua_State *L);
     void loadBaseAssets();
 
@@ -92,6 +92,40 @@ namespace mygame
         }
     }
 
+    void findEntryPoint(int argc, char *argv[])
+    {
+        if (argc > 1) // Assuming argv[1] is the desired project path
+        {
+            g_luaScriptName = "p//main.lua";
+            yg::file::setProjectPath(std::string(argv[1]));
+        }
+        else // Find entry point
+        {
+            std::vector<uint8_t> data;
+
+            // Check if there is a main.lua in ygproject/
+            yg::file::setProjectPath(yg::file::getBasePath("ygproject/"));
+            if (yg::file::readFile("p//main.lua", data) == 0)
+            {
+                g_luaScriptName = "p//main.lua";
+            }
+            else
+            {
+                // Check if there is a main.lua in .zip file ygproject.zip
+                yg::file::setProjectPath(yg::file::getBasePath("ygproject.zip"));
+                if (yg::file::readFile("p//main.lua", data) == 0)
+                {
+                    g_luaScriptName = "p//main.lua";
+                }
+                else
+                {
+                    g_luaScriptName = "a//main.lua";
+                    yg::file::setProjectPath("");
+                }
+            }
+        }
+    }
+
     void init(int argc, char *argv[])
     {
         yg::log::info("project: %v (%v)", mygame::version::PROJECT_NAME, mygame::version::git_commit);
@@ -104,13 +138,7 @@ namespace mygame
             g_licenseStr = new std::string(data.begin(), data.end());
         }
 
-        // assuming argv[1] is a path to a directory: set it as project directory
-        if (argc > 1)
-        {
-            std::string projFilePathFromArgv = argv[1];
-            std::replace(projFilePathFromArgv.begin(), projFilePathFromArgv.end(), '\\', '/');
-            yg::file::setProjectPath(projFilePathFromArgv);
-        }
+        findEntryPoint(argc, argv);
 
         // enable Vsync by default
         yg::control::enableVSync(true);
@@ -165,7 +193,7 @@ namespace mygame
         }
 
         // Set default viewport based on buffer
-        // ToDo: consider exposing glViewport() to use code
+        // ToDo: consider exposing glViewport() to user code
         if (yg::util::postproc::isInitialized())
         {
             glViewport(0,

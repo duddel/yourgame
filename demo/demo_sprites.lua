@@ -6,7 +6,7 @@ function init()
     yg.interact.addBinary("Framebuffer", "active", false)
 
     -- load sprite sheet
-    yg.asset.loadTexture("sprites", "a//sprites.png", "a//sprites.json", "DIFFUSE", "NEAREST", "REPEAT", true)
+    yg.asset.loadTexture("sprites", "p//sprites.png", "p//sprites.json", "DIFFUSE", "NEAREST", "REPEAT", true)
 
     timer = 0
 end

@@ -10,8 +10,8 @@ function init()
     -- load assets
     yg.asset.loadGeometry("grid", "a//yg_grid.obj")
     yg.asset.loadGeometry("system", "a//yg_system.obj")
-    yg.asset.loadGeometry("trafficcone", "a//trafficcone.obj", "a//trafficcone.mtl")
-    yg.asset.loadGeometry("box", "a//box.obj", "a//box.mtl")
+    yg.asset.loadGeometry("trafficcone", "p//trafficcone.obj", "p//trafficcone.mtl")
+    yg.asset.loadGeometry("box", "p//box.obj", "p//box.mtl")
     yg.asset.loadVertFragShader("diff", "a//yg_default.vert", "a//yg_diffusecolor.frag")
     yg.asset.loadVertFragShader("simple", "a//yg_default.vert", "a//yg_simplecolor.frag")
 

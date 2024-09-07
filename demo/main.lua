@@ -3,7 +3,7 @@ function init()
     yg.gl.clearColor(1, 1, 1, 1)
 
     -- load main texture atlas and get coord infos
-    yg.asset.loadTexture("main", "a//sprites_main.png", "a//sprites_main.json", "DIFFUSE", "LINEAR", "REPEAT", true)
+    yg.asset.loadTexture("main", "p//sprites_main.png", "p//sprites_main.json", "DIFFUSE", "LINEAR", "REPEAT", true)
     coordsMenu = yg.asset.getTexture("main"):getCoords("menu")
     coordsLoad = yg.asset.getTexture("main"):getCoords("loading")
 end
@@ -54,23 +54,23 @@ function tick()
     -- detect clicks
     if yg.input.getDelta("MOUSE_BUTTON_1") > 0 then
         if hitAabb2(aabbSprites, yg.input.get("MOUSE_X"), yg.input.get("MOUSE_Y")) then
-            runAnotherScript = "a//demo_sprites.lua"
+            runAnotherScript = "p//demo_sprites.lua"
         end
 
         if hitAabb2(aabbPhysics, yg.input.get("MOUSE_X"), yg.input.get("MOUSE_Y")) then
-            runAnotherScript = "a//demo_physics.lua"
+            runAnotherScript = "p//demo_physics.lua"
         end
 
         if hitAabb2(aabbTrafoCamera, yg.input.get("MOUSE_X"), yg.input.get("MOUSE_Y")) then
-            runAnotherScript = "a//demo_trafocamera.lua"
+            runAnotherScript = "p//demo_trafocamera.lua"
         end
 
         if hitAabb2(aabbSkylight, yg.input.get("MOUSE_X"), yg.input.get("MOUSE_Y")) then
-            runAnotherScript = "a//demo_skylight.lua"
+            runAnotherScript = "p//demo_skylight.lua"
         end
 
         if hitAabb2(aabbPostproc, yg.input.get("MOUSE_X"), yg.input.get("MOUSE_Y")) then
-            runAnotherScript = "a//demo_postproc.lua"
+            runAnotherScript = "p//demo_postproc.lua"
         end
     end
 

@@ -20,17 +20,17 @@ function init()
     lightPosition = {20, 10, 0}
 
     -- load assets
-    yg.asset.loadTexture("world", "a//ball.png", "", "DIFFUSE", "NEAREST", "REPEAT", true)
-    yg.asset.loadTexture("cylinder", "a//cylinder.png", "", "DIFFUSE", "NEAREST", "REPEAT", true)
+    yg.asset.loadTexture("world", "p//ball.png", "", "DIFFUSE", "NEAREST", "REPEAT", true)
+    yg.asset.loadTexture("cylinder", "p//cylinder.png", "", "DIFFUSE", "NEAREST", "REPEAT", true)
     yg.asset.loadVertFragShader("diff", "a//yg_default.vert", "a//yg_diffusecolor.frag")
     yg.asset.loadVertFragShader("simple", "a//yg_default.vert", "a//yg_simplecolor.frag")
     yg.asset.loadVertFragShader("tex", "a//yg_default.vert", "a//yg_diffusetex.frag")
-    yg.asset.loadGeometry("cube", "a//box.obj", "a//box.mtl")
-    yg.asset.loadGeometry("sphere_outside", "a//sphere.obj")
+    yg.asset.loadGeometry("cube", "p//box.obj", "p//box.mtl")
+    yg.asset.loadGeometry("sphere_outside", "p//sphere.obj")
     yg.asset.loadGeometry("grid", "a//yg_grid.obj")
-    yg.asset.loadGeometry("cylinder", "a//cylinder.obj")
-    yg.asset.loadGeometry("trafficcone", "a//trafficcone.obj", "a//trafficcone.mtl")
-    yg.asset.loadGeometry("fence", "a//fence.obj", "a//fence.mtl")
+    yg.asset.loadGeometry("cylinder", "p//cylinder.obj")
+    yg.asset.loadGeometry("trafficcone", "p//trafficcone.obj", "p//trafficcone.mtl")
+    yg.asset.loadGeometry("fence", "p//fence.obj", "p//fence.mtl")
 
     -- initialize physics
     physEnv = yg.phys.PhysEnv()
