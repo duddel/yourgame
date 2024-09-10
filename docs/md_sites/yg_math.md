@@ -252,6 +252,17 @@ Sets the distance of the far clipping plane. Valid for both `PERSPECTIVE` and `O
 | -------- | ------ | ------------------------------ |
 | `zFar`   | number | Distance of far clipping plane |
 
+### function yg.math.Camera.rotateFirstPerson()
+
+Rotates yaw and pitch angles of camera transform. Pitch is locked to `[-pi/2, +pi/2]`.
+
+> `yg.math.Camera.rotateFirstPerson(yaw, pitch)` -> `void`
+
+| Argument | Type   | Info                              |
+| -------- | ------ | --------------------------------- |
+| `yaw`    | number | Yaw angle to rotate (add) [Rad]   |
+| `pitch`  | number | Pitch angle to rotate (add) [Rad] |
+
 ### function yg.math.Camera.trafo()
 
 Returns (a reference to) the transform of the camera (extrinsics).

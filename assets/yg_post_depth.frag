@@ -7,11 +7,10 @@ in vec2 vOutTex;
 
 layout(location = 0) out vec4 color;
 
-uniform vec3 lightAmbient;
-uniform sampler2D textureDiffuse;
+uniform sampler2D textureBufferDepth;
 
 void main()
 {
-    vec3 finalColor = vec3(texture(textureDiffuse, vOutTex));
-    color = vec4(finalColor * lightAmbient, 1.0);
+    vec3 depthColor = (1.0 - texture(textureBufferDepth, vOutTex).r) * vec3(0.30, 0.90, 0.99);
+    color = vec4(depthColor, 1.0);
 }

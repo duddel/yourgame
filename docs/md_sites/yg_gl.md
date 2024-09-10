@@ -56,27 +56,13 @@ end
 
 Draws sky from image texture.
 
-> `yg.gl.drawSky(texture, camera, tint)` -> `void`
+> `yg.gl.drawSky(texture, camera, tint, trafo)` -> `void`
 
 | Argument  | Type                                            | Info                                                                                        |
 | --------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | `texture` | [yg.gl.Texture](#class-yggltexture)             | Sky texture                                                                                 |
 | `camera`  | [yg.math.Camera](yg_math.md#class-ygmathcamera) | Camera to use                                                                               |
 | `tint`    | {number}                                        | Tint, ends up as ambient color in shader. Default (neutral): `{1,1,1}` (array of 3 numbers) |
-
-
-## function yg.gl.drawSky2()
-
-Draws sky from image texture, advanced.
-
-> `yg.gl.drawSky2(texture, camera, tint, shader, trafo)` -> `void`
-
-| Argument  | Type                                            | Info                                                                                        |
-| --------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `texture` | [yg.gl.Texture](#class-yggltexture)             | Sky texture                                                                                 |
-| `camera`  | [yg.math.Camera](yg_math.md#class-ygmathcamera) | Camera to use                                                                               |
-| `tint`    | {number}                                        | Tint, ends up as ambient color in shader. Default (neutral): `{1,1,1}` (array of 3 numbers) |
-| `shader`  | [yg.gl.Shader](#class-ygglshader)               | Shader to use. May be `nil` (for default sky shader)                                        |
 | `trafo`   | [yg.math.Trafo](yg_math.md#class-ygmathtrafo)   | Rotation of `trafo` is applied to sky. May be `nil`                                         |
 
 ## function yg.gl.depthTest()

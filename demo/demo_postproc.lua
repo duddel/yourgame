@@ -70,16 +70,17 @@ function tick()
 
     -- update camera from input
     c:setPerspective(90, camAspect, 1, 100)
-    c:trafo():rotateGlobal(yg.time.getDelta() * 1.25 * yg.input.get("KEY_LEFT"), "Y")
-    c:trafo():rotateGlobal(yg.time.getDelta() * -1.25 * yg.input.get("KEY_RIGHT"), "Y")
-    c:trafo():rotateLocal(yg.time.getDelta() * 1.25 * yg.input.get("KEY_UP"), "X")
-    c:trafo():rotateLocal(yg.time.getDelta() * -1.25 * yg.input.get("KEY_DOWN"), "X")
+
+    rotYaw = yg.time.getDelta() * (1.25 * (yg.input.get("KEY_LEFT") - yg.input.get("KEY_RIGHT")) +
+                                   0.05 * yg.input.get("MOUSE_CATCHED") * -yg.input.getDelta("MOUSE_X"))
+    rotPitch = yg.time.getDelta() * (1.25 * (yg.input.get("KEY_UP") - yg.input.get("KEY_DOWN")) +
+                                     0.05 * yg.input.get("MOUSE_CATCHED") * -yg.input.getDelta("MOUSE_Y"))
+    c:rotateFirstPerson(rotYaw, rotPitch)
+
     move = {}
-    move[1] = yg.time.getDelta() * 7.0 * yg.input.get("KEY_D") - 
-              yg.time.getDelta() * 7.0 * yg.input.get("KEY_A")
+    move[1] = yg.time.getDelta() * 7.0 * (yg.input.get("KEY_D") - yg.input.get("KEY_A"))
     move[2] = 0
-    move[3] = yg.time.getDelta() * 7.0 * yg.input.get("KEY_S") - 
-              yg.time.getDelta() * 7.0 * yg.input.get("KEY_W")
+    move[3] = yg.time.getDelta() * 7.0 * (yg.input.get("KEY_S") - yg.input.get("KEY_W"))
     c:trafo():translateLocal(move)
 
     -- draw scene objects

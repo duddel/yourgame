@@ -3,7 +3,7 @@
 ## Draw
 To draw sky in the scene, an image with **equirectangular projection** (aspect ratio 2:1) is used. These are images that typically 360-degree cameras generate.
 
-Use [yg.gl.drawSky()](yg_gl.md#function-yggldrawsky) or [yg.gl.drawSky2()](yg_gl.md#function-yggldrawsky2) to draw sky. Sky should usually be the first thing to draw in a scene to prevent occlusion.
+Use [yg.gl.drawSky()](yg_gl.md#function-yggldrawsky) to draw sky. Sky should usually be the first thing to draw in a scene to prevent occlusion.
 
 ## Sky Images
 

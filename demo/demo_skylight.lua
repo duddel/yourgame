@@ -39,22 +39,23 @@ function tick()
 
     -- update camera from input
     c:setPerspective(90, yg.input.get("WINDOW_ASPECT_RATIO"), 0.1, 100)
-    c:trafo():rotateGlobal(yg.time.getDelta() * 1.25 * yg.input.get("KEY_LEFT"), "Y")
-    c:trafo():rotateGlobal(yg.time.getDelta() * -1.25 * yg.input.get("KEY_RIGHT"), "Y")
-    c:trafo():rotateLocal(yg.time.getDelta() * 1.25 * yg.input.get("KEY_UP"), "X")
-    c:trafo():rotateLocal(yg.time.getDelta() * -1.25 * yg.input.get("KEY_DOWN"), "X")
+
+    rotYaw = yg.time.getDelta() * (1.25 * (yg.input.get("KEY_LEFT") - yg.input.get("KEY_RIGHT")) +
+                                   0.05 * yg.input.get("MOUSE_CATCHED") * -yg.input.getDelta("MOUSE_X"))
+    rotPitch = yg.time.getDelta() * (1.25 * (yg.input.get("KEY_UP") - yg.input.get("KEY_DOWN")) +
+                                     0.05 * yg.input.get("MOUSE_CATCHED") * -yg.input.getDelta("MOUSE_Y"))
+    c:rotateFirstPerson(rotYaw, rotPitch)
+
     move = {}
-    move[1] = yg.time.getDelta() * 7.0 * yg.input.get("KEY_D") - 
-              yg.time.getDelta() * 7.0 * yg.input.get("KEY_A")
+    move[1] = yg.time.getDelta() * 7.0 * (yg.input.get("KEY_D") - yg.input.get("KEY_A"))
     move[2] = 0
-    move[3] = yg.time.getDelta() * 7.0 * yg.input.get("KEY_S") - 
-              yg.time.getDelta() * 7.0 * yg.input.get("KEY_W")
+    move[3] = yg.time.getDelta() * 7.0 * (yg.input.get("KEY_S") - yg.input.get("KEY_W"))
     c:trafo():translateLocal(move)
 
     -- draw sky
     skyT = yg.math.Trafo()
     skyT:rotateGlobal(yg.interact.getNumber("Sky Rotation"), "Y")
-    yg.gl.drawSky2(yg.asset.getTexture("sky"), c, yg.interact.getRGB("Tint"), nil, skyT)
+    yg.gl.drawSky(yg.asset.getTexture("sky"), c, yg.interact.getRGB("Tint"), skyT)
 
     -- draw scene objects
     yg.gl.draw(yg.asset.getGeometry("grid"), nil, yg.asset.getShader("simple"), nil, c, nil)

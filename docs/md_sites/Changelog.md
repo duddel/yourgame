@@ -2,7 +2,11 @@
 
 ## v0.2.0 (unreleased)
 
+Download here: <https://github.com/duddel/yourgame/releases/tag/v0.2.0>
+
 - Improved frame buffer size options, see [`function yg.postproc.init()`](yg_postproc.md#function-ygpostprocinit)
+- New [`function yg.math.camera.rotateFirstPerson()`](yg_math.md#function-ygmathcamerarotatefirstperson)
+- Simplified sky drawing by removing `function yg.gl.drawSky2()` and extending [`function yg.gl.drawSky()`](yg_gl.md#function-yggldrawsky)
 
 ## v0.1.0
 

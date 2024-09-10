@@ -3,15 +3,11 @@
 
 precision mediump float; // required for es
 
-in vec2 vOutTex;
+in vec3 vOutNorm;
 
 layout(location = 0) out vec4 color;
 
-uniform vec3 lightAmbient;
-uniform sampler2D textureDiffuse;
-
 void main()
 {
-    vec3 finalColor = vec3(texture(textureDiffuse, vOutTex));
-    color = vec4(finalColor * lightAmbient, 1.0);
+    color = vec4((normalize(vOutNorm) + 1.0) * 0.5, 1.0);
 }

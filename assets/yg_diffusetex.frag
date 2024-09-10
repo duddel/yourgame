@@ -9,9 +9,9 @@ in vec2 vOutTex;
 
 layout(location = 0) out vec4 color;
 
+uniform vec3 lightPosition;
 uniform vec3 lightAmbient;
 uniform vec3 lightDiffuse;
-uniform vec3 lightPosition;
 uniform sampler2D textureDiffuse;
 
 void main()
