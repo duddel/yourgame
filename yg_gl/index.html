@@ -620,13 +620,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#function-yggldrawsky2" class="md-nav__link">
-    function yg.gl.drawSky2()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#function-yggldepthtest" class="md-nav__link">
     function yg.gl.depthTest()
   </a>
@@ -918,13 +911,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#function-yggldrawsky2" class="md-nav__link">
-    function yg.gl.drawSky2()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#function-yggldepthtest" class="md-nav__link">
     function yg.gl.depthTest()
   </a>
@@ -1174,7 +1160,7 @@
 <h2 id="function-yggldrawsky">function yg.gl.drawSky()</h2>
 <p>Draws sky from image texture.</p>
 <blockquote>
-<p><code>yg.gl.drawSky(texture, camera, tint)</code> -&gt; <code>void</code></p>
+<p><code>yg.gl.drawSky(texture, camera, tint, trafo)</code> -&gt; <code>void</code></p>
 </blockquote>
 <table>
 <thead>
@@ -1199,42 +1185,6 @@
 <td><code>tint</code></td>
 <td>{number}</td>
 <td>Tint, ends up as ambient color in shader. Default (neutral): <code>{1,1,1}</code> (array of 3 numbers)</td>
-</tr>
-</tbody>
-</table>
-<h2 id="function-yggldrawsky2">function yg.gl.drawSky2()</h2>
-<p>Draws sky from image texture, advanced.</p>
-<blockquote>
-<p><code>yg.gl.drawSky2(texture, camera, tint, shader, trafo)</code> -&gt; <code>void</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Info</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>texture</code></td>
-<td><a href="#class-yggltexture">yg.gl.Texture</a></td>
-<td>Sky texture</td>
-</tr>
-<tr>
-<td><code>camera</code></td>
-<td><a href="../yg_math/#class-ygmathcamera">yg.math.Camera</a></td>
-<td>Camera to use</td>
-</tr>
-<tr>
-<td><code>tint</code></td>
-<td>{number}</td>
-<td>Tint, ends up as ambient color in shader. Default (neutral): <code>{1,1,1}</code> (array of 3 numbers)</td>
-</tr>
-<tr>
-<td><code>shader</code></td>
-<td><a href="#class-ygglshader">yg.gl.Shader</a></td>
-<td>Shader to use. May be <code>nil</code> (for default sky shader)</td>
 </tr>
 <tr>
 <td><code>trafo</code></td>
