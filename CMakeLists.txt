@@ -1,5 +1,5 @@
 # initialized from yourgamelib commit:
-# 5cac750b5b7d84aa3e3c9c04b530dd9056e5dbd4
+# 0a78db796f24907e606763221001a4f2e0045c3a
 
 cmake_minimum_required(VERSION 3.6)
 find_package(Git)
@@ -28,7 +28,7 @@ set(YOURGAME_GIT_REMOTE https://github.com/duddel/yourgamelib)
 # the initial value of YOURGAME_GIT_COMMIT_REQUESTED is the commit of yourgamelib
 # during initialization of this project.
 # it should be adjusted if another (newer) version of yourgamelib is supported.
-set(YOURGAME_GIT_COMMIT_REQUESTED 64f480e1d75898c558be4172625eae6c67861fd8)
+set(YOURGAME_GIT_COMMIT_REQUESTED 0a78db796f24907e606763221001a4f2e0045c3a)
 
 # enforce C++11 and disable extensions
 # set(CMAKE_CXX_STANDARD 11)
